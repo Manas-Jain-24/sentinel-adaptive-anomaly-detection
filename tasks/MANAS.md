@@ -117,3 +117,9 @@ published-detector compatibility are locally verified; normal review/integration
 - Next work: review/integrate MN-01/02/03 with accurate metadata. MN-04 guards remain gated
   on measured sustained-fault/drift comparisons and permitted data; no automatic guard or
   rebaseline was added. Real model/threshold selection stays blocked on genuine assets.
+
+Implementation commit: `6480a0e0824428c34795c8863223c0a8d6cc4694`, pushed to
+`origin/feat/manas/MN-03-prior-quantile`. See the [MN-03 handoff](../docs/HANDOFFS/MN-03_manas_20261026T191139Z_prior-score-quantile.md)
+for actual commands, pinned composition/runtime reproduction, dataset clarification,
+sharing state and exact integration/continuation steps.
+Draft review: [PR #4](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/4).
