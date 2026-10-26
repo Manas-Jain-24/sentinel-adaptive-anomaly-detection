@@ -1,0 +1,151 @@
+{
+  "scope": "synthetic_calibration_software_verification",
+  "official_benchmark": false,
+  "authored_utc": "2026-10-26T19:09:15.540797+00:00",
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+  "implementation_state": "MN-03 working tree; actual implementation commit recorded in handoff",
+  "source_sha256": {
+    "src/sentinel/detectors/thresholds.py": "a90f0b70ee1ad5fde93782a3076f7c5c3960b0ca2b3228cbe48cf60fcef69769",
+    "src/sentinel/detectors/calibrated.py": "d54079431e185fc842002e048e790f629acebb3a044a86548a7c696e16ef64fe"
+  },
+  "tests": {
+    "foundation_before_changes": {
+      "passed": 24
+    },
+    "owned_unit_contract_cases": {
+      "passed": 94
+    },
+    "standalone_suite": {
+      "passed": 118,
+      "skipped_modules": 1,
+      "reason": "KS-02/MN-02 are unmerged"
+    },
+    "published_composition_suite": {
+      "passed": 122,
+      "skipped": 0,
+      "scope": "synthetic_published_detector_compatibility",
+      "official_benchmark": false,
+      "sources": [
+        {
+          "commit": "954bd1bc38b866617de3a011b6b22d6921238601",
+          "path": "src/sentinel/data/features.py",
+          "sha256": "e8de0025fbed3bae54928da2a642e3304d667814bbaf8494818fb07a932f426b"
+        },
+        {
+          "commit": "2bdae80560973dc72b489b906be34da0aa1c3dc2",
+          "path": "src/sentinel/detectors/residual.py",
+          "sha256": "10c423aa048b1764f6d91add9bc669f01e16b913e42037e41260cc09dc6d2ef2"
+        }
+      ],
+      "exit_code": 0
+    },
+    "fixture_regression": {
+      "scope": "synthetic_smoke",
+      "metric_id": "provisional_event_trigger_f1_v0",
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "calibration_config": {
+        "window_size": 3,
+        "min_history": 2,
+        "quantile": 1,
+        "fallback_threshold": 4,
+        "threshold_floor": 0.01
+      },
+      "reason": "Later normal score ties empirical threshold; shared >= comparison flags it."
+    },
+    "initial_test_assumption": "One fixture assertion expected zero FP, failed, and was corrected after inspecting the actual score/threshold tie. Algorithm/comparison rule were unchanged."
+  },
+  "runtime": {
+    "input_count": 5000,
+    "active_series": 1,
+    "cadence_seconds": 1,
+    "score_formula": "abs(sin(i / 9)) + 0.03 * (i % 7) + (4 if i % 499 == 0 else 0)",
+    "observation_value": "10 + generated_score",
+    "base_config": {
+      "window_size": 32,
+      "min_history": 8,
+      "threshold": 4.0,
+      "scale_floor": 0.1,
+      "max_series": 100
+    },
+    "measurement": "One trial per case; perf_counter_ns around process(); discard stated prefix; nearest-rank p95. Standalone and wrapper inputs are explicitly different streams. Excludes parsing/writing/construction/cold-start/memory.",
+    "results": [
+      {
+        "algorithm": "mad_starter",
+        "calibration_config": null,
+        "discarded_prefix": 32,
+        "measured_points": 4968,
+        "p50_us": 5.8,
+        "p95_us": 6.6
+      },
+      {
+        "algorithm": "prior_score_quantile",
+        "calibration_config": {
+          "window_size": 64,
+          "min_history": 32,
+          "quantile": 0.99,
+          "fallback_threshold": 4.0,
+          "threshold_floor": 1e-06
+        },
+        "discarded_prefix": 64,
+        "measured_points": 4936,
+        "p50_us": 3.3,
+        "p95_us": 3.5
+      },
+      {
+        "algorithm": "mad_prior_score_quantile",
+        "calibration_config": {
+          "window_size": 64,
+          "min_history": 32,
+          "quantile": 0.99,
+          "fallback_threshold": 4.0,
+          "threshold_floor": 1e-06
+        },
+        "discarded_prefix": 96,
+        "measured_points": 4904,
+        "p50_us": 16.6,
+        "p95_us": 21.3
+      },
+      {
+        "algorithm": "prior_score_quantile",
+        "calibration_config": {
+          "window_size": 256,
+          "min_history": 32,
+          "quantile": 0.99,
+          "fallback_threshold": 4.0,
+          "threshold_floor": 1e-06
+        },
+        "discarded_prefix": 256,
+        "measured_points": 4744,
+        "p50_us": 9.5,
+        "p95_us": 10.9
+      },
+      {
+        "algorithm": "mad_prior_score_quantile",
+        "calibration_config": {
+          "window_size": 256,
+          "min_history": 32,
+          "quantile": 0.99,
+          "fallback_threshold": 4.0,
+          "threshold_floor": 1e-06
+        },
+        "discarded_prefix": 288,
+        "measured_points": 4712,
+        "p50_us": 24.1,
+        "p95_us": 28.0
+      }
+    ]
+  },
+  "official_dataset": {
+    "available_locally": false,
+    "pdf_description": "NAB subset prepared in starter pack with hidden test windows",
+    "pdf_download_links": 0,
+    "official_directory_files": [
+      "README.md"
+    ],
+    "user_reply": "Problem-statement description; no actual starter-pack link supplied."
+  }
+}

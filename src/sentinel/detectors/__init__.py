@@ -1,1 +1,1 @@
-"""Manas owns detectors; only RollingMADStarter is currently implemented."""
+"""Manas owns causal streaming detectors and their score calibration."""
