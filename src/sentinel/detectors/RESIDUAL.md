@@ -131,3 +131,34 @@ Another 13 compatibility tests cover the published real KS-02 extractor, includi
 MAD level-score parity and a missing synthetic peak. They run automatically once KS-02 is
 importable and are explicitly skipped as a module in the independent branch otherwise.
 All inputs are synthetic; no official detection-quality experiment or period fitting ran.
+
+## PR-2 context and consumer review
+
+Manas's additional tests in `tests/detectors/test_residual_partitions.py` exercise the real
+published inventory/split/feature modules without merging or changing them. For this fixed
+threshold, finite-window detector, fresh replay from a declared context of at least W points
+reproduces uninterrupted predictions on the target range. Both reset and carry policies are
+checked, including interleaved series and group holdouts. Context is excluded from metrics.
+
+Readiness alone is insufficient to certify the declared lookback. With W=8/min_history=2,
+two context points already produce ready=true, but the reference history still differs from
+the full eight-point window. Ayush/Mayank's future runner must verify effective model support,
+select indices within each series, construct independent state, and apply the target mask.
+The split builder cannot infer a consumer's actual memory from its declarations.
+
+MN-03 calibration introduces additional support: C preceding scores can depend on a further
+W preceding observations. Review the composed support/state policy when that implementation
+exists; do not reuse the current W-only replay equivalence as certification of future fitted,
+calibrated or guarded state. No such state integration is implemented by these tests.
+
+Reproduce the pinned consumer check from the installed repository:
+
+```powershell
+.\.venv\Scripts\python.exe tests/detectors/check_published_data.py --ref 954bd1bc38b866617de3a011b6b22d6921238601 --snapshot-dir outputs/pr2-consumer-review-001 -- tests -q
+```
+
+The manual development utility loads exact locally fetched Git bytes into that Python process,
+records SHA256 hashes and actual pytest counts, and preserves existing snapshot/report files.
+It adds no network fetching, production data adapter or experiment harness. Use a fresh output
+directory each time. Normal CI on the independent branch explicitly skips the two optional
+integration modules until the data modules are importable.

@@ -114,3 +114,34 @@ Implementation commit: `8129bff278bd08853722bcb7dbab71293a769618`, pushed to
 records the pinned real-extractor test command, diagnostic reproduction, integration limits
 and exact continuation. Retrieve branch HEAD for the final documentation commit as well.
 Draft review: [PR #3](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/3).
+
+### PR #2 feature and consumer review (Manas scope)
+
+Reviewed Kaustubh's published head `954bd1bc38b866617de3a011b6b22d6921238601` for causal
+feature behavior and compatibility with MN-02. Inspected the diff, comments/reviews, CI and
+data/method/handoff documents. Initial PR comments/reviews were empty; all four latest CI
+matrix jobs passed for that exact head (Ubuntu/Windows, Python 3.11/3.13). The connected CI
+tool was unavailable; authenticated GitHub REST supplied the actual check runs/annotations.
+Maintenance annotations concern Actions runtime/image migration, owned by Ayush.
+
+- Exact isolated PR snapshot: **191 passed, 1 Windows symlink-privilege skip**; Ruff lint,
+  format (**21 files**), strict mypy (**15 source files**) and repository checks passed.
+- Added **15** consumer cases in `tests/detectors/test_residual_partitions.py`: fresh reset/
+  carry context reproduces target predictions; context stays outside metrics; insufficient
+  declared lookback fails to reproduce full history even when ready=true; per-series indices
+  work for interleaved CSVs; group state is separate; negative gain/floor changes, cadence
+  gaps and real-extractor errors preserve the documented behavior.
+- Added the manual dev utility `tests/detectors/check_published_data.py` to load all three
+  exact data modules from a locally fetched commit and record source hashes/pytest results.
+  The pinned combined consumer suite passed **121 tests, no skips**. The independent branch
+  suite passed **93 tests, 2 optional-module skips**. Source lint/format (**19 files**) and
+  configured strict mypy (**13 source files**) pass; runner+src type check passes **14 files**.
+- An initial extra mypy invocation targeting only the runner could not resolve the editable
+  package's type information; checking `src` and the runner together resolved it without
+  modifying package/shared configuration. No production defect was reproduced or hidden.
+- No blocking feature finding reproduced. This is an agent's scoped review for Manas, not
+  a human approval, full split/config approval, or authorization to merge. Shared config,
+  CLI/replay integration, fitting/state policy, target masks and exact metadata still need
+  Ayush/Mayank review. KS-04/05 remain BLOCKED; official intake still contains only README.
+- No Kaustubh-owned source/task file or Ayush-owned central record was edited. Review routing,
+  evidence/handoff links and publication references are recorded after sharing below.
