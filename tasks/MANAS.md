@@ -145,3 +145,12 @@ Maintenance annotations concern Actions runtime/image migration, owned by Ayush.
   Ayush/Mayank review. KS-04/05 remain BLOCKED; official intake still contains only README.
 - No Kaustubh-owned source/task file or Ayush-owned central record was edited. Review routing,
   evidence/handoff links and publication references are recorded after sharing below.
+
+Shared review/consumer commit: `a9bab6e6d40d3a5f9f74a684838f73d4bcc3b19b`, pushed on the
+MN-02 branch. Posted the [scoped PR #2 review](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/2#pullrequestreview-5657147497)
+as COMMENTED at the reviewed SHA. Requested Ayush (`AJCoder01`) and Mayank
+(`Kratos7heSpartanRage`) after verifying collaborator accounts/public profile names.
+Their approvals and main integration remain pending. See the
+[PR-2 review handoff](../docs/HANDOFFS/MN-02_manas_20261026T183629Z_pr2-feature-review.md)
+for exact commands, source/CI evidence, ownership and next actions. PR #3's description now
+reflects the full residual/context-consumer scope and current test counts.
