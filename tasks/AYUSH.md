@@ -60,6 +60,9 @@ after profiling shows benefit (within AY-06, no separate infrastructure project)
 - Branch: `feat/ayush/AY-01-run-provenance-profiling`, based on inspected shared `main`
   `d7158d62eb8fa4e4c5d4907238d03c5989967083`; local main was initially one documentation commit behind.
   The published remote exists; the newer publication record resolves the stale local notes.
+- Implementation commit: `07f17ed13787101f37422bf5260045d16002f2dd`, local-only/unpushed.
+  [Continuation handoff and prepared PR summary](../docs/HANDOFFS/AY-01_ayush_20261026T154512Z_provenance-profiling.md).
+  Another machine cannot retrieve it until the branch is shared; no PR exists yet.
 - Implemented: additive provenance/profiling/workload metadata; actual Git HEAD/dirty or explicit
   unknown; canonical config/environment/dependency hashes with full environment snapshot;
   optional exact-byte split snapshot/checksum; per-series coverage/counts and hardware;
