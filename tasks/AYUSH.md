@@ -13,7 +13,7 @@ not intention. Effort: 1 unit ~= a focused half-day including tests/review; actu
 
 | ID | Priority / effort | Task and explicit deliverable | Dependencies | Status |
 |---|---|---|---|---|
-| AY-01 | P0 / 2 | Extend run manifests with revision/dirty state, environment/split/config hashes, and p50/p95/cold/end-to-end profiling; record workload | Foundation contracts; works with synthetic replay | TODO |
+| AY-01 | P0 / 2 | Extend run manifests with revision/dirty state, environment/split/config hashes, and p50/p95/cold/end-to-end profiling; record workload | Foundation contracts; works with synthetic replay | IN_REVIEW |
 | AY-02 | P1 / 3 | Propose reviewed state contract, implement versioned JSON checkpoints and compatible resume for baseline; full replay fallback | Current Detector; coordinate extension before edits | TODO |
 | AY-03 | P0 / 2 | Add replay integration tests and clean error semantics for interleaving, early termination, atomic output, output collisions; integrate a test-double detector | Current Protocol; no final model needed | TODO |
 | AY-04 | P0 / 2 | Implement official prediction exporter/schema validator and execution adapter after Q06/Q10 | Organizer schema/runtime contract | BLOCKED |
@@ -47,10 +47,40 @@ affected-owner coordination. Other developers report progress through their own 
 
 ## Handoff and local progress
 
-No AY task is complete at initialization. INIT-01 supplies baseline orchestration but not AY-01's
+No AY task was complete at initialization. INIT-01 supplies baseline orchestration but not AY-01's
 full manifest/profile fields, AY-02 resume, or AY-04 exporter. Log actual task branch/commit,
 tests/results, decisions/blockers, and next action below, then add a unique handoff using
 [HANDOFF_PROTOCOL](../docs/HANDOFF_PROTOCOL.md). Only shared committed changes are portable.
 
 Optional stretch: optimize state representation or add a schema-compatible batch reader only
 after profiling shows benefit (within AY-06, no separate infrastructure project).
+
+### AY-01 — implementation verified, awaiting peer review (2026-10-26)
+
+- Branch: `feat/ayush/AY-01-run-provenance-profiling`, based on inspected shared `main`
+  `d7158d62eb8fa4e4c5d4907238d03c5989967083`; local main was initially one documentation commit behind.
+  The published remote exists; the newer publication record resolves the stale local notes.
+- Implemented: additive provenance/profiling/workload metadata; actual Git HEAD/dirty or explicit
+  unknown; canonical config/environment/dependency hashes with full environment snapshot;
+  optional exact-byte split snapshot/checksum; per-series coverage/counts and hardware;
+  bounded timing histograms with explicit p50/p95 upper bounds (<1/128 relative overestimate),
+  learning-warmup/ready/cold/subsequent-call populations and defined replay/prepublication regions.
+  Detected input mutation aborts publication. No detector/evaluator/config/prediction semantics changed.
+- Files: `src/sentinel/pipeline.py`, `cli.py`, new `profiling.py`/`provenance.py`, three test modules
+  under `tests/pipeline/`, README, INTERFACES, proposal and verification evidence.
+- Verified: `.venv/bin/python -m pytest` **43 passed** (24 existing + 19 new); Ruff lint/format,
+  strict mypy (14 source files), repository checker, pip check, CLI help all exited 0.
+  README replay/evaluate commands and optional split CLI path exited 0. All 16 semantic prediction
+  rows match the pre-change baseline after excluding elapsed_ns. Artificial-event counts TP=1,
+  FP=FN=0 are provisional wiring evidence only; no official benchmark was evaluated.
+  [Raw commands/results and artifacts](../docs/validation/AY-01_20261026T150504Z/README.md).
+- Contract review: [additive proposal](../docs/HANDOFFS/AY-01_ayush_20261026T145042Z_manifest-proposal.md).
+  Mayank reviews artifacts and timing semantics; Kaustubh reviews checksum-only split provenance.
+  No peer approval/PR/CI execution or main integration is claimed. Shared summaries remain unchanged.
+- Limitations: approximate quantiles are explicitly labeled; cold excludes construction/imports;
+  final manifest write/rename is outside measured regions; split membership and peak memory are
+  not validated/measured. Official assets/schema/scorer remain unavailable. AY-06 owns larger
+  workload/robustness profiling; these tiny synthetic timings are not a performance benchmark.
+- Remaining: share the task branch, obtain affected-owner review, rerun gates after any changes,
+  then integrate only with authorization. Next engineering task is AY-02's state-contract proposal;
+  checkpoint implementation requires coordination. AY-03 remains independently executable.

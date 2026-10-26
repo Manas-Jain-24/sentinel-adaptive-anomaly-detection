@@ -19,6 +19,14 @@ def main(argv: list[str] | None = None) -> int:
     run.add_argument("--output-dir", type=Path, required=True)
     run.add_argument("--dataset-id", required=True)
     run.add_argument(
+        "--split-manifest",
+        type=Path,
+        help=(
+            "Snapshot/hash an optional split manifest; "
+            "does not validate membership or feed inference"
+        ),
+    )
+    run.add_argument(
         "--scope", choices=["synthetic_smoke", "development_validation"], required=True
     )
     evaluate = commands.add_parser(
@@ -36,6 +44,7 @@ def main(argv: list[str] | None = None) -> int:
                 load_config(arguments.config),
                 cast(EvaluationScope, arguments.scope),
                 arguments.dataset_id,
+                split_manifest_path=arguments.split_manifest,
             )
         else:
             result = evaluate_run(arguments.run_dir, arguments.windows)

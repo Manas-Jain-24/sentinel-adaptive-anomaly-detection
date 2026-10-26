@@ -1,0 +1,62 @@
+{
+  "task": "AY-01",
+  "executed_at_utc": "2026-10-26T15:05:04Z",
+  "context": "macOS arm64, Python 3.12.14; synthetic software validation only",
+  "checks": [
+    {
+      "name": "pytest",
+      "cmd": ".venv/bin/python -m pytest",
+      "exit_code": 0,
+      "output": "============================= test session starts ==============================\nplatform darwin -- Python 3.12.14, pytest-8.3.5, pluggy-1.7.0\nrootdir: /Users/ayush/everything/Projects/sentinel-adaptive-anomaly-detection\nconfigfile: pyproject.toml\ntestpaths: tests\ncollected 43 items\n\ntests/pipeline/test_profiling.py .........                               [ 20%]\ntests/pipeline/test_provenance.py .....                                  [ 32%]\ntests/pipeline/test_run_metadata.py .....                                [ 44%]\ntests/test_foundation.py ........................                        [100%]\n\n============================== 43 passed in 0.55s ==============================\n"
+    },
+    {
+      "name": "ruff-lint",
+      "cmd": ".venv/bin/python -m ruff check .",
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    {
+      "name": "ruff-format",
+      "cmd": ".venv/bin/python -m ruff format --check .",
+      "exit_code": 0,
+      "output": "19 files already formatted\n"
+    },
+    {
+      "name": "mypy",
+      "cmd": ".venv/bin/python -m mypy",
+      "exit_code": 0,
+      "output": "Success: no issues found in 14 source files\n"
+    },
+    {
+      "name": "repository",
+      "cmd": ".venv/bin/python scripts/check_repository.py",
+      "exit_code": 0,
+      "output": "OK: 32 mandatory documents, 91 relative links, 24 unique team tasks, official PDF hash\n"
+    },
+    {
+      "name": "pip-check",
+      "cmd": ".venv/bin/python -m pip check",
+      "exit_code": 0,
+      "output": "WARNING: The directory '/Users/ayush/Library/Caches/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\nNo broken requirements found.\n"
+    },
+    {
+      "name": "cli-help",
+      "cmd": ".venv/bin/python -m sentinel run --help",
+      "exit_code": 0,
+      "output": "usage: __main__.py run [-h] --input INPUT --config CONFIG --output-dir\n                       OUTPUT_DIR --dataset-id DATASET_ID\n                       [--split-manifest SPLIT_MANIFEST] --scope\n                       {synthetic_smoke,development_validation}\n\noptions:\n  -h, --help            show this help message and exit\n  --input INPUT\n  --config CONFIG\n  --output-dir OUTPUT_DIR\n  --dataset-id DATASET_ID\n  --split-manifest SPLIT_MANIFEST\n                        Snapshot/hash an optional split manifest; does not\n                        validate membership or feed inference\n  --scope {synthetic_smoke,development_validation}\n"
+    }
+  ],
+  "synthetic_smoke": {
+    "plain_replay_exit": 0,
+    "plain_evaluate_exit": 0,
+    "split_replay_exit": 0,
+    "split_evaluate_exit": 0,
+    "semantic_comparison": "16 prediction rows equal pre-change baseline, without elapsed_ns, for plain and split runs",
+    "scope": "synthetic_smoke",
+    "metric_id": "provisional_event_trigger_f1_v0",
+    "official_metric": false,
+    "tp": 1,
+    "fp": 0,
+    "fn": 0
+  }
+}
