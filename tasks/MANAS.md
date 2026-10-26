@@ -108,3 +108,9 @@ compatibility are verified; peer/integration review and merge remain pending.
   CURRENT_STATE/TASK_BOARD/INTEGRATION remain Ayush's responsibility after authorized integration.
 - Next actionable task: **MN-03**, a bounded empirical threshold from preceding combined scores
   with explicit minimum-history fallback. Official model comparison remains blocked by assets.
+
+Implementation commit: `8129bff278bd08853722bcb7dbab71293a769618`, pushed to
+`origin/feat/manas/MN-02-residual`. The [MN-02 handoff](../docs/HANDOFFS/MN-02_manas_20261026T175901Z_residual-detector.md)
+records the pinned real-extractor test command, diagnostic reproduction, integration limits
+and exact continuation. Retrieve branch HEAD for the final documentation commit as well.
+Draft review: [PR #3](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/3).
