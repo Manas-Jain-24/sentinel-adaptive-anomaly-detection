@@ -15,6 +15,7 @@
 | GitHub Actions | Reproduce checks on Windows/Linux, Python 3.11/3.13 | Workflow configured; no remote run is implied |
 | Optional scikit-learn | IF/LOF/OCSVM comparisons if experiments justify them | Not installed as project dependencies |
 | Optional River / STUMPY / libspot | Drift / shape / EVT research candidates | Not adopted; version/platform/license review first |
+| Optional Chronos-2 / TimesFM | Zero-shot forecast comparators for EXP-12 | Not installed; separate optional environment and model terms/runtime gate required |
 | Optional static HTML/SVG viewer | Inspect genuine artifacts offline | Mayank task; no runtime dependency of core |
 
 No LLM calls in scoring/evidence: arithmetic evidence is faster, reproducible, and tied to actual

@@ -91,8 +91,10 @@ official assets, schema, and scorer. UI and advanced models are optional.
 **Level B - competitive final system:** calibrated combination of level/change residuals with
 seasonal expectation when supported by the past, guarded updates/shadow drift only if validated,
 runtime profiling, experiment tracking, error analysis, robust export, and artifact-based viewer.
-Each added component has a measured promotion gate. A simpler model may be selected for final
-submission if it performs better or the advanced system is unreliable.
+Chronos-2 and TimesFM-3 are forecasting-model comparators in EXP-12, not default runtime
+dependencies or an assumed detector replacement. Each added component has a measured promotion
+gate. A simpler model may be selected for final submission if it performs better or the advanced
+system is unreliable.
 
 **Level C - research stretch:** see [EXPERIMENT_PLAN](EXPERIMENT_PLAN.md) for hypotheses, effort,
 failure and abandonment gates for EVT calibration, shape discord augmentation, and adaptive

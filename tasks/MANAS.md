@@ -15,12 +15,12 @@ half-day including tests/review; real elapsed effort depends on findings.
 | MN-02 | P0 / 3 | Implement residual detector with level/delta and optional seasonal components, fixed documented combination, direct component evidence | FeatureFrame contract; fake extractor now, KS-02 integration later | TODO |
 | MN-03 | P0 / 2 | Implement bounded prior-score empirical quantile threshold with minimum-history fallback and causal calibration tests | Can start independent score-stream tests; integrate MN-02 later | TODO |
 | MN-04 | P1 / 3 | Compare no guard/capped influence/finite quarantine and shadow drift; implement only validated update policy | MN-02/03, sustained-shift/fault tests, permitted data | TODO |
-| MN-05 | P1 / 2 | Run component/calibration/guard ablations and optional IF comparator through Mayank harness; select/freeze candidate | MY-02, KS-04, official/local metric identity | BLOCKED |
+| MN-05 | P1 / 3 | Run component/calibration/guard ablations plus Chronos-2 and gated TimesFM-3 forecast-to-anomaly comparators through Mayank harness; select/freeze candidate | MY-02, KS-04, authorized labels/scorer; TimesFM license/runtime gate | BLOCKED |
 | MN-06 | P2 / 1 initial spike | Prototype EVT tail calibration feasibility only after A/B gates; stop or separately estimate implementation | Level A valid, measured B; S1 gates | TODO |
 
 **First three tasks:** MN-01, MN-02, MN-03. Start MN-01. MN-02 uses a deterministic
 FeatureExtractor double to avoid waiting for KS-02. MN-03 accepts a prior score stream in tests;
-the current score is compared before it enters calibration. Core+initial spike: 13 effort units.
+the current score is compared before it enters calibration. Core+initial spike: 14 effort units.
 MN-06's one unit is a feasibility decision, not the full three-unit stretch implementation.
 
 ## Algorithm and interface obligations

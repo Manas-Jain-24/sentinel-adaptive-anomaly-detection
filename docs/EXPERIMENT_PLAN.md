@@ -55,6 +55,62 @@ on synthetic inputs, and MN-01 checks baseline causality. These are useful wirin
 | EXP-09 | P2 | Causal shape discord catches missed contextual events | Stretch S2 | Kaustubh/Manas | Past-only matching study |
 | EXP-10 | P2 | Online expert selection improves transfer | Stretch S3 | All A/B gates passed | Manas/Mayank | Leakage-free selection study |
 | EXP-11 | P0 | Frozen final model on untouched permitted split | Scorer/schema resolved, AY-05 | Mayank/Ayush | Final reproducible evaluation and export |
+| [EXP-12](#exp-12-forecasting-foundation-models) | P1 | Do zero-shot foundation forecasts improve event detection enough to justify runtime? | Authorized labeled data, official scorer ideally, MN-05/MY-02/AY-06 | Manas lead; Mayank, Ayush, Kaustubh support | Paired event results, causal wrapper, license/runtime gate |
+
+## EXP-12: Forecasting foundation models as anomaly candidates
+
+**Question.** Do Amazon Chronos-2 and Google Research TimesFM-3 forecasts improve the event
+F1/delay/recall/precision balance versus rolling MAD and the selected residual baseline, at an
+acceptable per-window runtime and memory cost? Forecast accuracy alone is not the objective.
+
+**Candidates.** First test `autogluon/chronos-2-small` (28M) as the practical CPU Chronos checkpoint;
+test `amazon/chronos-2` (120M) only if latency/memory allow. Test TimesFM-3 (330M) only after a
+runtime feasibility probe and explicit weight-license check. If the TimesFM-3 checkpoint cannot
+be used or run in the permitted setup, test TimesFM-2.5 only after verifying its exact checkpoint
+license and inference package. Original Chronos, fine-tuning, and additional TSFMs are out of the
+first experiment. Keep optional libraries/models out of base install and Git; record exact model
+ID, revision/hash, package versions, license URL/version, hardware, and download/cache source.
+
+**Causal detector wrapper.** At prediction origin `t-1`, forecast the next `h` values from past
+history only and obtain model quantiles `q10`, `q50`, and `q90`. When actual `y_t` arrives, emit
+the frozen forecast error evidence and interval-exceedance score
+`score_t = max(0, q10_t - y_t, y_t - q90_t) / max(q90_t - q10_t, scale_floor)`.
+This is a nonnegative anomaly score, **not a probability**. Label using one threshold selected on
+permitted train/development labels only. Alternatively calibrate a fixed score threshold on a
+separate permitted calibration prefix, with the policy recorded before validation. Emit q50,
+q10/q90, interval width, signed residual, score, threshold, origin timestamp, and forecast age as
+interpretable evidence. Do not revise past scores after observations arrive.
+
+**Freshness/latency variants.** Compare forecast stride 1 (refresh at every newly observed point)
+with frozen block forecasts at horizon 8 (refresh only after the block). Both are causal: the
+block policy never sees an actual observation early. Report event detection delay and score age
+for each; do not present stale block forecasts as fully refreshed inference. Start after the same
+warmup for every model. Batch series only as a secondary run, since batch startup/throughput may
+not match per-window online latency. Separate model load and first-compile time from warmed per-
+window inference, and also report end-to-end cold-start cost. First probe CPU use for both models;
+on the current Windows host, TimesFM-3's upstream quickstart documents CUDA, while its repo also
+describes an Apple Silicon MLX path. CPU availability is therefore unverified, not assumed. If a
+permitted GPU is available, log its model/memory and compare the same workloads; GPU work is optional.
+
+**Evaluation design.** Use identical authorized group/chronological splits, warmup, event matching,
+and inputs for MAD, selected residual baseline, Chronos-2, and TimesFM-3. Fit no weights on hidden
+or validation/test labels. Prefer the organizer's scorer. Until that arrives, report only the
+named provisional metric, clearly scoped as development validation. Measure event F1, TP/FP/FN,
+precision, recall, per-hit delay plus missed-event count, forecast coverage/interval width, cold
+load, warmed p50/p95 per point, block latency, total replay time, peak RAM and accelerator memory.
+Inspect spikes, seasonal peaks, regime shifts, flat/short streams, and persistent faults. For
+stochastic/infrastructure-sensitive cases record repeat runs and versions. Perform no per-series
+hidden-label tuning or post-hoc point adjustment.
+
+**Acceptance / promotion.** First prove one-step/block origin timestamps and prefix invariance with
+independent hand-built tests. Evaluate on approved labeled groups. Promote a TSFM into final B only
+if it passes the existing frozen F1/recall/p95 gates in this plan, produces useful numerical
+evidence, satisfies the actual runtime rules, and its model terms permit the contest use and chosen
+sharing. Compare against both the rolling MAD fallback and the selected residual model; use paired
+series/event results, not provider forecasting leaderboards. If inference fails, is slow, license
+is unclear, or event gains do not pass gates, retain it as a measured comparator and submit the
+simple detector. This candidate addition does not replace EXP-01 as the first value experiment;
+run EXP-12 after the basic scorer/split/replay path is valid.
 
 ## Tuning, logging, and statistical caution
 

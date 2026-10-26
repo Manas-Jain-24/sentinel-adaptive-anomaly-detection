@@ -31,6 +31,24 @@ implementation/research risk. The deduction is an internal planning convention, 
 | C5 | 4 | 4 | 4 | 4 | 3 | 3.90 | 0.45 | 3.45 |
 | C6 | 4 | 4 | 4 | 5 | 4 | 4.15 | 0.25 | 3.90 |
 
+## Additional pretrained forecast candidates (not detector replacements)
+
+Chronos-2 and TimesFM-3 are forecasters, not methods scored by this project. Their outputs could
+support a causal anomaly wrapper, so assess them as C7/C8 only through EXP-12. The same
+40/20/15/15/10 rubric and planning risk deduction are shown below; scores remain subjective
+estimates, not benchmark results.
+
+| Comparator | Technical 40% | Innovation 20% | Efficiency 15% | Presentation 15% | Code/demo 10% | Raw /5 | Risk deduction | Adjusted /5 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| C7 Chronos-2 forecast residual | 4 | 4 | 3 | 4 | 3 | 3.75 | 0.45 | 3.30 |
+| C8 TimesFM-3 forecast residual | 4 | 4 | 2 | 4 | 3 | 3.60 | 0.45 | 3.15 |
+
+C7/C8 carry added adoption risk: forecasting-to-alert calibration is unproven on the competition
+metric, refreshing each point can cost time, checkpoints add dependencies, and TimesFM-3 weights
+have restrictive upstream terms. Chronos-2 is the first practical probe; TimesFM-3 remains gated.
+TimesFM-2.5 is a separate fallback only if its checkpoint and terms are verified. Exact evidence
+and gates are in EXP-12.
+
 ## Selection: Sentinel Pulse (C6)
 
 C6 offers explicit evidence, bounded sequential execution, and separable workstreams. C1 is

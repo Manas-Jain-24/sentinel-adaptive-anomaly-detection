@@ -5,6 +5,26 @@ documentation. These are research findings, not measurements of our system. No t
 leaderboard number is used as an expected hackathon score. Licenses/versions must be checked
 before incorporating external implementation code; none is copied into this starter.
 
+## Forecasting foundation model comparators (added 2026-10-26)
+
+| Model | Verified upstream information | Anomaly-detection fit and engineering decision |
+|---|---|---|
+| [Amazon Chronos-2 repository](https://github.com/amazon-science/chronos-forecasting) and [release overview](https://www.amazon.science/blog/introducing-chronos-2-from-univariate-to-universal-forecasting) | The current Chronos family includes Chronos-2; upstream lists a 120M checkpoint and a 28M small checkpoint, and describes zero-shot univariate, multivariate, and covariate-informed forecasts. The upstream project lists CPU/GPU inference. | **Include as EXP-12 comparator.** Start with the 28M small checkpoint on CPU; optionally compare 120M if resource and latency gates allow. It forecasts; it is not already an event detector. A causal interval-violation wrapper and event scorer are required. Forecasting leaderboard results do not establish anomaly F1. |
+| [Google Research TimesFM repository](https://github.com/google-research/timesfm) and [TimesFM-3 announcement](https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/) | Current upstream announces TimesFM 3.0 (Aug 2026), 330M parameters, univariate/multivariate prediction and quantile forecasts. Its downloaded/self-hosted 3.0 weights have a separate non-commercial, non-production license; source code is Apache-2.0. README code demonstrates a CUDA configuration and an Apple Silicon MLX backend. | **Include as a gated EXP-12 comparator.** First confirm the team runtime supports the checkpoint (especially on CPU) and review its weight terms against the contest/use/distribution. If either gate fails, test TimesFM 2.5 only after confirming checkpoint/API terms; do not put model weights in Git. |
+| [Original Chronos/Chronos-Bolt family overview](https://github.com/amazon-science/chronos-forecasting) | Upstream lists smaller Bolt checkpoints as well as the original model family. | Optional fallback if Chronos-2's cold start or per-window latency is too costly; keep it out of the first comparison unless the primary Chronos-2 candidate fails a gate. |
+
+Why try these: zero-shot pretrained forecasts could provide useful context when training labels
+are sparse, and quantiles provide an inspectable predictive interval. Why not replace the detector
+immediately: forecasting loss measures prediction accuracy, while the competition rewards event
+detection and delay. A model can forecast well on average and still miss short anomalies, absorb
+a persistent shift into context, or exceed the runtime budget when asked to refresh every point.
+The split, causal score wrapper, blocked-refresh test, event metric, cold/warm timing, and fallback
+are specified in [EXP-12](EXPERIMENT_PLAN.md#exp-12-forecasting-foundation-models).
+
+The TimesFM-3 weight restriction is an explicit upstream license condition, not an interpretation
+that this hackathon is or is not commercial. The team should use the checkpoint only if its terms
+permit this competition and how the model/results will be shared. No legal conclusion is asserted.
+
 | Source | Research-backed finding | Design implication / limits |
 |---|---|---|
 | [R1: NAB repository](https://github.com/numenta/NAB) | NAB supplies streaming time series, labels, and its own scoring procedure. | Use provenance-aware adapters; the prepared hackathon subset may differ. Public NAB is not the organizer data. |
@@ -16,6 +36,8 @@ before incorporating external implementation code; none is copied into this star
 | [R7: Matrix profile author paper](https://www.cs.ucr.edu/~eamonn/MP_journal.pdf) | Matrix profiles support motifs and discord discovery through subsequence similarity. | Strong shape-anomaly comparator; subsequence length and reference-history policy matter. |
 | [R8: STUMPY streaming tutorial](https://stumpy.readthedocs.io/en/latest/Tutorial_Matrix_Profiles_For_Streaming_Data.html) | Incremental profile updates and finite-window egress are available; old scores can change as new neighbors arrive. | Freeze emitted historical decisions. Use a left/past-only reference to prevent hindsight leakage. |
 | [R9: Author-maintained libspot](https://github.com/asiffer/libspot) | C implementation and bindings target stream outliers; repository exposes LGPL-3.0 licensing. | Optional stretch dependency; check platform/build/license obligations before adoption. |
+| [R10: Amazon Chronos-2 repository](https://github.com/amazon-science/chronos-forecasting) | Chronos-2 produces zero-shot forecasts; upstream lists multiple sizes and CPU/GPU usage. | EXP-12 maps forecast quantiles to causal nonconformity scores. No forecast leaderboards are reused as anomaly results. |
+| [R11: Google Research TimesFM repository](https://github.com/google-research/timesfm) | Current TimesFM 3.0 supports quantile and multivariate forecasts; its self-hosted weights have separate restrictive terms. | Test a gated adapter on available hardware; exclude if license/inference prevents a valid competition submission. |
 
 ## Fundamental method comparison
 

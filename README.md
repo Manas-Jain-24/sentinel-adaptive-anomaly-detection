@@ -57,7 +57,8 @@ synthetic fixtures, a repository checker, and a Windows/Linux CI definition are 
 
 Level B adds residual features, causal seasonal prediction, calibrated thresholds, and guarded
 adaptation **only after comparisons**. See [delivery levels](docs/PRD.md) and
-[experiment plan](docs/EXPERIMENT_PLAN.md). Warmup currently emits NORMAL with `ready=false`
+[experiment plan](docs/EXPERIMENT_PLAN.md). EXP-12 now adds Amazon Chronos-2 and Google TimesFM-3
+as gated forecasting comparators; neither is installed or benchmarked yet. Warmup currently emits NORMAL with `ready=false`
 and `score=null`; that is a documented internal convention awaiting organizer confirmation.
 
 ## Team
