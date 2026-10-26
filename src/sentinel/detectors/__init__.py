@@ -1,1 +1,1 @@
-"""Manas owns detectors; only RollingMADStarter is currently implemented."""
+"""Manas owns streaming baselines and causal residual detector composition."""
