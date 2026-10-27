@@ -1,1 +1,1 @@
-"""Manas owns the rolling MAD starter and rolling z-score comparator."""
+"""Causal baselines, residual composition and prior-score calibration, owned by Manas."""
