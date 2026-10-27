@@ -357,3 +357,10 @@ Seven saved runs also pass merged Python and frontend Node parser/scalar metric 
 Frontend drops advanced model/provenance/profiling fields; full model-specific UI support
 is for Mayank review. No frontend files edited, browser render or build claimed.
 PR #7 retains main-merge/affected-owner review gates; MY-02 and real data are still needed.
+
+Final main sync: Mayank fixed the same lint issues upstream at `3789673`. Resolved
+formatting-only overlap by preserving his evaluator/test files exactly; no final diff
+in those owned files. Merge `566dee3` passed **609 tests, 1 Windows symlink skip**,
+Ruff lint/format (48 files), strict mypy (23), repository/whitespace checks and fresh
+MAD/quantile CLI smokes. Final hashes/commands are in evidence `latest-main-sync.json`.
+PR #7 is the published integration review; main remains for authorized merge/review.

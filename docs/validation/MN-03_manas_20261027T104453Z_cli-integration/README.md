@@ -48,3 +48,14 @@ Browser rendering/build was not performed in this integration session. The parse
 discards model/provenance/profiling metadata, and model-specific chart/inspector
 semantics remain for Mayank review; no claim of full advanced viewer support.
 Original smoke source evidence remains unchanged and identifies clean `beaa418`.
+
+## Final upstream-owner reconciliation
+
+Mayank published the same lint fix independently as main `3789673`. A formatting-only
+merge overlap was resolved by taking his evaluator/test files byte-for-byte. The final
+PR diff therefore has no evaluation source/test changes relative to current main.
+`latest-main-sync.json` is the final source/check record and supersedes earlier
+current-source hashes; original phase artifacts/proofs remain historical evidence.
+Clean merge `566dee3` passed 609 tests/one Windows symlink skip, lint/format (48 files),
+mypy (23 source files), repository checker and whitespace checks. Fresh default MAD
+and long quantile CLI smokes retain 1/0/0 and 0/1/1 respectively under current MY-01.

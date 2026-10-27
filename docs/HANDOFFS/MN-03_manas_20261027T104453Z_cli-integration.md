@@ -132,3 +132,20 @@ Next: review PR #7 against current main, retaining module and AY-01 owner review
 Use final published head for CI. Central summaries remain for Ayush; real comparisons
 still require MY-02 plus authorized official data. The observed quantile tie limitation
 and unchanged default MAD remain documented. No main merge or external message sent.
+
+## Final upstream-owner reconciliation
+
+Main advanced to `37896738ecac9a18f93173c51061da0f467f971b`: Mayank's own CI formatting
+fix overlapped the temporary integration cleanup. Inspected the diff: only report table
+heading text and test docstring differed. Resolved both merge conflicts using his exact
+upstream evaluator/test bytes; no final evaluation source/test diff relative to main.
+Merge commit: `566dee3d22b37101fb3db4cf0bcb7c4f2832fa3f`.
+
+Final full command `pytest -q --basetemp outputs/pytest-final-main-sync-001 --tb=short`:
+609 passed, one Windows symlink skip. Ruff lint/format passed (48 files), mypy 23 source
+files passed, repository checker 199 links/PDF/task IDs passed, git diff --check passed.
+Fresh actual CLI MAD/long quantile smokes on clean merge 566dee3 retain 1/0/0 and 0/1/1.
+See evidence `latest-main-sync.json` for final source hashes/settings/commands/results;
+earlier current-main/AST-equivalence artifacts are retained as historical phase evidence.
+No metric semantics were overridden. PR #7 source/evidence updates are pushed after this
+record; final PR body identifies published head and CI. Main itself was not merged by us.
