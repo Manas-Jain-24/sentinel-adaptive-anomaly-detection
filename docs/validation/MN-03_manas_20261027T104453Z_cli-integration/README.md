@@ -30,3 +30,21 @@ use tests/fixtures/synthetic_windows.json. Saved output hashes must match before
 Ayush must review the scoped additive model manifest/settings and publication retry.
 Mayank can now use genuine outputs for MY-02/MY-03 without waiting for official data;
 authorized-data experiments still require official pack/permissions/split/time answers.
+
+## New-main compatibility follow-up
+
+During integration Mayank PR #6 merged into main `b301c07`. This feature branch now
+includes those original commits. Full Python checks: 609 passed, 1 Windows symlink
+privilege skip. Mayank's newly merged evaluator/source tests initially failed four
+lint findings and formatting. Minimal formatting/import cleanup preserves every
+production evaluator function AST; no metric logic changed. Follow-up focused
+evaluation/CLI/publication checks passed 58 cases.
+
+`latest-evaluator-compatibility.json` records validation of all seven archived runs
+by merged MY-01, preserving scalar counts/delays and adding its diagnostic fields.
+`frontend-artifact-compatibility.json` records Node execution of Mayank's actual
+parser/scalar evaluator on all seven saved runs, agreeing with Python counts/F1.
+Browser rendering/build was not performed in this integration session. The parser
+discards model/provenance/profiling metadata, and model-specific chart/inspector
+semantics remain for Mayank review; no claim of full advanced viewer support.
+Original smoke source evidence remains unchanged and identifies clean `beaa418`.

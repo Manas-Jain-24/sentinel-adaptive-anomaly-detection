@@ -1,0 +1,77 @@
+{
+  "scope": "synthetic_parser_and_scalar_metric_compatibility",
+  "browser_render_checked": false,
+  "advanced_manifest_support_complete": false,
+  "checks": [
+    {
+      "name": "legacy-mad",
+      "points": 16,
+      "algorithm": "rolling_mad_starter",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "model_metadata_preserved": false,
+      "profiling_preserved": false
+    },
+    {
+      "name": "readme-quantile",
+      "points": 16,
+      "algorithm": "residual_max_prior_quantile",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "model_metadata_preserved": false,
+      "profiling_preserved": false
+    },
+    {
+      "name": "mad",
+      "points": 96,
+      "algorithm": "rolling_mad_starter",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "model_metadata_preserved": false,
+      "profiling_preserved": false
+    },
+    {
+      "name": "zscore",
+      "points": 96,
+      "algorithm": "rolling_zscore",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "model_metadata_preserved": false,
+      "profiling_preserved": false
+    },
+    {
+      "name": "residual",
+      "points": 96,
+      "algorithm": "residual_max",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "model_metadata_preserved": false,
+      "profiling_preserved": false
+    },
+    {
+      "name": "residual-quantile",
+      "points": 96,
+      "algorithm": "residual_max_prior_quantile",
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "model_metadata_preserved": false,
+      "profiling_preserved": false
+    },
+    {
+      "name": "residual-seasonal",
+      "points": 96,
+      "algorithm": "residual_max_seasonal",
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "model_metadata_preserved": false,
+      "profiling_preserved": false
+    }
+  ]
+}

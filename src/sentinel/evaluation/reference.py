@@ -1,4 +1,4 @@
-﻿"""Provisional event-trigger F1 v0. See docs/EVALUATION.md before interpreting."""
+"""Provisional event-trigger F1 v0. See docs/EVALUATION.md before interpreting."""
 
 import json
 import statistics
@@ -255,12 +255,15 @@ def format_evaluation_report(metrics: dict[str, Any]) -> str:
 
     per_series = metrics.get("per_series", {})
     if per_series:
-        lines.extend([
-            "## Per-Series Breakdown",
-            "",
-            "| Series ID | Windows | TP | FP | FN | Precision | Recall | Event F1 | Mean Delay | Obs |",
-            "|---|---|---|---|---|---|---|---|---|---|",
-        ])
+        lines.extend(
+            [
+                "## Per-Series Breakdown",
+                "",
+                "| Series ID | Windows | TP | FP | FN | Precision | Recall | Event F1 | "
+                "Mean Delay | Obs |",
+                "|---|---|---|---|---|---|---|---|---|---|",
+            ]
+        )
         for s_id, s_stats in per_series.items():
             s_mean_d = s_stats.get("mean_delay_seconds")
             s_mean_str = f"{s_mean_d:.2f}s" if s_mean_d is not None else "N/A"
@@ -273,16 +276,18 @@ def format_evaluation_report(metrics: dict[str, Any]) -> str:
 
     policy = metrics.get("policy", {})
     if policy:
-        lines.extend([
-            "## Policy & Semantics",
-            "",
-            f"- **Matching Rule**: {policy.get('matching')}",
-            f"- **Pre-Window Trigger Policy**: {policy.get('pre_window_trigger')}",
-            f"- **Repeat Trigger in Window**: {policy.get('repeat_trigger_in_window')}",
-            f"- **Zero Denominator Convention**: {policy.get('zero_denominator_convention')}",
-            f"- **Warmup Policy**: {policy.get('warmup_policy')}",
-            "",
-        ])
+        lines.extend(
+            [
+                "## Policy & Semantics",
+                "",
+                f"- **Matching Rule**: {policy.get('matching')}",
+                f"- **Pre-Window Trigger Policy**: {policy.get('pre_window_trigger')}",
+                f"- **Repeat Trigger in Window**: {policy.get('repeat_trigger_in_window')}",
+                f"- **Zero Denominator Convention**: {policy.get('zero_denominator_convention')}",
+                f"- **Warmup Policy**: {policy.get('warmup_policy')}",
+                "",
+            ]
+        )
 
     return "\n".join(lines)
 

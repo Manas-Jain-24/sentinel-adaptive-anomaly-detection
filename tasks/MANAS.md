@@ -345,3 +345,15 @@ MN-02/03 remain IN_REVIEW, not DONE merely from this combined feature branch. MN
 real-data and A/B blockers remain. Ayush/Kaustubh/Mayank review affected boundaries; Mayank
 can start consuming these actual saved outputs in parallel. Ayush owns central reconciliation.
 Final PR publication records shared commits and CI; no automatic main merge authorized.
+
+Publication: [integration PR #7](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/7)
+is open ready for review. While working, Mayank PR #6 merged into main `b301c07`;
+this branch now includes it, including MY-01 diagnostics/golden tests and MY-03 viewer.
+Full combined suite: **609 passed, 1 Windows symlink skip**. New-main Ruff/format
+violations required minimal Mayank source/test formatting/import cleanup; production
+evaluator function ASTs are identical before/after (no scoring change). Ruff format
+now covers 48 files; strict mypy passes 23. Focused post-cleanup checks: 58 passed.
+Seven saved runs also pass merged Python and frontend Node parser/scalar metric checks.
+Frontend drops advanced model/provenance/profiling fields; full model-specific UI support
+is for Mayank review. No frontend files edited, browser render or build claimed.
+PR #7 retains main-merge/affected-owner review gates; MY-02 and real data are still needed.

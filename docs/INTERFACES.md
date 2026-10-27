@@ -16,7 +16,7 @@ is currently one point-sized streaming window; future trailing windows end at th
 Raw NAB `timestamp,value` input needs KS-04 to supply the series ID and approved timezone. Do not
 rename/assume a raw timestamp convention silently. Series cardinality is bounded by max_series.
 
-## Feature boundary (typed now; extractor not implemented)
+## Feature boundary (implemented by KS-02)
 
 `FeatureExtractor.process(Observation) -> FeatureFrame` and `reset() -> None` operate per series.
 The frame fields are `series_id`, `timestamp`, `expected_level`, `expected_delta`, `scale`, `delta`,
@@ -24,7 +24,8 @@ The frame fields are `series_id`, `timestamp`, `expected_level`, `expected_delta
 observations; delta may use current value minus the preceding value. `scale` is positive when
 ready; expected_level/expected_delta/scale may be null in warmup; seasonal_expected is null until
 a validated period has sufficient past context. All present numerical values must be finite.
-KS-02 implements this contract; MN-02 can use a deterministic fake FeatureExtractor meanwhile.
+KS-02's merged RollingFeatureExtractor implements this contract; MN-02 uses it through
+the integration factory, with deterministic doubles retained for boundary tests.
 RollingMADStarter does not use FeatureFrame and remains runnable if feature development stalls.
 
 ## Detector boundary and lifecycle (implemented)
@@ -189,6 +190,13 @@ precision/recall/event_f1, per-hit delay_seconds, mean_delay_seconds (null if no
 and warmup counts, and, through evaluate_run, scope, dataset ID, input/windows hashes.
 [EVALUATION](EVALUATION.md) defines exact episode matching and edge cases. Unsupported metric or
 scope must error. Official benchmark/hidden scopes are not supported by this starter evaluator.
+
+Merged MY-01 adds diagnostic per_series counts/precision/recall/F1/coverage/delays,
+macro_precision/macro_recall/macro_event_f1 across observed series, missed_events,
+median/min/max/p95 delay_seconds summaries, series_count and explicit policy metadata.
+The provisional identifier and trigger semantics remain unchanged. Macro averages use
+the documented zero-denominator convention and are separate from pooled event F1;
+delay p95 uses linear interpolation, separate from runtime histogram upper bounds.
 
 ## Errors, persistence, and future adapters
 

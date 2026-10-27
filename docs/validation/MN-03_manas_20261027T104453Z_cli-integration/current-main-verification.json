@@ -1,0 +1,60 @@
+{
+  "scope": "synthetic_integration_verification_after_MY01_MY03_merge",
+  "official_benchmark": false,
+  "base_main": "b301c07d8bd1d2526c880748b20c6779e99a2680",
+  "committed_base": "9f0766871ef0c705dc0068fc767d6089d9f2011c",
+  "dirty_at_verification": true,
+  "note": "Tracked formatting/docs/evidence changes are identified by exact source hashes and published in the final PR head. Original seven smokes remain bound to their original source commit.",
+  "source_sha256": {
+    "src/sentinel/__init__.py": "3778e530ca6a1786aaa181957b159cbd1835cbbda772905c5d58c43d4511da05",
+    "src/sentinel/__main__.py": "ce794dc56cb1a826284221eb388332170adf753c1a8d5971b115abd9636cc581",
+    "src/sentinel/cli.py": "b839c83e9059cc1e1cd9e1f748c139dea25ed99b7ff32f33d050c3167ac97a70",
+    "src/sentinel/config.py": "6207be7c66cc6a8b8975b2c19f4f6afa0c3c487369394939afb8f9be16eb7267",
+    "src/sentinel/contracts.py": "29a16144defc18a74d55a0835b2be73ed74ef1eebbc9a5f7443f6b0254ebc2a3",
+    "src/sentinel/data/__init__.py": "0cc8f88eafe42d4ed856d3b09b33610f7460473db3ca345755023cd80d4d4648",
+    "src/sentinel/data/features.py": "e8de0025fbed3bae54928da2a642e3304d667814bbaf8494818fb07a932f426b",
+    "src/sentinel/data/inventory.py": "3748d882ccee01e519cca2eefd398af13b623c6ca90da3c77826e10647bdccda",
+    "src/sentinel/data/io.py": "5e0ba20d67cfdd90643aab988643fa9bfa29bb7e49045906b44a24e225ac6733",
+    "src/sentinel/data/splits.py": "b8307b1a1b622c5d66397bba1fb6f51dbb8d21492560ab9f08c8b9b62d0ec3cf",
+    "src/sentinel/detectors/__init__.py": "0ae5c48d631efea4a07ac8417872a2cdaf534c1ec6d5167d2b2c5ceade2cb434",
+    "src/sentinel/detectors/calibrated.py": "d54079431e185fc842002e048e790f629acebb3a044a86548a7c696e16ef64fe",
+    "src/sentinel/detectors/forecast.py": "cc775efa37b0e20345af6ae05a1ff48c42b07f5c3b0bf2896cf2766640ecd025",
+    "src/sentinel/detectors/residual.py": "10c423aa048b1764f6d91add9bc669f01e16b913e42037e41260cc09dc6d2ef2",
+    "src/sentinel/detectors/rolling.py": "a3426ae26f11d45628daf83412e5b729f11a90b4bc90166c4ca2e4647329e5b9",
+    "src/sentinel/detectors/selection.py": "8e6ed039b1d3ce80fa884f544f9925e4004ca3fda3170b5e73a8965d87000e85",
+    "src/sentinel/detectors/thresholds.py": "a90f0b70ee1ad5fde93782a3076f7c5c3960b0ca2b3228cbe48cf60fcef69769",
+    "src/sentinel/detectors/zscore.py": "983f67e1ac1831d010a11a38133c3a12c9760aaa4d19e11d54ea4c5458109c85",
+    "src/sentinel/evaluation/__init__.py": "aed748bd045942da2d6ed726055ec3108d9ea44daf8bf05781f8fd84321f839a",
+    "src/sentinel/evaluation/reference.py": "27190a13191f45f2328fd819201a4e3f53d3b1d6cb08d654d39dd6f5c4207d74",
+    "src/sentinel/pipeline.py": "25835dfd5e41b4d87aea12e3b05672f13eb34c2ed1df561e418429754540564c",
+    "src/sentinel/profiling.py": "5d792548683cda1183228efe509fc4b79faa3f48af1e4a0a3c70d94780d85374",
+    "src/sentinel/provenance.py": "e7e96c296407edb49212354321a5d83721e5d50f77808b12724044efc98c4815"
+  },
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q --basetemp outputs/pytest-current-integration-final-001 --tb=short",
+      "result": "609 passed, 1 Windows symlink privilege skip"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check .",
+      "result": "passed"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff format --check --no-cache .",
+      "result": "48 files already formatted"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m mypy",
+      "result": "23 source files passed"
+    },
+    {
+      "command": ".venv/Scripts/python.exe scripts/check_repository.py",
+      "result": "32 mandatory docs, 199 links, 24 tasks and official PDF hash passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "frontend": "Actual Node parser/scalar evaluator compatibility checked; no browser/render/build claim; metadata passthrough incomplete"
+}

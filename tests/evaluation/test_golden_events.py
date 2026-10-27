@@ -1,4 +1,4 @@
-﻿"""Comprehensive event golden tests for provisional event-trigger F1 v0.
+"""Comprehensive event golden tests for provisional event-trigger F1 v0.
 
 Owned by Mayank (MY-01). Tests independently calculated TP/FP/FN counts, boundary
 conditions, repeated episodes, warmup interactions, no-event series, gaps,
@@ -9,7 +9,8 @@ from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import pytest
-from sentinel.contracts import AnomalyWindow, ContractError, parse_timestamp
+
+from sentinel.contracts import AnomalyWindow, ContractError
 from sentinel.evaluation.reference import event_metrics, format_evaluation_report
 
 
@@ -126,7 +127,8 @@ def test_pre_window_trigger_conservative_policy() -> None:
 
     Explicit conservative trigger policy:
     - Episode began at t1 (before window [t2, t3]), causing a false positive.
-    - Since episode continues through t2 and t3 without a new trigger, window [t2, t3] is a miss (FN).
+    - Since the episode continues through t2 and t3 without a new trigger,
+      window [t2, t3] is a miss (FN).
     """
     t0 = iso_time(0)
     t1 = iso_time(1)  # Episode starts here (outside window)
@@ -465,11 +467,13 @@ def test_delay_percentile_calculations() -> None:
         w_end = w_start + timedelta(minutes=5)
         trigger = w_start + timedelta(seconds=delay_sec)
         windows.append(make_window("s", w_start, w_end))
-        records.extend([
-            make_record("s", w_start, score=0.1),
-            make_record("s", trigger, score=5.0),
-            make_record("s", w_end, score=0.1),
-        ])
+        records.extend(
+            [
+                make_record("s", w_start, score=0.1),
+                make_record("s", trigger, score=5.0),
+                make_record("s", w_end, score=0.1),
+            ]
+        )
     # Add a final bounding record so all windows are comfortably within coverage
     records.append(make_record("s", base_time + timedelta(hours=2), score=0.1))
 

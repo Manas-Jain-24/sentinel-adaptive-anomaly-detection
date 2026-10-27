@@ -93,3 +93,42 @@ At authorship source is locally committed; this new branch is not yet pushed. An
 machine must wait for the final PR/publication record, then fetch that branch/head. Use
 fresh output/basetemp directories; never overwrite existing runs. Final PR records actual
 shared head/CI status. No new external message or extra GitHub review comment was sent.
+
+## Publication and concurrent-main follow-up
+
+Integration [PR #7](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/7)
+was opened ready for review and attached to the task. Source/evidence was shared through
+`2caba7c2a9b33945396fc67bc4f3460f4eaefa5d` before this follow-up. No main merge was performed.
+
+Mayank [PR #6](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/6)
+merged while integration was being completed. Fetched/inspected new main
+`b301c07d8bd1d2526c880748b20c6779e99a2680` and merged its original history into this feature
+branch. It includes actual Python MY-01 diagnostic metrics/27 golden cases and the
+MY-03 frontend, despite the incomplete PR title/body. MY-02 harness remains absent.
+Old no-evaluation-file-change statements above describe the initial increment only.
+
+Actual compatibility: full `pytest -q --basetemp outputs/pytest-new-main-integration-001
+--tb=short`: **609 passed, one Windows symlink skip**. New main introduced four Ruff
+findings (long table string, test import order/unused import, long docstring) and two
+format violations. Minimal string concatenation, formatting/import cleanup in the
+merged `evaluation/reference.py` and `tests/evaluation/test_golden_events.py` resolves
+these without changing any evaluator function AST (compared before/after); no scoring
+logic changed. This necessary integration-only cleanup is flagged for Mayank review.
+Ruff lint/format then passed (48 files). Strict mypy passed 23 source files.
+
+Focused `pytest tests/evaluation tests/detectors/test_cli_integration.py
+ tests/detectors/test_publication_integration.py -q --basetemp
+ outputs/pytest-new-main-focused-002 --tb=short`: **58 passed**. All seven archived
+runs were evaluated by merged MY-01, agreeing on scalar metrics/delays. Node executed
+Mayank's actual parser/evaluator on those seven cases with scalar parity; reports are
+in the evidence folder. This is not general browser evaluator parity or render QA.
+
+Viewer limitation reproduced: parseRunManifest drops model/provenance/profiling, so it
+cannot audit the new full run identity yet. Existing basic fields/algorithm/evidence
+parse, scalar metrics agree on these fixtures. Leave model-specific manifest/chart
+adoption to Mayank; no frontend file was edited. No browser/build was run here.
+
+Next: review PR #7 against current main, retaining module and AY-01 owner reviews.
+Use final published head for CI. Central summaries remain for Ayush; real comparisons
+still require MY-02 plus authorized official data. The observed quantile tie limitation
+and unchanged default MAD remain documented. No main merge or external message sent.
