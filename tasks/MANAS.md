@@ -14,9 +14,9 @@ half-day including tests/review; real elapsed effort depends on findings.
 | MN-01 | P0 / 2 | Add causal rolling mean/z baseline as an independent comparator; verify MAD starter against hand-derived data; document score orientation/floors | Existing Detector and synthetic fixtures | DONE |
 | MN-02 | P0 / 3 | Implement residual detector with level/delta and optional seasonal components, fixed documented combination, direct component evidence | FeatureFrame contract; fake extractor now, KS-02 integration later | IN_REVIEW |
 | MN-03 | P0 / 2 | Implement bounded prior-score empirical quantile threshold with minimum-history fallback and causal calibration tests | Can start independent score-stream tests; integrate MN-02 later | IN_REVIEW |
-| MN-04 | P1 / 3 | Compare no guard/capped influence/finite quarantine and shadow drift; implement only validated update policy | MN-02/03, sustained-shift/fault tests, permitted data | TODO |
-| MN-05 | P1 / 2 | Run component/calibration/guard ablations and optional IF comparator through Mayank harness; select/freeze candidate | MY-02, KS-04, official/local metric identity | BLOCKED |
-| MN-06 | P2 / 1 initial spike | Prototype EVT tail calibration feasibility only after A/B gates; stop or separately estimate implementation | Level A valid, measured B; S1 gates | TODO |
+| MN-04 | P1 / 3 | Compare no guard/capped influence/finite quarantine and shadow drift; implement only validated update policy | MN-02/03, sustained-shift/fault tests, permitted data | BLOCKED |
+| MN-05 | P1 / 2 | Run component/calibration/guard ablations plus Chronos/TimesFM and optional IF comparators through Mayank harness; select/freeze candidate | MY-02, KS-04, official/local metric identity | BLOCKED |
+| MN-06 | P2 / 1 initial spike | Prototype EVT tail calibration feasibility only after A/B gates; stop or separately estimate implementation | Level A valid, measured B; S1 gates | BLOCKED |
 
 **First three tasks:** MN-01, MN-02, MN-03. Start MN-01. MN-02 uses a deterministic
 FeatureExtractor double to avoid waiting for KS-02. MN-03 accepts a prior score stream in tests;
@@ -269,3 +269,39 @@ Merge/review PR #3 before PR #4. No default CLI/config/contract changes.
 Composition verification: 434 passed, 1 Windows symlink skip; Ruff lint/format
 (33 files), strict mypy (19 files), repository and whitespace checks passed.
 See [composition refresh](../docs/HANDOFFS/MN-03_manas_20261027T100338Z_composition-refresh.md).
+
+### Remaining-work implementation — 2026-10-27 (Asia/Calcutta)
+
+User authorized completing all Manas work. This does not override prerequisite/ownership
+rules. Current branch `feat/manas/MN-04-05-detector-readiness`, implementation `b88d38a77bd12bed704f7b68158985208406eae7`.
+
+- MN-01 **DONE**: PR #1 merged. MN-02/03 **IN_REVIEW**, refreshed against merged main,
+  preserving histories and all personal records. PR #3 refresh `891a853` passed 336 tests;
+  PR #4 refresh `8907b47` passed 434; each had one Windows symlink skip.
+- MN-04 **BLOCKED for real-data promotion**, synthetic comparison implemented/verified:
+  no guard/capped/finite quarantine/shadow x fixed/adaptive x seven scenarios, 56 paired
+  diagnostic runs. Causal/prefix tests, bounded exclusion, after-decision rebaseline and
+  disable/reset/raw-replay rollback pass. Synthetic results show fault/drift trade-offs;
+  no production guard was enabled. Explicit update-boundary coordination is still needed.
+- MN-05 **BLOCKED for experiments/freeze**, forecast software implemented/verified:
+  [interval wrapper](../src/sentinel/detectors/forecast.py) with model injection, past-only
+  contexts, fresh/frozen forecasts, origin/age arithmetic evidence and calibration support.
+  [Method notes](../src/sentinel/detectors/FORECAST.md) explain lifecycle and block-phase
+  partition limits. Tests use deterministic fakes; actual Chronos/TimesFM adapters,
+  libraries, weights, performance, GPU and model terms have not been evaluated.
+- MN-06 **BLOCKED by A/B gates**: preliminary NO-GO recorded; actual synthetic tail/tie
+  counts archived but real tail sufficiency unknown. No EVT fit/dependency/build/license
+  claim. Reassess only after the documented gate, rather than marking the spike DONE.
+- Final software checks: **504 passed, 1 Windows symlink-privilege skip**; 70 new focused
+  cases passed; Ruff lint/format (37 files), strict mypy (20 source files), repository and
+  whitespace checks passed. MAD README smoke remained 16 points, provisional 1/0/0.
+- [Readiness/gates](../src/sentinel/detectors/READINESS.md),
+  [portable synthetic evidence](../validation/MN-04-05_manas_20261027T101343Z_synthetic-readiness.json) and
+  [continuation handoff](../docs/HANDOFFS/MN-04_manas_20261027T101343Z_detector-readiness.md) record exact commands,
+  clean implementation revision, comparisons, limitations and next actions.
+- Data permissions/official pack, label/split/time semantics, model-use permissions and
+  MY-02 harness still block genuine ablations/selection. Public NAB download is local,
+  raw, reference-only. Default CLI remains MAD. No central or teammate-owned file changed.
+- Publish these branches for review in order PR #3 -> #4 -> detector readiness. Ayush
+  owns main integration and stale shared-summary reconciliation. No peer approvals or
+  main merge are implied by this progress. See final PR body for publication state.
