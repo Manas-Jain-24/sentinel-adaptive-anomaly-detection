@@ -10,7 +10,7 @@ import pytest
 from sentinel import pipeline
 from sentinel.cli import main
 from sentinel.config import DetectorConfig
-from sentinel.contracts import ContractError, Detector
+from sentinel.contracts import AnomalyWindow, ContractError, Detector, parse_timestamp
 from sentinel.data.features import RollingFeatureExtractor
 from sentinel.data.io import read_observations
 from sentinel.detectors.calibrated import CalibratedDetector
@@ -19,7 +19,7 @@ from sentinel.detectors.rolling import RollingMADStarter
 from sentinel.detectors.selection import ModelConfig
 from sentinel.detectors.thresholds import PriorScoreQuantile, QuantileThresholdConfig
 from sentinel.detectors.zscore import RollingZScoreDetector
-from sentinel.evaluation.reference import evaluate_run
+from sentinel.evaluation.reference import evaluate_run, event_metrics
 from sentinel.pipeline import prediction_record, run_file
 
 FIXTURES = Path(__file__).parents[1] / "fixtures"
@@ -323,3 +323,37 @@ def test_missing_malformed_or_duplicate_model_file_is_an_actionable_cli_error(
         == 2
     )
     assert not (tmp_path / "run").exists()
+
+
+def test_default_quantile_ties_can_start_an_episode_before_a_real_synthetic_spike(
+    tmp_path: Path,
+) -> None:
+    # Regression for the measured 96-point CLI smoke. Preserve the observed
+    # limitation rather than tune the threshold/metric to conceal its miss.
+    from datetime import UTC, datetime, timedelta
+
+    start = datetime(2026, 1, 1, tzinfo=UTC)
+    rows = ["series_id,timestamp,value"]
+    for i in range(96):
+        value = 25 if i == 64 else (10.0, 10.1, 10.0, 9.9)[i % 4]
+        rows.append(f"s,{(start + timedelta(seconds=i)).isoformat()},{value}")
+    source = tmp_path / "stream.csv"
+    source.write_text("\n".join(rows) + "\n", encoding="utf-8")
+    destination = tmp_path / "run"
+    run_file(
+        source,
+        destination,
+        DetectorConfig(),
+        "synthetic_smoke",
+        "quantile-tie-regression",
+        model_config=ModelConfig(detector="residual", calibration=QuantileThresholdConfig()),
+    )
+    predictions = records(destination)
+    assert predictions[39]["label"] == "NORMAL"
+    assert predictions[40]["label"] == "ANOMALOUS"
+    assert predictions[40]["score"] == predictions[40]["threshold"]
+    assert all(row["label"] == "ANOMALOUS" for row in predictions[40:65])
+    assert predictions[65]["label"] == "NORMAL"
+    event_time = parse_timestamp(predictions[64]["timestamp"])
+    metric = event_metrics(predictions, [AnomalyWindow("s", event_time, event_time)])
+    assert (metric["tp"], metric["fp"], metric["fn"]) == (0, 1, 1)

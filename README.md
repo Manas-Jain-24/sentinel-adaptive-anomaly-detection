@@ -63,6 +63,9 @@ a **separate** file; do not add model keys to `configs/starter.json`:
 requires 32 preceding **ready scores** before replacing its fallback threshold; the short
 16-point fixture cannot fill that history. Longer synthetic tests exercise the empirical
 path. Example settings prove software wiring and are not tuned competition parameters.
+In a separate 96-point synthetic check, tied calibrated scores started an alert episode
+before the spike; the provisional trigger metric counted TP/FP/FN=0/1/1. This is a known
+configuration/metric interaction, not evidence for selecting quantiles over MAD.
 
 `configs/residual-seasonal.model.json` demonstrates an explicit observation lag of four.
 It is suitable only for a fixture with that declared lag, not inferred seasonality in real
