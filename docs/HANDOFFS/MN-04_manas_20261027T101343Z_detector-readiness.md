@@ -107,3 +107,10 @@ Publication follow-up: refreshed PR #3/#4 branches and this branch were pushed. 
 post-documentation repository checker found a task-file evidence link missing `docs/`;
 the link was corrected in a follow-up commit and the checker rerun before final handoff.
 Use the final PR head, not the first documentation commit, for clean-clone checks.
+
+Published review: [draft PR #5](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/5).
+The branch was shared through `eecdc915929e1b8fe211a761d558b06639742d69` before this
+publication-only note. PR #3/#4 are now ready for review; exact refreshed heads
+`891a8539a4ad424e7a2673aca76a022345d52a05` and
+`8907b47b6518b81b87aebe9c1b68389fbef6d76c` have all reported CI jobs successful.
+PR #5's final-head CI must be checked independently. Main remains `50f4000`.

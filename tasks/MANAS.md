@@ -305,3 +305,12 @@ rules. Current branch `feat/manas/MN-04-05-detector-readiness`, implementation `
 - Publish these branches for review in order PR #3 -> #4 -> detector readiness. Ayush
   owns main integration and stale shared-summary reconciliation. No peer approvals or
   main merge are implied by this progress. See final PR body for publication state.
+
+Publication: refreshed [PR #3](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/3)
+at `891a8539a4ad424e7a2673aca76a022345d52a05` and
+[PR #4](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/4)
+at `8907b47b6518b81b87aebe9c1b68389fbef6d76c` are ready for review;
+all reported Ubuntu/Windows Python 3.11/3.13 checks passed for both exact heads.
+New [draft PR #5](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/5)
+publishes detector readiness. Its source/evidence was pushed through `eecdc91` before
+this publication-only record; use its latest head for continuation. Main is unchanged.
