@@ -1,0 +1,131 @@
+{
+  "revision": "22e86ab2b843bc50175ed48b74afa6e2fef8366d",
+  "commands": [
+    {
+      "argv": [
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\candidate-22e86ab\\pytest",
+        "--tb=short"
+      ],
+      "exit_code": 0,
+      "stdout": "..............................................................s......... [ 24%]\n........................................................................ [ 49%]\n........................................................................ [ 74%]\n........................................................................ [ 99%]\n.                                                                        [100%]\n=========================== short test summary info ===========================\nSKIPPED [1] tests\\data\\test_inventory.py:139: Creating symlinks unavailable on this host: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Kaustubh\\\\Hackathon\\\\sentinel-adaptive-anomaly-detection\\\\outputs\\\\candidate-22e86ab\\\\pytest\\\\test_symlink_cannot_escape_dec0\\\\trace.csv' -> 'C:\\\\Kaustubh\\\\Hackathon\\\\sentinel-adaptive-anomaly-detection\\\\outputs\\\\candidate-22e86ab\\\\pytest\\\\test_symlink_cannot_escape_dec0\\\\data\\\\trace.csv'\n288 passed, 1 skipped in 5.41s\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "27 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy"
+      ],
+      "exit_code": 0,
+      "stdout": "Success: no issues found in 16 source files\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "stdout": "No broken requirements found.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+        "scripts/check_repository.py"
+      ],
+      "exit_code": 0,
+      "stdout": "OK: 32 mandatory documents, 152 relative links, 24 unique team tasks, official PDF hash\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main...HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+        "-m",
+        "sentinel",
+        "run",
+        "--input",
+        "tests/fixtures/synthetic_stream.csv",
+        "--config",
+        "configs/starter.json",
+        "--output-dir",
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\candidate-22e86ab\\smoke",
+        "--dataset-id",
+        "synthetic-fixture-v1",
+        "--scope",
+        "synthetic_smoke"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": \"1.0\",\n  \"package_version\": \"0.1.0\",\n  \"algorithm\": \"rolling_mad_starter\",\n  \"evaluation_scope\": \"synthetic_smoke\",\n  \"dataset_id\": \"synthetic-fixture-v1\",\n  \"input_sha256\": \"19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de\",\n  \"predictions_sha256\": \"c7052d9a2ef6c607c333918a9a35de1970b50b594dac58fc74b07e8516be5cd6\",\n  \"config\": {\n    \"window_size\": 32,\n    \"min_history\": 8,\n    \"threshold\": 4.0,\n    \"scale_floor\": 0.1,\n    \"max_series\": 100\n  },\n  \"python\": \"3.12.14\",\n  \"platform\": \"Windows-11-10.0.26300-SP0\",\n  \"observations\": 16,\n  \"ready_observations\": 8,\n  \"anomalous_points\": 1,\n  \"detector_total_ns\": 251100,\n  \"runtime_note\": \"process() only, includes warmup; excludes parsing/writing; not a benchmark\",\n  \"official_submission_ready\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+        "-m",
+        "sentinel",
+        "evaluate",
+        "--run-dir",
+        "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\candidate-22e86ab\\smoke",
+        "--windows",
+        "tests/fixtures/synthetic_windows.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"metric_id\": \"provisional_event_trigger_f1_v0\",\n  \"official_metric\": false,\n  \"tp\": 1,\n  \"fp\": 0,\n  \"fn\": 0,\n  \"precision\": 1.0,\n  \"recall\": 1.0,\n  \"event_f1\": 1.0,\n  \"macro_precision\": 1.0,\n  \"macro_recall\": 1.0,\n  \"macro_event_f1\": 1.0,\n  \"delay_seconds\": [\n    0.0\n  ],\n  \"mean_delay_seconds\": 0.0,\n  \"median_delay_seconds\": 0.0,\n  \"min_delay_seconds\": 0.0,\n  \"max_delay_seconds\": 0.0,\n  \"p95_delay_seconds\": 0.0,\n  \"missed_events\": 0,\n  \"warmup_points_included_in_coverage\": 8,\n  \"observations\": 16,\n  \"series_count\": 1,\n  \"per_series\": {\n    \"synthetic-demo\": {\n      \"tp\": 1,\n      \"fp\": 0,\n      \"fn\": 0,\n      \"precision\": 1.0,\n      \"recall\": 1.0,\n      \"event_f1\": 1.0,\n      \"windows_count\": 1,\n      \"observations\": 16,\n      \"warmup_points\": 8,\n      \"delay_seconds\": [\n        0.0\n      ],\n      \"mean_delay_seconds\": 0.0,\n      \"median_delay_seconds\": 0.0\n    }\n  },\n  \"policy\": {\n    \"matching\": \"first_trigger_in_closed_window\",\n    \"pre_window_trigger\": \"false_positive_window_unmatched\",\n    \"repeat_trigger_in_window\": \"false_positive\",\n    \"zero_denominator_convention\": 0.0,\n    \"warmup_policy\": \"included_in_coverage_unflagged\"\n  },\n  \"evaluation_scope\": \"synthetic_smoke\",\n  \"dataset_id\": \"synthetic-fixture-v1\",\n  \"input_sha256\": \"19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de\",\n  \"windows_sha256\": \"57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb\"\n}\n",
+      "stderr": ""
+    }
+  ]
+}

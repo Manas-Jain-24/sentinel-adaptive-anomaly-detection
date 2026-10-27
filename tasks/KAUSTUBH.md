@@ -11,12 +11,12 @@ half-day including verification; no calendar deadline or skill level is assumed.
 
 | ID | Priority / effort | Task and explicit deliverable | Dependencies | Status |
 |---|---|---|---|---|
-| KS-01 | P0 / 2 | Build inventory/provenance manifest schema and validator; lengths/cadence/gaps/duplicates/finite values; audit fixtures now and real assets when received | Observation schema, fixtures | IN_REVIEW |
-| KS-02 | P0 / 3 | Implement bounded causal FeatureExtractor: prior median/scale, expected delta, observed delta, optional past-only seasonal reference with explicit unavailable state | FeatureFrame Protocol; no final detector dependency | IN_REVIEW |
-| KS-03 | P0 / 2 | Implement deterministic group/chronological split manifest tooling and boundary-purge validation; hashes and group constraints | Synthetic manifest for tests; use real inventory later | IN_REVIEW |
+| KS-01 | P0 / 2 | Build inventory/provenance manifest schema and validator; lengths/cadence/gaps/duplicates/finite values; audit fixtures now and real assets when received | Approved/merged #2 at 50f4000; consumer adoption continues in #7/MY-02 | DONE |
+| KS-02 | P0 / 3 | Implement bounded causal FeatureExtractor: prior median/scale, expected delta, observed delta, optional past-only seasonal reference with explicit unavailable state | Existing FeatureFrame; approved/merged #2; shared config adoption in open #7 | DONE |
+| KS-03 | P0 / 2 | Implement deterministic group/chronological split manifest tooling and boundary-purge validation; hashes and group constraints | Approved/merged #2; MY-02 target/context adoption pending | DONE |
 | KS-04 | P0 / 2 | Adapt organizer starter files/labels to canonical input, with documented timezone/gap/column mapping and access provenance | Official assets and Q01/Q09 answers | BLOCKED |
 | KS-05 | P1 / 2 | Real dataset EDA and train-only periodicity/cadence analysis; provide figures/notes for slides 3/5 and EXP-01 | KS-04, permitted development labels | BLOCKED |
-| KS-06 | P1 / 2 | Stress feature/data behavior on missing spans, rescaling, contaminated warmup, flat/short series; report limitations | KS-02/03 | IN_REVIEW |
+| KS-06 | P1 / 2 | Stress feature/data behavior on missing spans, rescaling, contaminated warmup, flat/short series; report limitations | Original tests approved/merged #2; reader/replay follow-up in review | DONE |
 
 **First three tasks:** KS-01, KS-02, KS-03. KS-01 starts on synthetic inputs with explicit labels
 and cannot claim a real NAB inventory. KS-02/03 can be developed with fixed mock manifests;
@@ -112,7 +112,7 @@ coordinate with Manas and document horizon/memory effects before adoption.
 - Independent review found UTC-fold ordering and integer-overflow exception issues. Both were
   reproduced with failing tests, fixed by normalizing instants/values before processing, and
   rechecked by the reviewer: no remaining findings. Agent review is not teammate approval.
-- Actual final commands: feature suite 30 passed; full pytest 124 passed/1 skipped; Ruff check
+- Actual final commands: feature suite 30 passed; full pytest 124 passed / 1 skipped; Ruff check
   and format check pass (18 files), strict mypy passes (14 source files), repository checker and
   whitespace check pass. The existing symlink test skips for Windows privilege; only Python 3.12
   Windows executed. Exact commands/limitations are in the
@@ -130,7 +130,7 @@ coordinate with Manas and document horizon/memory effects before adoption.
   per-series chronological cuts; deterministic inventory/split hashes, strict source-backed
   validation, explicit context/targets and conservative boundary purging. No random split/seed,
   label loading, model fitting, shared contract or other-owner edits.
-- Final focused split tests: 45 passed; full suite: 169 passed/1 skipped (170 collected). Ruff
+- Final focused split tests: 45 passed; full suite: 169 passed / 1 skipped (170 collected). Ruff
   lint/format pass (20 files), mypy passes (15 source files), repository/whitespace checks pass.
   Actual feature replay on declared context matches uninterrupted causal replay. Only Windows/
   Python 3.12 executed; the previous symlink privilege skip remains.
@@ -188,7 +188,7 @@ friend with a fresh coding agent can continue. They also requested a copyable ag
 - Open [PR #2](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/2) targets
   main. No merge or force push occurred. Shared initial snapshot:
   `955564571de61971ac270addf6cd560bc918c4da`; later documentation commits record publication.
-- Fresh pre-publication checks: pytest 191 passed/1 skipped; Ruff lint/format, strict mypy
+- Fresh pre-publication checks: pytest 191 passed / 1 skipped; Ruff lint/format, strict mypy
   (15 source files), pip check, repository/PDF/link and Git whitespace checks pass. Check the PR's
   latest CI head for actual Ubuntu/Windows Python 3.11/3.13 results; local tests remain Python 3.12.
 - KS-01/02/03/06 remain IN_REVIEW: publish/review does not imply owner approval or integration.
@@ -202,3 +202,90 @@ friend with a fresh coding agent can continue. They also requested a copyable ag
 - Start with the [publication handoff](../docs/HANDOFFS/KS-06_kaustubh_20261026T163753Z_publication.md)
   and [agent prompt](../docs/data/KAUSTUBH_AGENT_PROMPT.md), which contain exact retrieval/check
   commands, remaining tasks, owners, reasons, context policies, limits and next actions.
+
+### Latest recovery and owned follow-up: 2026-10-27 (Asia/Calcutta)
+
+This entry supersedes historical open/local-only statements above. User assigned both Kaustubh
+and Ayush scopes and confirmed both, preserving other owners' boundaries. Active branch:
+`fix/kaustubh/KS-06-integration-review`, from main `8c1be6f`. Implementation:
+**05d2ee4ce733943baf46e36ee5bb40ef9aaa1594**; final records/PR carry publication.
+
+- GitHub #2 is **merged** at `50f40009f4ddd757b5dfb7ac1c34e379d6801ac1`. Manas APPROVED on
+  2026-10-26T18:45:23Z; Ayush/AJCoder01 APPROVED on 2026-10-27T08:40:00Z. Earlier COMMENTED agent
+  review is distinct. No Mayank approval found/claimed. Actual main code/tests establish KS-01/
+  02/03/06 implementation. DONE covers these original synthetic deliverables; new follow-up stays
+  IN_REVIEW, and official data/later harness/config adoption are not included in completion.
+- Inspected inventory/features/splits/stress implementation and #7 factory/config/support.
+  #7 keeps data/typed contracts/base config unchanged and records W+C saturated calibrated
+  lookback. Seasonal lag counts observations. Its split snapshot applies no target mask or
+  permission validation; Mayank's MY-02 must enforce reviewed context/target/effective support.
+- Fixed `src/sentinel/data/io.py`: strict quoting, csv.Error to contextual ContractError, valid
+  quoted multiline fields preserved. Eight `tests/data/test_io_errors.py` cases cover reader,
+  inventory and real CLI publication. Seven failed/one control passed before fix; all eight
+  pass afterward. No dependency or shared schema change.
+- Owned data/pipeline **189 passed / 1 skip**, full candidate **288 passed / 1 skip**; Ruff/mypy/pip/
+  repository/whitespace checks and synthetic smoke passed. Exact main **266 passed / 1 skip**;
+  exact #7 **609 passed / 1 skip**; archived #7 plus owned patch **631 passed / 1 skip** with full
+  Python gates and default/short-quantile semantic parity. Skip is Windows symlink privilege.
+  Independent agent review found no actionable defect; peer reviews remain required.
+- Local data/official contains only README. Remote main/open PRs/issues/release assets supplied
+  no pack or Q01/Q09 answers. No authorized download/participant-portal access was provided.
+  KS-04/05 remain BLOCKED on actual organizer assets, development labels/access/permission,
+  prescribed splits and timestamp/cadence/columns/missingness. No public NAB substitution,
+  guessed timezone/cadence, real EDA, official parity or hidden evaluation is claimed.
+- Explicit Ayush authorization covers central records and 14 pipeline/fallback cases. Detector/
+  evaluator/frontend/other personal tasks remain untouched. AY-02 remains a proposal only.
+
+Reviewers/next: Ayush manifest/order/CLI/envelope; Manas causal features/calibration/state; Mayank
+split/leakage/target masks and complete artifacts. Retrieve the published PR head, rerun fresh
+gates, review #7 without duplicating it, and merge only with authorization. Start KS-04 only after
+missing inputs arrive; KS-05 follows authorized frozen training data. Exact commands/files,
+blockers and restart instructions are in the
+[new data handoff](../docs/HANDOFFS/KS-06_kaustubh_20261027T113928Z_data-integration-review.md).
+
+
+### Concurrent-main preservation before publication
+
+Main advanced to `3d18760e709c9ef4fe897d90d7dd0888c10bd046` with Mayank's separate demo/web
+addition. Verified no Python/config/test/CI diff from the original audited main. Feature-only
+merge `137cad38a6cb4a82971549649683a220f195abdc` preserves the upstream files unchanged;
+no merge into main or other-owner edit. Refreshed exact-main archive: 266 passed / 1 Windows
+symlink skip, Ruff 25 files, mypy 16, repository 139 links and README smoke TP/FP/FN=1/0/0.
+Four exact-head CI jobs succeeded in run 40498576245. Initial archive pytest had 178 passed /
+89 setup errors because the local harness omitted its outputs parent; created the parent and
+reran successfully with fresh basetemp. Failed command is retained in compatibility evidence.
+No viewer build/browser QA or comparison-result validity is claimed. Final feature candidate
+is checked after this preservation/record update; PR identifies exact head and actual CI.
+
+
+### Verified publication and coordination
+
+Published [PR #8](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/8)
+from `fix/kaustubh/KS-06-integration-review` to main. Initial published candidate
+`22e86ab2b843bc50175ed48b74afa6e2fef8366d` passed all README gates on the exact committed tree:
+288 passed / 1 Windows privilege skip, Ruff 27 files, strict mypy 16 files, pip/repository/
+whitespace checks, synthetic 16-point replay/evaluate TP/FP/FN=1/0/0. Raw commands/results are
+in `docs/validation/AY-03_20261027T113928Z/candidate-22e86ab-checks.json` (repository-relative).
+All eight exact-head CI jobs succeeded: push run 40499158468 and PR run 40499214180.
+This final publication record follows that candidate; final PR body identifies the later checked
+head and actual latest CI instead of attributing earlier checks to a new commit.
+
+[Scoped #7 review](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/7#pullrequestreview-5666596852)
+was actually posted by kaustubh-dot at a52dd28, state COMMENTED, 2026-10-27T11:51:52Z.
+It reports the inherited parser failures/fix and bounded feature/context compatibility; it is
+not an APPROVE or Ayush/human approval. PR #8 actually requests AJCoder01 (Ayush), Manas-Jain-24
+(Manas) and Kratos7heSpartanRage (Mayank); no submitted reviews were present at publication.
+GitHub connector writes returned 403 Resource not accessible by integration; authenticated CLI
+successfully performed the authorized PR/review/reviewer actions. No credential was exposed.
+
+Exact sharing commands: `git push -u origin fix/kaustubh/KS-06-integration-review`,
+`gh pr create --repo Manas-Jain-24/sentinel-adaptive-anomaly-detection --base main --head fix/kaustubh/KS-06-integration-review --title 'KS-06 / AY-03: harden CSV replay and reconcile verified integration' --body-file outputs/integration-review-pr-body.md`,
+`gh api repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pulls/7/reviews --method POST --input outputs/pr7-review-payload.json`,
+and `gh pr edit 8 --repo Manas-Jain-24/sentinel-adaptive-anomaly-detection --add-reviewer 'AJCoder01,Manas-Jain-24,Kratos7heSpartanRage'`.
+All CLI publication actions exited 0. Body/payload files are local/ignored; actual content is
+shared on GitHub. The branch/handoffs are portable after the final non-force push.
+
+Next actions remain named-owner reviews, authorized integration, AY-02 proposal approval before
+state API work, Mayank's MY-02 target-mask/harness implementation, and organizer asset/permission/
+label/split/Q01/Q09/scorer/schema/runtime answers. KS-04/05 remain BLOCKED. No merge into main,
+release, official parity, real EDA, benchmark/candidate promotion or submission was performed.
