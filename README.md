@@ -47,11 +47,25 @@ the artificial event using **`provisional_event_trigger_f1_v0`**. A successful s
 proves software wiring only. It is neither the official metric implementation nor a NAB result.
 Input timestamps must include an offset. Raw NAB CSV files need a documented adapter first.
 
+Run manifests also record Git revision/dirty state, resolved-config and environment hashes,
+installed dependency versions, hardware, per-series workload, and timing populations. p50/p95
+are bounded histogram upper estimates (less than 1/128 relative overestimate). Process timing
+excludes construction and I/O; replay timing includes them. Cold timing means the first process
+call per series, not interpreter startup. Final manifest write/publication is outside the recorded
+prepublication duration. See [exact field and timing definitions](docs/INTERFACES.md).
+
+Optionally append `--split-manifest path/to/manifest.json` to `sentinel run` to preserve and hash
+an existing split file. The run stores its exact bytes in `split-manifest.snapshot`; this does
+not validate split membership or pass split contents to the detector. Without the option, split
+provenance is explicitly null. Dataset/scope remain operator assertions. Keep input files immutable
+during replay; detected input changes fail without publishing artifacts.
+
 ## What exists
 
 `src/sentinel/` contains typed contracts, strict canonical CSV ingestion, JSON config,
 a causal rolling median/MAD starter, independent per-series state, CLI replay, numeric evidence,
-checksummed run manifests, detector timing, and a provisional event evaluator. Output publication
+checksummed run manifests, provenance/workload/timing distributions, and a provisional event
+evaluator. Output publication
 uses a temporary directory so input errors do not publish a partial run. Unit/integration tests,
 synthetic fixtures, a repository checker, and a Windows/Linux CI definition are included.
 

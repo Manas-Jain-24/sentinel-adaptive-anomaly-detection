@@ -7,6 +7,7 @@ import shutil
 import tempfile
 from collections.abc import Callable, Iterable, Iterator
 from dataclasses import asdict
+from datetime import UTC, datetime
 from pathlib import Path
 from time import perf_counter_ns
 from typing import Any
@@ -24,6 +25,8 @@ from sentinel.contracts import (
 )
 from sentinel.data.io import read_observations
 from sentinel.detectors.rolling import RollingMADStarter
+from sentinel.profiling import ReplayProfile
+from sentinel.provenance import canonical_sha256, environment_snapshot, source_state
 
 
 def process_stream(
@@ -62,7 +65,11 @@ def run_file(
     config: DetectorConfig,
     scope: EvaluationScope,
     dataset_id: str,
+    *,
+    split_manifest_path: Path | None = None,
 ) -> dict[str, Any]:
+    started_ns = perf_counter_ns()
+    started_at = timestamp_text(datetime.now(UTC))
     if scope not in ("synthetic_smoke", "development_validation"):
         raise ContractError("Starter supports synthetic_smoke or development_validation only")
     if not dataset_id.strip():
@@ -74,7 +81,18 @@ def run_file(
     output_dir.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(tempfile.mkdtemp(prefix=".sentinel-", dir=output_dir.parent))
     try:
+        input_sha256 = sha256_file(input_path)
+        environment = environment_snapshot()
+        source = source_state(Path(__file__))
+        split_artifact = None
+        split_sha256 = None
+        if split_manifest_path is not None:
+            split_artifact = "split-manifest.snapshot"
+            shutil.copyfile(split_manifest_path, temporary / split_artifact)
+            split_sha256 = sha256_file(temporary / split_artifact)
+        profile = ReplayProfile()
         count = ready_count = alerts = total_ns = 0
+        replay_started_ns = perf_counter_ns()
         with (temporary / "predictions.jsonl").open("w", encoding="utf-8", newline="\n") as stream:
             for prediction, elapsed in process_stream(
                 read_observations(input_path),
@@ -88,13 +106,17 @@ def run_file(
                 ready_count += int(prediction.ready)
                 alerts += int(prediction.label == "ANOMALOUS")
                 total_ns += elapsed
-        metadata = {
+                profile.record(prediction, elapsed)
+        replay_elapsed_ns = perf_counter_ns() - replay_started_ns
+        if sha256_file(input_path) != input_sha256:
+            raise ContractError("Input changed during replay; no run was published")
+        metadata: dict[str, Any] = {
             "schema_version": SCHEMA_VERSION,
             "package_version": __version__,
             "algorithm": "rolling_mad_starter",
             "evaluation_scope": scope,
             "dataset_id": dataset_id,
-            "input_sha256": sha256_file(input_path),
+            "input_sha256": input_sha256,
             "predictions_sha256": sha256_file(temporary / "predictions.jsonl"),
             "config": config.to_dict(),
             "python": platform.python_version(),
@@ -107,7 +129,42 @@ def run_file(
                 "process() only, includes warmup; excludes parsing/writing; not a benchmark"
             ),
             "official_submission_ready": False,
+            "provenance": {
+                "version": "1.0",
+                "source": source,
+                "config_sha256": canonical_sha256(config.to_dict()),
+                "environment": environment,
+                "environment_sha256": canonical_sha256(environment),
+                "dependencies_sha256": canonical_sha256(environment["dependencies"]),
+                "split_manifest_sha256": split_sha256,
+                "split_manifest_artifact": split_artifact,
+                "split_validation": "checksum_only" if split_artifact else "not_supplied",
+                "started_at_utc": started_at,
+            },
+            "profiling": {
+                **profile.timings(),
+                "end_to_end_replay_ns": replay_elapsed_ns,
+                "replay_region": (
+                    "predictions file open through close; includes CSV open/read, parsing, "
+                    "detector construction, routing, process, serialization, writing and profiling"
+                ),
+                "prepublication_region": (
+                    "run_file entry through metadata preparation, including provenance and hashes; "
+                    "excludes final run.json write/rename, CLI startup and evaluation"
+                ),
+            },
+            "workload": {
+                **profile.workload(),
+                "observations": count,
+                "ready_observations": ready_count,
+                "warmup_observations": count - ready_count,
+                "window_size": config.window_size,
+                "min_history": config.min_history,
+                "max_series": config.max_series,
+            },
         }
+        metadata["provenance"]["prepared_at_utc"] = timestamp_text(datetime.now(UTC))
+        metadata["profiling"]["prepublication_elapsed_ns"] = perf_counter_ns() - started_ns
         (temporary / "run.json").write_text(
             json.dumps(metadata, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n"
         )

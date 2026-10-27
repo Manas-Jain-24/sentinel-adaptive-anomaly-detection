@@ -63,9 +63,59 @@ operator assertions, not automatic verification. Every run uses a new directory.
 are staged in a sibling temporary directory and published on success; this is single-process
 publication, not a multiwriter transaction service.
 
-AY-01 planned additive metadata: split/feature/schema versions, source revision, dirty flag,
-dependency/environment digest, seed where relevant, timestamps, full timing distributions,
-and workload/hardware. Current manifests must not be described as containing these fields yet.
+AY-01 adds the following optional objects under schema 1.0; old runs without them remain valid.
+The implementation is prepared for affected-owner review on the AY-01 branch; see the
+[manifest proposal](HANDOFFS/AY-01_ayush_20261026T145042Z_manifest-proposal.md). Peer review and
+integration are pending. No prediction/detector/config/evaluation semantics change.
+
+`provenance` (version `1.0`):
+
+- `source`: status (`git` or `unavailable`), full HEAD `revision` and boolean `dirty`, plus note.
+  The tracked package checkout is used regardless of caller CWD. Dirty includes tracked edits
+  and nonignored untracked files. HEAD identifies the committed base, never uncommitted code.
+  Without tracked source/Git, revision and dirty are null with an explicit explanation.
+- `config_sha256`: digest of resolved `config`. `environment` records Python version/implementation,
+  OS/platform, architecture, processor (null if unknown), logical CPU count, and sorted unique
+  installed distribution name/version pairs. `environment_sha256` hashes the full snapshot;
+  `dependencies_sha256` hashes its dependency list. These three hashes use sorted-key, compact,
+  ASCII-escaped UTF-8 JSON without a trailing newline and with NaN/Inf disallowed. They identify
+  recorded metadata; they do not certify locked dependencies or reproduce uncommitted source.
+- `split_manifest_sha256` and `split_manifest_artifact`: null unless an optional manifest is
+  supplied. `--split-manifest PATH` copies bytes to `split-manifest.snapshot` in the run directory,
+  then hashes that copy. `split_validation` is `checksum_only` or `not_supplied`. This preserves
+  provenance without inventing KS-03 semantics or verifying split membership. Bytes are opaque
+  and never passed to inference. Existing input/prediction hashes also hash exact file bytes.
+- UTC `started_at_utc` and `prepared_at_utc`: entry to run_file and completion of metadata
+  preparation, before the final manifest write/publication. No random seed is needed by the
+  deterministic starter; no feature extractor or split schema version is invented.
+
+`profiling` uses `perf_counter_ns`, nanoseconds, and explicit region descriptions:
+
+- `distributions`: `all_process`, `ready_process`, `warmup_process`, `cold_process` (first process
+  call per series) and `warm_process` (subsequent calls, including remaining learning warmup).
+  Process time excludes detector construction, routing, parsing, serialization and profiler work.
+  Cold does not measure interpreter startup, imports or constructor cost.
+- Each population has exact `count`, `total_ns`, `min_ns`, `max_ns`, and a bounded integer
+  `histogram` of `upper_bound_ns`/`count` pairs. `p50_upper_bound_ns`/`p95_upper_bound_ns` are
+  nearest-rank quantile upper bounds, with relative overestimate <1/128; durations <256 ns are
+  exact. Empty populations have zero count/total, null min/max/quantiles and empty histograms.
+  The bound can exceed max_ns slightly. These are explicitly approximate quantiles, not exact
+  observations. Storage depends on duration magnitude, not number of points.
+- `end_to_end_replay_ns`: predictions file open through close, including CSV open/read, construction,
+  routing, parsing, process, serialization, writing and profiling. `prepublication_elapsed_ns`: run_file
+  entry through prepared metadata, also including input hashing, environment/Git collection,
+  optional split snapshot, output setup and prediction hashing. Final run.json serialization/
+  write/rename, CLI startup and evaluation are excluded to keep staged publication immutable.
+  Wall time includes profiler overhead; no peak-memory or official-runtime measurement is implied.
+
+`workload` records actual observation/readiness/warmup counts, series_count, configured window_size,
+min_history/max_series, no-resampling cadence policy, and a per-series map of counts and UTC
+first/last timestamps. Hardware is in provenance.environment. Profiling requires O(S + log T)
+storage for S series and largest duration T, with a fixed number of histogram sub-buckets.
+
+Input bytes are hashed before and after replay; a detected change aborts publication. This guard
+does not lock the input file; use immutable input assets. Prediction equality excludes elapsed_ns;
+run timestamps, runtime distributions, Git state and environment may also vary between runs.
 
 ## Config (implemented)
 
