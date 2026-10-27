@@ -1,0 +1,204 @@
+{
+  "authored_date": "2026-10-27",
+  "timezone": "Asia/Calcutta",
+  "main": "8c1be6fdd167c741ad1de0123d48bda3effbab12",
+  "scope": "GitHub connector recovery snapshot before this agent's review comments; no approval inferred.",
+  "prs": [
+    {
+      "number": 3,
+      "url": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/3",
+      "head": "891a8539a4ad424e7a2673aca76a022345d52a05",
+      "base_at_query": "50f40009f4ddd757b5dfb7ac1c34e379d6801ac1",
+      "state": "open",
+      "draft": false,
+      "reviews_at_recovery": [],
+      "comments_at_recovery": [],
+      "threads_at_recovery": [],
+      "ci_run": [
+        {
+          "id": 40486915361,
+          "name": "foundation-checks",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 29,
+          "jobs_url": "https://api.github.com/repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40486915361/jobs",
+          "logs_url": "https://api.github.com/repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40486915361/logs",
+          "workflow_id": 397176822
+        }
+      ],
+      "jobs": [
+        {
+          "id": 122130891545,
+          "name": "checks (ubuntu-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122130891929,
+          "name": "checks (windows-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122130891993,
+          "name": "checks (ubuntu-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122130892072,
+          "name": "checks (windows-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "url": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/4",
+      "head": "8907b47b6518b81b87aebe9c1b68389fbef6d76c",
+      "base_at_query": "50f40009f4ddd757b5dfb7ac1c34e379d6801ac1",
+      "state": "open",
+      "draft": false,
+      "reviews_at_recovery": [],
+      "comments_at_recovery": [],
+      "threads_at_recovery": [],
+      "ci_run": [
+        {
+          "id": 40486917352,
+          "name": "foundation-checks",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 31,
+          "jobs_url": "https://api.github.com/repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40486917352/jobs",
+          "logs_url": "https://api.github.com/repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40486917352/logs",
+          "workflow_id": 397176822
+        }
+      ],
+      "jobs": [
+        {
+          "id": 122130898800,
+          "name": "checks (ubuntu-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122130898943,
+          "name": "checks (windows-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122130899004,
+          "name": "checks (windows-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122130899042,
+          "name": "checks (ubuntu-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "url": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/5",
+      "head": "9339ac2d84e62dd0762d58d2aaf585bf5455f79a",
+      "base_at_query": "50f40009f4ddd757b5dfb7ac1c34e379d6801ac1",
+      "state": "open",
+      "draft": true,
+      "reviews_at_recovery": [],
+      "comments_at_recovery": [],
+      "threads_at_recovery": [],
+      "ci_run": [
+        {
+          "id": 40487420483,
+          "name": "foundation-checks",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 35,
+          "jobs_url": "https://api.github.com/repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40487420483/jobs",
+          "logs_url": "https://api.github.com/repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40487420483/logs",
+          "workflow_id": 397176822
+        }
+      ],
+      "jobs": [
+        {
+          "id": 122132590706,
+          "name": "checks (windows-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122132590935,
+          "name": "checks (ubuntu-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122132590975,
+          "name": "checks (windows-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122132591057,
+          "name": "checks (ubuntu-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "url": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/7",
+      "head": "a52dd287e276bc9f4596394934999852d7bb3d55",
+      "base_at_query": "37896738ecac9a18f93173c51061da0f467f971b",
+      "state": "open",
+      "draft": false,
+      "reviews_at_recovery": [],
+      "comments_at_recovery": [],
+      "threads_at_recovery": [],
+      "ci_run": [
+        {
+          "id": 40492936214,
+          "name": "foundation-checks",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 43,
+          "jobs_url": "https://api.github.com/repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40492936214/jobs",
+          "logs_url": "https://api.github.com/repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40492936214/logs",
+          "workflow_id": 397176822
+        }
+      ],
+      "jobs": [
+        {
+          "id": 122151109352,
+          "name": "checks (windows-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122151109609,
+          "name": "checks (windows-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122151109618,
+          "name": "checks (ubuntu-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122151109723,
+          "name": "checks (ubuntu-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

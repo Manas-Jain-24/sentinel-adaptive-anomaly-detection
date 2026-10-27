@@ -65,3 +65,38 @@ that no remote branches existed. Teammates follow README clone/setup instruction
 still arranges contributor access and desired branch protections. Future local commits must be
 pushed/shared before another computer can retrieve them. Do not place tokens in remote URLs,
 config examples, committed files, or logs.
+
+## Verified integration audit: 2026-10-27 (Asia/Calcutta)
+
+User explicitly assigned both Ayush integration and Kaustubh data scope, then confirmed
+"Include both explicitly assigned scopes; preserve other owners' boundaries." This authorizes
+these central-record corrections. It does not authorize a main merge or replace owner reviews.
+Detector/evaluator/frontend implementation and other owners' task records were not edited.
+
+Recovered `origin/main`: `8c1be6fdd167c741ad1de0123d48bda3effbab12`. KS #2 merged at `50f4000`,
+MN #1 at `f392cfa`, MY #6 at `b301c07`; later lint fixes and requirements.txt exist. Main266 passed/
+1 Windows symlink skip, Ruff lint/format, strict mypy, pip/repository/whitespace checks and
+archived-main README smoke passed. Four exact-head CI jobs succeeded in run 40494596951.
+Frontend build/browser QA and official golden checks were not run in this audit.
+
+Open PRs #3/#4/#5/#7 were fetched; actual heads/diffs/reviews/comments/CI inspected. At recovery
+all four had no reviews/comments; #5 was draft. Exact heads/checks are in
+[CURRENT_STATE](../docs/CURRENT_STATE.md). #7 includes AY-01 and the published detector stack:
+avoid duplicating its CLI/profiling/publication work. Head `a52dd28` reproduced 609 passed / 1 skip;
+eight exact-head check-runs succeeded. These features are not on main. Split snapshots there
+remain checksum-only, not target-mask/source/permission/lookback validation.
+
+Follow-up `05d2ee4` fixes two inherited reader errors and adds 22 reader/replay/fallback cases;
+pre-record candidate 288 passed / 1 skip. #7 archive plus only this source/test patch 631 passed / 1 skip,
+full Python gates and semantic smoke parity. This is compatibility evidence, not peer approval.
+The [AY-02 proposal](../docs/HANDOFFS/AY-02_ayush_20261027T113440Z_checkpoint-proposal.md) retains
+v1/full replay and blocks new state APIs pending recorded Ayush/affected-owner approval.
+
+Coordination: Manas reviews detector/selection/state lifecycle; Ayush shared APIs/publication/
+CLI/provenance; Kaustubh feature/support/cursor; Mayank artifacts/target masks and complete-run
+resume. Follow #3 -> #4 -> #5 history or explicitly review the #7 aggregate; no merge order is
+silently executed. Merge only after authorization, actual reviews/checks, then rerun gates on the
+exact merged commit. The [handoff](../docs/HANDOFFS/AY-03_ayush_20261027T113928Z_integration-review.md)
+records final publication/continuation. KS-04/05, official scoring/export and real-data freeze
+remain blocked by missing authorized assets/semantics/scorer/schema/runtime evidence. No private
+portal was accessible, no public data/labels were substituted, and no official parity is claimed.

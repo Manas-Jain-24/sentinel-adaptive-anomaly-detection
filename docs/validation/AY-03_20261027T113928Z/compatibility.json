@@ -1,0 +1,664 @@
+{
+  "authored_utc": "2026-10-27T11:37:53.725988+00:00",
+  "snapshots": [
+    {
+      "ref": "8c1be6fdd167c741ad1de0123d48bda3effbab12",
+      "snapshot": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\main",
+      "commands": [
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "run",
+            "--input",
+            "tests/fixtures/synthetic_stream.csv",
+            "--config",
+            "configs/starter.json",
+            "--output-dir",
+            "outputs/main-smoke",
+            "--dataset-id",
+            "synthetic-fixture-v1",
+            "--scope",
+            "synthetic_smoke"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\main",
+          "exit_code": 0,
+          "stderr": "",
+          "run_summary": {
+            "algorithm": "rolling_mad_starter",
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "predictions_sha256": "9de55e825e4721792207c14fd058f9a6d811961874399f11624fcc68fd60f3f3",
+            "observations": 16,
+            "ready_observations": 8,
+            "anomalous_points": 1,
+            "official_submission_ready": false
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "evaluate",
+            "--run-dir",
+            "outputs/main-smoke",
+            "--windows",
+            "tests/fixtures/synthetic_windows.json"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\main",
+          "exit_code": 0,
+          "stderr": "",
+          "metrics": {
+            "metric_id": "provisional_event_trigger_f1_v0",
+            "official_metric": false,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "event_f1": 1.0,
+            "macro_precision": 1.0,
+            "macro_recall": 1.0,
+            "macro_event_f1": 1.0,
+            "delay_seconds": [
+              0.0
+            ],
+            "mean_delay_seconds": 0.0,
+            "median_delay_seconds": 0.0,
+            "min_delay_seconds": 0.0,
+            "max_delay_seconds": 0.0,
+            "p95_delay_seconds": 0.0,
+            "missed_events": 0,
+            "warmup_points_included_in_coverage": 8,
+            "observations": 16,
+            "series_count": 1,
+            "per_series": {
+              "synthetic-demo": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "event_f1": 1.0,
+                "windows_count": 1,
+                "observations": 16,
+                "warmup_points": 8,
+                "delay_seconds": [
+                  0.0
+                ],
+                "mean_delay_seconds": 0.0,
+                "median_delay_seconds": 0.0
+              }
+            },
+            "policy": {
+              "matching": "first_trigger_in_closed_window",
+              "pre_window_trigger": "false_positive_window_unmatched",
+              "repeat_trigger_in_window": "false_positive",
+              "zero_denominator_convention": 0.0,
+              "warmup_policy": "included_in_coverage_unflagged"
+            },
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "windows_sha256": "57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb"
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "pytest",
+            "-q",
+            "--basetemp",
+            "outputs/pytest-main",
+            "--tb=short"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\main",
+          "exit_code": 0,
+          "stdout": "..............................................................s......... [ 26%]\n........................................................................ [ 53%]\n........................................................................ [ 80%]\n...................................................                      [100%]\n=========================== short test summary info ===========================\nSKIPPED [1] tests\\data\\test_inventory.py:139: Creating symlinks unavailable on this host: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Kaustubh\\\\Hackathon\\\\sentinel-adaptive-anomaly-detection\\\\outputs\\\\integration-review-20261027T113440Z\\\\main\\\\outputs\\\\pytest-main\\\\test_symlink_cannot_escape_dec0\\\\trace.csv' -> 'C:\\\\Kaustubh\\\\Hackathon\\\\sentinel-adaptive-anomaly-detection\\\\outputs\\\\integration-review-20261027T113440Z\\\\main\\\\outputs\\\\pytest-main\\\\test_symlink_cannot_escape_dec0\\\\data\\\\trace.csv'\n266 passed, 1 skipped in 5.41s\n",
+          "stderr": ""
+        }
+      ],
+      "overlays": {},
+      "smoke_counts": {
+        "observations": 16,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "official_metric": false
+      }
+    },
+    {
+      "ref": "a52dd287e276bc9f4596394934999852d7bb3d55",
+      "snapshot": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+      "commands": [
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "run",
+            "--input",
+            "tests/fixtures/synthetic_stream.csv",
+            "--config",
+            "configs/starter.json",
+            "--output-dir",
+            "outputs/before-default",
+            "--dataset-id",
+            "synthetic-fixture-v1",
+            "--scope",
+            "synthetic_smoke"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stderr": "",
+          "run_summary": {
+            "algorithm": "rolling_mad_starter",
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "predictions_sha256": "aadd8b368f1e0919aec7fa945a9b5f929353aeafdd4ca9f4071febef53bd9eae",
+            "observations": 16,
+            "ready_observations": 8,
+            "anomalous_points": 1,
+            "official_submission_ready": false,
+            "source": {
+              "status": "unavailable",
+              "revision": null,
+              "dirty": null,
+              "note": "Git unavailable, timed out, or package source is not in a tracked checkout"
+            }
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "evaluate",
+            "--run-dir",
+            "outputs/before-default",
+            "--windows",
+            "tests/fixtures/synthetic_windows.json"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stderr": "",
+          "metrics": {
+            "metric_id": "provisional_event_trigger_f1_v0",
+            "official_metric": false,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "event_f1": 1.0,
+            "macro_precision": 1.0,
+            "macro_recall": 1.0,
+            "macro_event_f1": 1.0,
+            "delay_seconds": [
+              0.0
+            ],
+            "mean_delay_seconds": 0.0,
+            "median_delay_seconds": 0.0,
+            "min_delay_seconds": 0.0,
+            "max_delay_seconds": 0.0,
+            "p95_delay_seconds": 0.0,
+            "missed_events": 0,
+            "warmup_points_included_in_coverage": 8,
+            "observations": 16,
+            "series_count": 1,
+            "per_series": {
+              "synthetic-demo": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "event_f1": 1.0,
+                "windows_count": 1,
+                "observations": 16,
+                "warmup_points": 8,
+                "delay_seconds": [
+                  0.0
+                ],
+                "mean_delay_seconds": 0.0,
+                "median_delay_seconds": 0.0
+              }
+            },
+            "policy": {
+              "matching": "first_trigger_in_closed_window",
+              "pre_window_trigger": "false_positive_window_unmatched",
+              "repeat_trigger_in_window": "false_positive",
+              "zero_denominator_convention": 0.0,
+              "warmup_policy": "included_in_coverage_unflagged"
+            },
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "windows_sha256": "57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb"
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "run",
+            "--input",
+            "tests/fixtures/synthetic_stream.csv",
+            "--config",
+            "configs/starter.json",
+            "--output-dir",
+            "outputs/before-quantile",
+            "--dataset-id",
+            "synthetic-fixture-v1",
+            "--scope",
+            "synthetic_smoke",
+            "--model-config",
+            "configs/residual-quantile.model.json"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stderr": "",
+          "run_summary": {
+            "algorithm": "residual_max_prior_quantile",
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "predictions_sha256": "751a138bf0197f86a1a61c65b14c6a943839376abd52bcf554748be70838b752",
+            "observations": 16,
+            "ready_observations": 8,
+            "anomalous_points": 2,
+            "official_submission_ready": false,
+            "source": {
+              "status": "unavailable",
+              "revision": null,
+              "dirty": null,
+              "note": "Git unavailable, timed out, or package source is not in a tracked checkout"
+            }
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "evaluate",
+            "--run-dir",
+            "outputs/before-quantile",
+            "--windows",
+            "tests/fixtures/synthetic_windows.json"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stderr": "",
+          "metrics": {
+            "metric_id": "provisional_event_trigger_f1_v0",
+            "official_metric": false,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "event_f1": 1.0,
+            "macro_precision": 1.0,
+            "macro_recall": 1.0,
+            "macro_event_f1": 1.0,
+            "delay_seconds": [
+              0.0
+            ],
+            "mean_delay_seconds": 0.0,
+            "median_delay_seconds": 0.0,
+            "min_delay_seconds": 0.0,
+            "max_delay_seconds": 0.0,
+            "p95_delay_seconds": 0.0,
+            "missed_events": 0,
+            "warmup_points_included_in_coverage": 8,
+            "observations": 16,
+            "series_count": 1,
+            "per_series": {
+              "synthetic-demo": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "event_f1": 1.0,
+                "windows_count": 1,
+                "observations": 16,
+                "warmup_points": 8,
+                "delay_seconds": [
+                  0.0
+                ],
+                "mean_delay_seconds": 0.0,
+                "median_delay_seconds": 0.0
+              }
+            },
+            "policy": {
+              "matching": "first_trigger_in_closed_window",
+              "pre_window_trigger": "false_positive_window_unmatched",
+              "repeat_trigger_in_window": "false_positive",
+              "zero_denominator_convention": 0.0,
+              "warmup_policy": "included_in_coverage_unflagged"
+            },
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "windows_sha256": "57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb"
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-c",
+            "import sentinel; from pathlib import Path; print(sentinel.__file__); assert Path(sentinel.__file__).resolve().is_relative_to(Path.cwd())"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stdout": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch\\src\\sentinel\\__init__.py\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "pytest",
+            "-q",
+            "--basetemp",
+            "outputs/pytest-combined",
+            "--tb=short"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stdout": "..............................................................s......... [ 11%]\n........................................................................ [ 22%]\n........................................................................ [ 34%]\n........................................................................ [ 45%]\n........................................................................ [ 56%]\n........................................................................ [ 68%]\n........................................................................ [ 79%]\n........................................................................ [ 91%]\n........................................................                 [100%]\n=========================== short test summary info ===========================\nSKIPPED [1] tests\\data\\test_inventory.py:139: Creating symlinks unavailable on this host: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Kaustubh\\\\Hackathon\\\\sentinel-adaptive-anomaly-detection\\\\outputs\\\\integration-review-20261027T113440Z\\\\pr7-with-owned-patch\\\\outputs\\\\pytest-combined\\\\test_symlink_cannot_escape_dec0\\\\trace.csv' -> 'C:\\\\Kaustubh\\\\Hackathon\\\\sentinel-adaptive-anomaly-detection\\\\outputs\\\\integration-review-20261027T113440Z\\\\pr7-with-owned-patch\\\\outputs\\\\pytest-combined\\\\test_symlink_cannot_escape_dec0\\\\data\\\\trace.csv'\n631 passed, 1 skipped in 31.54s\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "ruff",
+            "check",
+            "."
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stdout": "All checks passed!\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stdout": "50 files already formatted\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "mypy"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stdout": "Success: no issues found in 23 source files\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "scripts/check_repository.py"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stdout": "OK: 32 mandatory documents, 199 relative links, 24 unique team tasks, official PDF hash\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "run",
+            "--input",
+            "tests/fixtures/synthetic_stream.csv",
+            "--config",
+            "configs/starter.json",
+            "--output-dir",
+            "outputs/after-default",
+            "--dataset-id",
+            "synthetic-fixture-v1",
+            "--scope",
+            "synthetic_smoke"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stderr": "",
+          "run_summary": {
+            "algorithm": "rolling_mad_starter",
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "predictions_sha256": "279e3b681d8e9e8b22d31d67d2da02fb85933cfda56d51d3f65d3c50fce05da6",
+            "observations": 16,
+            "ready_observations": 8,
+            "anomalous_points": 1,
+            "official_submission_ready": false,
+            "source": {
+              "status": "unavailable",
+              "revision": null,
+              "dirty": null,
+              "note": "Git unavailable, timed out, or package source is not in a tracked checkout"
+            }
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "evaluate",
+            "--run-dir",
+            "outputs/after-default",
+            "--windows",
+            "tests/fixtures/synthetic_windows.json"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stderr": "",
+          "metrics": {
+            "metric_id": "provisional_event_trigger_f1_v0",
+            "official_metric": false,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "event_f1": 1.0,
+            "macro_precision": 1.0,
+            "macro_recall": 1.0,
+            "macro_event_f1": 1.0,
+            "delay_seconds": [
+              0.0
+            ],
+            "mean_delay_seconds": 0.0,
+            "median_delay_seconds": 0.0,
+            "min_delay_seconds": 0.0,
+            "max_delay_seconds": 0.0,
+            "p95_delay_seconds": 0.0,
+            "missed_events": 0,
+            "warmup_points_included_in_coverage": 8,
+            "observations": 16,
+            "series_count": 1,
+            "per_series": {
+              "synthetic-demo": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "event_f1": 1.0,
+                "windows_count": 1,
+                "observations": 16,
+                "warmup_points": 8,
+                "delay_seconds": [
+                  0.0
+                ],
+                "mean_delay_seconds": 0.0,
+                "median_delay_seconds": 0.0
+              }
+            },
+            "policy": {
+              "matching": "first_trigger_in_closed_window",
+              "pre_window_trigger": "false_positive_window_unmatched",
+              "repeat_trigger_in_window": "false_positive",
+              "zero_denominator_convention": 0.0,
+              "warmup_policy": "included_in_coverage_unflagged"
+            },
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "windows_sha256": "57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb"
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "run",
+            "--input",
+            "tests/fixtures/synthetic_stream.csv",
+            "--config",
+            "configs/starter.json",
+            "--output-dir",
+            "outputs/after-quantile",
+            "--dataset-id",
+            "synthetic-fixture-v1",
+            "--scope",
+            "synthetic_smoke",
+            "--model-config",
+            "configs/residual-quantile.model.json"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stderr": "",
+          "run_summary": {
+            "algorithm": "residual_max_prior_quantile",
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "predictions_sha256": "55100e65a3e06dde0640442d3431b84026c25aae011f1d4315c1292f5af6a213",
+            "observations": 16,
+            "ready_observations": 8,
+            "anomalous_points": 2,
+            "official_submission_ready": false,
+            "source": {
+              "status": "unavailable",
+              "revision": null,
+              "dirty": null,
+              "note": "Git unavailable, timed out, or package source is not in a tracked checkout"
+            }
+          }
+        },
+        {
+          "argv": [
+            "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\.venv\\Scripts\\python.exe",
+            "-m",
+            "sentinel",
+            "evaluate",
+            "--run-dir",
+            "outputs/after-quantile",
+            "--windows",
+            "tests/fixtures/synthetic_windows.json"
+          ],
+          "cwd": "C:\\Kaustubh\\Hackathon\\sentinel-adaptive-anomaly-detection\\outputs\\integration-review-20261027T113440Z\\pr7-with-owned-patch",
+          "exit_code": 0,
+          "stderr": "",
+          "metrics": {
+            "metric_id": "provisional_event_trigger_f1_v0",
+            "official_metric": false,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "event_f1": 1.0,
+            "macro_precision": 1.0,
+            "macro_recall": 1.0,
+            "macro_event_f1": 1.0,
+            "delay_seconds": [
+              0.0
+            ],
+            "mean_delay_seconds": 0.0,
+            "median_delay_seconds": 0.0,
+            "min_delay_seconds": 0.0,
+            "max_delay_seconds": 0.0,
+            "p95_delay_seconds": 0.0,
+            "missed_events": 0,
+            "warmup_points_included_in_coverage": 8,
+            "observations": 16,
+            "series_count": 1,
+            "per_series": {
+              "synthetic-demo": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "event_f1": 1.0,
+                "windows_count": 1,
+                "observations": 16,
+                "warmup_points": 8,
+                "delay_seconds": [
+                  0.0
+                ],
+                "mean_delay_seconds": 0.0,
+                "median_delay_seconds": 0.0
+              }
+            },
+            "policy": {
+              "matching": "first_trigger_in_closed_window",
+              "pre_window_trigger": "false_positive_window_unmatched",
+              "repeat_trigger_in_window": "false_positive",
+              "zero_denominator_convention": 0.0,
+              "warmup_policy": "included_in_coverage_unflagged"
+            },
+            "evaluation_scope": "synthetic_smoke",
+            "dataset_id": "synthetic-fixture-v1",
+            "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+            "windows_sha256": "57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb"
+          }
+        }
+      ],
+      "overlays": {
+        "src/sentinel/data/io.py": "7e080a90c1fad1bdba3c684e5469dea821b9d901e90c74252cc0e62b1586e42b",
+        "tests/data/test_io_errors.py": "974f9aa5a319a56cc51ece5afa0dbcc4ac96f6a6f1f0d285b89466b11e5a6bf1",
+        "tests/pipeline/test_replay_contract.py": "634eb8586505a39f8743d98b732e171c6e5b6199627939b7283a184aee3e892f"
+      },
+      "semantic_parity": {
+        "default_main_pr7_patched": true,
+        "quantile_pr7_before_after": true,
+        "ignored_fields": [
+          "elapsed_ns"
+        ],
+        "observations_per_trace": 16,
+        "limitation": "Short synthetic quantile trace uses fallback; no real-data or official parity claim."
+      },
+      "source_identity_note": "Untracked archive source reports unavailable Git provenance; refs/overlays above identify the snapshot. This is not a merged candidate commit."
+    }
+  ],
+  "implementation_commit": "05d2ee4ce733943baf46e36ee5bb40ef9aaa1594",
+  "reproduction": "Export each ref with git archive to a fresh contained directory; set PYTHONPATH to its src, use the installed pinned venv and recorded cwd/argv. For the second snapshot copy the three listed paths from implementation_commit. Compare parsed prediction rows after dropping elapsed_ns. Source identity in an archive is unavailable, not a fabricated Git revision."
+}
