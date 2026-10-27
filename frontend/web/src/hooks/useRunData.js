@@ -5,6 +5,7 @@ export function useRunData() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [predictions, setPredictions] = useState([]);
+  const [predictionsRaw, setPredictionsRaw] = useState("");
   const [runManifest, setRunManifest] = useState(null);
   const [windows, setWindows] = useState([]);
   const [evaluation, setEvaluation] = useState(null);
@@ -45,6 +46,7 @@ export function useRunData() {
         const parsedResults = resText ? parseResults(resText) : [];
 
         setPredictions(parsedPredictions);
+        setPredictionsRaw(pText);
         setRunManifest(parsedManifest);
         setWindows(parsedWindows);
         setEvaluation(parsedEval);
@@ -77,6 +79,7 @@ export function useRunData() {
           } else {
             const preds = parsePredictionsJsonl(text);
             setPredictions(preds);
+            setPredictionsRaw(text);
             const series = Array.from(new Set(preds.map(p => p.series_id)));
             setSeriesList(series);
             if (series.length > 0) setSelectedSeries(series[0]);
@@ -110,6 +113,7 @@ export function useRunData() {
     loading,
     error,
     predictions,
+    predictionsRaw,
     runManifest,
     windows,
     evaluation,

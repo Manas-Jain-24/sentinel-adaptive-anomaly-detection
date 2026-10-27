@@ -99,3 +99,34 @@ Implementation commit: `5e28d5c4b9fd6b6f4517f1b18d97088cf7b47a49`, pushed to
 `origin/feat/manas/MN-01-zscore`. See the [MN-01 handoff](../docs/HANDOFFS/MN-01_manas_20261026T162226Z_rolling-zscore.md)
 for exact commands, runtime reproduction, sharing state, reviewer obligations, and continuation.
 Draft review: [PR #1](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/1).
+
+
+### Demo-readiness and presentation support — 2026-10-27
+
+Status: **IN_REVIEW**. This is a user-requested cross-owner demo/presentation contribution; it does
+not complete or change MN-05 and does not select a final detector. Original UI/presentation owner:
+Mayank. Official-data work remains blocked until organizer assets and answers arrive.
+
+- Rebuilt the bundled Mission Control run from `frontend/web/public/demo/stream.csv` using the
+  checked-in CLI and starter config. The saved run and evaluation now agree on the 120-point input,
+  predictions, and two synthetic event windows. All example data are explicitly synthetic smoke.
+- Removed the unsupported planned/winner comparison rows; comparison state is empty until actual
+  compatible run results are loaded. Overview values no longer fall back to invented F1, P95,
+  throughput, or latency. The hero trace is drawn from saved detector predictions, not random flags.
+- Predictions SHA verification now hashes original JSONL text instead of reserializing parsed
+  numbers, which could change numeric formatting and produce a false mismatch.
+- Added a reproducible synthetic-artifact refresh script and local UI instructions. Root README now
+  links to the demo and deck. Created an editable 10-slide Challenge 2 deck with the supplied rubric,
+  real demo evidence, and explicit official-data blockers. The pre-existing untracked draft deck was
+  not modified or included.
+- Verification: `scripts/build_demo_artifacts.py` completed; `.venv\Scripts\python.exe -m pytest -q`
+  passed **266**, skipped **1** Windows symlink-privilege case; Vite production build completed with
+  2,376 modules transformed. Ruff check and format passed for `src`, `tests`, and the demo builder;
+  mypy passed for 16 source files; repository checker passed. Whole-repo Ruff also scans a separate,
+  pre-existing untracked `scripts/generate_presentation.py` draft and fails on its unsupported claims
+  and formatting; that file is not included in the PR. The finalizer validated 10 slides, one native
+  table, package integrity, layout, fonts, and re-import. Browser access to the local UI was unavailable
+  from the browser sandbox; do not describe that as a browser QA pass.
+- Current main baseline is `4a46101`. Implementation commit: `a342650c1112a0e0eaf8694bb5609d2fd216ede5`.
+  Pushed to `origin/codex/demo-readiness`; PR [#10](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/10)
+  is open and not merged. See the uniquely named demo-readiness handoff for exact blockers and next steps.

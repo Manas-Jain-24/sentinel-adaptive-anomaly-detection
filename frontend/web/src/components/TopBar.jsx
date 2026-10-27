@@ -2,8 +2,8 @@ import { Upload, Database, CheckCircle2, ShieldAlert } from "lucide-react";
 
 export function TopBar({ runManifest, sourceName, onOpenUpload }) {
   const scope = runManifest?.evaluation_scope || "synthetic_smoke";
-  const datasetId = runManifest?.dataset_id || "synthetic-fixture-v1";
-  const algorithm = runManifest?.algorithm || "rolling_mad_starter";
+  const datasetId = runManifest?.dataset_id || "unknown-dataset";
+  const algorithm = runManifest?.algorithm || "unknown-algorithm";
 
   return (
     <header
@@ -57,7 +57,7 @@ export function TopBar({ runManifest, sourceName, onOpenUpload }) {
             border: "1px solid rgba(255,255,255,0.05)"
           }}
         >
-          Metric: provisional_event_trigger_f1_v0 (provisional scorer)
+          Metric: provisional_event_trigger_f1_v0 (not official)
         </span>
       </div>
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Check, Copy, ShieldCheck, ShieldAlert, Cpu, Terminal, FileText, Lock, RefreshCw } from "lucide-react";
 import { sha256Browser } from "../lib/hashing";
 
-export function ManifestView({ runManifest, predictions = [] }) {
+export function ManifestView({ runManifest, predictions = [], predictionsRaw = "" }) {
   const [copiedKey, setCopiedKey] = useState(null);
   const [verifying, setVerifying] = useState(false);
   const [verificationResult, setVerificationResult] = useState(null); // true, false, null
@@ -14,28 +14,13 @@ export function ManifestView({ runManifest, predictions = [] }) {
   };
 
   const handleVerifyPredictions = async () => {
-    if (!runManifest?.predictions_sha256 || predictions.length === 0) return;
+    if (!runManifest?.predictions_sha256 || !predictionsRaw) return;
     setVerifying(true);
     setVerificationResult(null);
 
     try {
-      // Re-serialize predictions to JSONL format exactly as created
-      const lines = predictions.map(p => {
-        const raw = {
-          series_id: p.series_id,
-          timestamp: p.timestamp,
-          value: p.value,
-          score: p.score,
-          threshold: p.threshold,
-          label: p.label,
-          ready: p.ready,
-          evidence: p.evidence,
-          schema_version: p.schema_version,
-          elapsed_ns: p.elapsed_ns
-        };
-        return JSON.stringify(raw);
-      });
-      const content = lines.join("\n") + "\n";
+      // Hash the original JSONL text: parsing and re-serializing changes numeric formatting.
+      const content = predictionsRaw;
       const computedHash = await sha256Browser(content);
 
       setTimeout(() => {
@@ -69,7 +54,7 @@ export function ManifestView({ runManifest, predictions = [] }) {
               CRYPTOGRAPHIC RUN MANIFEST & INTEGRITY
             </span>
             <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "3px" }}>
-              Verifies zero data tampering and enforces immutable provenance for Challenge 2 submission.
+              Checks the saved predictions file against its recorded SHA-256 digest; this is not submission validation.
             </p>
           </div>
 
@@ -146,7 +131,7 @@ export function ManifestView({ runManifest, predictions = [] }) {
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid rgba(255,255,255,0.04)", paddingBottom: "6px" }}>
               <span style={{ color: "var(--text-dim)" }}>Detector Total Runtime:</span>
-              <span className="mono-num" style={{ color: "var(--cyan-signal)" }}>{(runManifest.detector_total_ns / 1000).toFixed(1)} µs</span>
+              <span className="mono-num" style={{ color: "var(--cyan-signal)" }}>{(runManifest.detector_total_ns / 1000).toFixed(1)} ï¿½s</span>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", paddingBottom: "6px" }}>
               <span style={{ color: "var(--text-dim)" }}>Official Submission Ready:</span>

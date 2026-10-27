@@ -3,9 +3,9 @@
   "package_version": "0.1.0",
   "algorithm": "rolling_mad_starter",
   "evaluation_scope": "synthetic_smoke",
-  "dataset_id": "synthetic-fixture-v1",
-  "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
-  "predictions_sha256": "576386a8742a457f445922b56096f323d1ca0aeb54df4d78e955e6644e164346",
+  "dataset_id": "synthetic-mission-control-v1",
+  "input_sha256": "d498daf1209999d8c920a2b403535e2460996097f664e993beae15f732651de0",
+  "predictions_sha256": "31ca47029d0b55cd916dfb5b6dd7bf259fc4e7217607dd9c6c80e035e7584fd2",
   "config": {
     "window_size": 32,
     "min_history": 8,
@@ -13,12 +13,12 @@
     "scale_floor": 0.1,
     "max_series": 100
   },
-  "python": "3.12.3",
-  "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64",
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.26200-SP0",
   "observations": 120,
   "ready_observations": 112,
   "anomalous_points": 2,
-  "detector_total_ns": 1845200,
-  "runtime_note": "process only, includes warmup; excludes parsing/writing; not a benchmark",
+  "detector_total_ns": 1774600,
+  "runtime_note": "process() only, includes warmup; excludes parsing/writing; not a benchmark",
   "official_submission_ready": false
 }
