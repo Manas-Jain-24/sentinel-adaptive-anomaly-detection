@@ -4,9 +4,9 @@ Causal, interpretable streaming anomaly detection for **Utkrishta 2026, Challeng
 GitHub repository: [Manas-Jain-24/sentinel-adaptive-anomaly-detection](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection).
 The foundation is published on `main`. The Python package and project name remain Sentinel Pulse.
 
-**Status:** runnable starter, research and engineering blueprint. The competitive detector,
-official dataset adapter, official scorer/exporter, and dashboard remain planned work.
-The organizer dataset, scoring code, submission schema, hardware limits, and deadline were not
+**Status:** runnable CLI baseline and synthetic Mission Control demo. Official dataset adaptation,
+official scorer/exporter, final model selection, and official benchmark results remain blocked.
+The organizer starter pack, scoring code, submission schema, hardware limits, and deadline were not
 provided. No official benchmark or hidden evaluation has been performed.
 
 ## Start here
@@ -46,6 +46,16 @@ This replays **16 synthetic points**, writes `predictions.jsonl` and `run.json`,
 the artificial event using **`provisional_event_trigger_f1_v0`**. A successful smoke result
 proves software wiring only. It is neither the official metric implementation nor a NAB result.
 Input timestamps must include an offset. Raw NAB CSV files need a documented adapter first.
+
+## Local demo and presentation
+
+The read-only Mission Control UI is in [frontend/web](frontend/web/README.md). Its bundled run is
+synthetic smoke data only and its event metric is provisional. The 10-slide, evidence-based deck is
+[deliverables/Sentinel_Pulse_Challenge_2_Final_v2.pptx](deliverables/Sentinel_Pulse_Challenge_2_Final_v2.pptx).
+Neither artifact represents official benchmark performance.
+
+To run the UI, build the synthetic artifacts using the script in the UI README, then install the
+frontend dependencies and start Vite from `frontend/web`.
 
 ## What exists
 

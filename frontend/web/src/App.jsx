@@ -29,6 +29,7 @@ export default function App() {
     loading,
     error,
     predictions,
+    predictionsRaw,
     runManifest,
     windows,
     evaluation,
@@ -59,18 +60,20 @@ export default function App() {
 
   // Derive KPIs for Overview
   const kpis = {
-    observations: runManifest?.observations || predictions.length,
-    ready_observations: runManifest?.ready_observations || predictions.filter(p => p.ready).length,
+    observations: runManifest?.observations ?? predictions.length,
+    ready_observations: runManifest?.ready_observations ?? predictions.filter(p => p.ready).length,
     anomalies_count: predictions.filter(p => p.label === "ANOMALOUS").length,
-    tp: evaluation?.tp ?? 2,
-    fp: evaluation?.fp ?? 0,
-    fn: evaluation?.fn ?? 0,
-    precision: evaluation?.precision ?? 1.0,
-    recall: evaluation?.recall ?? 1.0,
-    event_f1: evaluation?.event_f1 ?? 1.0,
-    mean_latency_us: runManifest?.detector_total_ns ? (runManifest.detector_total_ns / (runManifest.observations * 1000)).toFixed(1) : "15.4",
-    p95_latency_us: "18.2",
-    p95_delay_seconds: evaluation?.p95_delay_seconds ?? 60.0
+    tp: evaluation?.tp ?? null,
+    fp: evaluation?.fp ?? null,
+    fn: evaluation?.fn ?? null,
+    precision: evaluation?.precision ?? null,
+    recall: evaluation?.recall ?? null,
+    event_f1: evaluation?.event_f1 ?? null,
+    mean_latency_us: runManifest?.detector_total_ns && runManifest?.observations
+      ? runManifest.detector_total_ns / (runManifest.observations * 1000)
+      : null,
+    p95_latency_us: null,
+    p95_delay_seconds: evaluation?.p95_delay_seconds ?? null
   };
 
   return (
@@ -116,7 +119,7 @@ export default function App() {
               transition={{ duration: 0.2 }}
             >
               {activeTab === "overview" && (
-                <OverviewView onNavigate={setActiveTab} kpis={kpis} />
+                <OverviewView onNavigate={setActiveTab} kpis={kpis} predictions={predictions} />
               )}
 
               {activeTab === "stream" && (
@@ -158,6 +161,7 @@ export default function App() {
                 <ManifestView
                   runManifest={runManifest}
                   predictions={predictions}
+                  predictionsRaw={predictionsRaw}
                 />
               )}
 
@@ -170,28 +174,10 @@ export default function App() {
           </AnimatePresence>
         </main>
 
-        {/* Honesty Rules Footer */}
-        <footer
-          style={{
-            padding: "12px 32px",
-            borderTop: "1px solid var(--panel-border)",
-            background: "rgba(5, 7, 10, 0.9)",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: "0.72rem",
-            color: "var(--text-dim)",
-            fontFamily: "var(--font-mono)"
-          }}
-        >
-          <div>
-            <span>Software demonstration on synthetic data. Not an official or NAB result.</span>
-            <span style={{ margin: "0 8px" }}>•</span>
-            <span>Metric: <strong style={{ color: "var(--amber-threshold)" }}>provisional_event_trigger_f1_v0 (provisional, not the official scorer)</strong></span>
-          </div>
-          <div>
-            <span>Utkrishta 2026 • Challenge 2: Sentinel • Team Sentinel Pulse</span>
-          </div>
+        {/* Provenance footer */}
+        <footer style={{ padding: "12px 32px", borderTop: "1px solid var(--panel-border)", background: "rgba(5, 7, 10, 0.9)", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.72rem", color: "var(--text-dim)", fontFamily: "var(--font-mono)" }}>
+          <span>Software demonstration on synthetic data. Not an official or NAB result. Metric is provisional.</span>
+          <span>Utkrishta 2026 Â· Challenge 2: Sentinel Â· Sentinel Pulse project</span>
         </footer>
       </div>
 
