@@ -296,7 +296,7 @@ rules. Current branch `feat/manas/MN-04-05-detector-readiness`, implementation `
   cases passed; Ruff lint/format (37 files), strict mypy (20 source files), repository and
   whitespace checks passed. MAD README smoke remained 16 points, provisional 1/0/0.
 - [Readiness/gates](../src/sentinel/detectors/READINESS.md),
-  [portable synthetic evidence](../validation/MN-04-05_manas_20261027T101343Z_synthetic-readiness.json) and
+  [portable synthetic evidence](../docs/validation/MN-04-05_manas_20261027T101343Z_synthetic-readiness.json) and
   [continuation handoff](../docs/HANDOFFS/MN-04_manas_20261027T101343Z_detector-readiness.md) record exact commands,
   clean implementation revision, comparisons, limitations and next actions.
 - Data permissions/official pack, label/split/time semantics, model-use permissions and

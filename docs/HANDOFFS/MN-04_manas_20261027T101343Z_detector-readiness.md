@@ -102,3 +102,8 @@ No official data benchmark, hidden evaluation, real model score or runtime is cl
 
 At authorship source is locally committed but not yet pushed; another machine cannot access
 this new work until publication. Final PR body records the actual published branch/head/link.
+
+Publication follow-up: refreshed PR #3/#4 branches and this branch were pushed. The
+post-documentation repository checker found a task-file evidence link missing `docs/`;
+the link was corrected in a follow-up commit and the checker rerun before final handoff.
+Use the final PR head, not the first documentation commit, for clean-clone checks.
