@@ -1,0 +1,67 @@
+{
+  "scope": "synthetic_runtime_diagnostic",
+  "official_benchmark": false,
+  "authored_utc": "2026-10-26T16:20:09.452392+00:00",
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+  "observations": 5000,
+  "active_series": 1,
+  "cadence_seconds": 1,
+  "value_formula": "10 + sin(i / 9) + 0.03 * (i % 7) + (4 if i % 499 == 0 else 0)",
+  "measurement": "One trial; process_stream process() time only; discard first window_size calls; p95 nearest rank; excludes parsing, writing and observation construction; no memory measurement.",
+  "results": [
+    {
+      "algorithm": "RollingMADStarter",
+      "config": {
+        "window_size": 32,
+        "min_history": 8,
+        "threshold": 4,
+        "scale_floor": 0.1,
+        "max_series": 100
+      },
+      "measured_points": 4968,
+      "p50_us": 6.6,
+      "p95_us": 12.0
+    },
+    {
+      "algorithm": "RollingZScoreDetector",
+      "config": {
+        "window_size": 32,
+        "min_history": 8,
+        "threshold": 4,
+        "scale_floor": 0.1,
+        "max_series": 100
+      },
+      "measured_points": 4968,
+      "p50_us": 66.7,
+      "p95_us": 90.6
+    },
+    {
+      "algorithm": "RollingMADStarter",
+      "config": {
+        "window_size": 128,
+        "min_history": 8,
+        "threshold": 4,
+        "scale_floor": 0.1,
+        "max_series": 100
+      },
+      "measured_points": 4872,
+      "p50_us": 18.4,
+      "p95_us": 22.8
+    },
+    {
+      "algorithm": "RollingZScoreDetector",
+      "config": {
+        "window_size": 128,
+        "min_history": 8,
+        "threshold": 4,
+        "scale_floor": 0.1,
+        "max_series": 100
+      },
+      "measured_points": 4872,
+      "p50_us": 145.9,
+      "p95_us": 235.2
+    }
+  ]
+}

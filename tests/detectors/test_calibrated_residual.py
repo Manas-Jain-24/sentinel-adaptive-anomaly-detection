@@ -1,4 +1,4 @@
-"""Execute against the exact published MN-02/KS-02 modules before their merge."""
+"""Require real feature/residual composition and complete calibration context."""
 
 from datetime import UTC, datetime, timedelta
 
@@ -6,11 +6,11 @@ import pytest
 
 from sentinel.config import DetectorConfig
 from sentinel.contracts import Detector, Observation, Prediction
+from sentinel.data import features
+from sentinel.detectors import residual
 from sentinel.detectors.calibrated import CalibratedDetector
 from sentinel.detectors.thresholds import PriorScoreQuantile, QuantileThresholdConfig
 
-features = pytest.importorskip("sentinel.data.features", reason="Published KS-02 is unmerged")
-residual = pytest.importorskip("sentinel.detectors.residual", reason="Published MN-02 is unmerged")
 START = datetime(2026, 1, 1, tzinfo=UTC)
 
 

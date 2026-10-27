@@ -1,0 +1,35 @@
+{
+  "dataset_id": "synthetic-fixture-v1",
+  "evaluation_scope": "synthetic_smoke",
+  "schema_version": "sentinel_inventory_v1",
+  "sources": [
+    {
+      "observations": 16,
+      "series": [
+        {
+          "cadence_max_seconds": 60.0,
+          "cadence_median_seconds": 60.0,
+          "cadence_min_seconds": 60.0,
+          "end": "2026-01-01T00:15:00Z",
+          "gap_intervals": 0,
+          "length": 16,
+          "missing_steps": 0,
+          "off_grid_intervals": 0,
+          "series_id": "synthetic-demo",
+          "start": "2026-01-01T00:00:00Z",
+          "value_max": 15.0,
+          "value_min": 9.9
+        }
+      ],
+      "sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+      "size_bytes": 678,
+      "spec": {
+        "expected_cadence_seconds": 60.0,
+        "group_id": "synthetic-fixture",
+        "path": "tests/fixtures/synthetic_stream.csv",
+        "permission_basis": "Repository fixture supplied for synthetic software verification",
+        "source": "Repository hand-authored fixture; tests/fixtures/README.md"
+      }
+    }
+  ]
+}

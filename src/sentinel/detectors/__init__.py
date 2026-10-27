@@ -1,1 +1,1 @@
-"""Manas owns causal streaming detectors and their score calibration."""
+"""Causal baselines, residual composition and prior-score calibration, owned by Manas."""
