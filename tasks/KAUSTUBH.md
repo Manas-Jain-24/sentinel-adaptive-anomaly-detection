@@ -242,3 +242,17 @@ gates, review #7 without duplicating it, and merge only with authorization. Star
 missing inputs arrive; KS-05 follows authorized frozen training data. Exact commands/files,
 blockers and restart instructions are in the
 [new data handoff](../docs/HANDOFFS/KS-06_kaustubh_20261027T113928Z_data-integration-review.md).
+
+
+### Concurrent-main preservation before publication
+
+Main advanced to `3d18760e709c9ef4fe897d90d7dd0888c10bd046` with Mayank's separate demo/web
+addition. Verified no Python/config/test/CI diff from the original audited main. Feature-only
+merge `137cad38a6cb4a82971549649683a220f195abdc` preserves the upstream files unchanged;
+no merge into main or other-owner edit. Refreshed exact-main archive: 266 passed / 1 Windows
+symlink skip, Ruff 25 files, mypy 16, repository 139 links and README smoke TP/FP/FN=1/0/0.
+Four exact-head CI jobs succeeded in run 40498576245. Initial archive pytest had 178 passed /
+89 setup errors because the local harness omitted its outputs parent; created the parent and
+reran successfully with fresh basetemp. Failed command is retained in compatibility evidence.
+No viewer build/browser QA or comparison-result validity is claimed. Final feature candidate
+is checked after this preservation/record update; PR identifies exact head and actual CI.

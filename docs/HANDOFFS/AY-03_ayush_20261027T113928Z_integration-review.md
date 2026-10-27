@@ -159,3 +159,17 @@ official_metric=false. Timing is execution evidence only, not a performance comp
 Relevant files: reader; two new owned test modules; AY-02 proposal; tasks/AYUSH and KAUSTUBH;
 central records under explicit user scope; this handoff, the data handoff and validation JSON.
 No other-owner implementation or task record, raw input/labels, secret, dependency or model changed.
+
+
+### Concurrent-main preservation before publication
+
+Main advanced to `3d18760e709c9ef4fe897d90d7dd0888c10bd046` with Mayank's separate demo/web
+addition. Verified no Python/config/test/CI diff from the original audited main. Feature-only
+merge `137cad38a6cb4a82971549649683a220f195abdc` preserves the upstream files unchanged;
+no merge into main or other-owner edit. Refreshed exact-main archive: 266 passed / 1 Windows
+symlink skip, Ruff 25 files, mypy 16, repository 139 links and README smoke TP/FP/FN=1/0/0.
+Four exact-head CI jobs succeeded in run 40498576245. Initial archive pytest had 178 passed /
+89 setup errors because the local harness omitted its outputs parent; created the parent and
+reran successfully with fresh basetemp. Failed command is retained in compatibility evidence.
+No viewer build/browser QA or comparison-result validity is claimed. Final feature candidate
+is checked after this preservation/record update; PR identifies exact head and actual CI.

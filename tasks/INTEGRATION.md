@@ -100,3 +100,11 @@ exact merged commit. The [handoff](../docs/HANDOFFS/AY-03_ayush_20261027T113928Z
 records final publication/continuation. KS-04/05, official scoring/export and real-data freeze
 remain blocked by missing authorized assets/semantics/scorer/schema/runtime evidence. No private
 portal was accessible, no public data/labels were substituted, and no official parity is claimed.
+
+Final upstream refresh: main advanced to `3d18760e709c9ef4fe897d90d7dd0888c10bd046` with only
+Mayank's demo/web files. Feature-only merge `137cad3` preserves them unchanged; no merge into
+main. Refreshed-main archive gates/smoke: 266 passed / 1 skip, Ruff 25/mypy 16/repository checks and
+provisional TP/FP/FN=1/0/0. Four exact-head CI jobs passed in run 40498576245. Initial archive-test
+setup had 89 errors because the local harness omitted its outputs parent; created that parent,
+reran successfully and retained the failed command. No production fix was needed. Neither viewer
+was built/rendered/certified in this audit. Original main 8c1 evidence remains historical.

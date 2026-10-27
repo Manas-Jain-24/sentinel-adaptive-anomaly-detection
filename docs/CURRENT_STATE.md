@@ -1,9 +1,9 @@
 # Current integrated state
 
 Maintainer: Ayush. Repository audit: 2026-10-27 (Asia/Calcutta), authorized by the user's explicit
-combined Ayush/Kaustubh scope. Verified integrated baseline: **origin/main 8c1be6fdd167c741ad1de0123d48bda3effbab12**.
-This feature PR corrects stale summaries; pending PRs remain separate from main. No merge was
-performed by this audit. Git/code/executed checks take precedence over historical planning prose.
+combined Ayush/Kaustubh scope. Verified integrated baseline: **origin/main 3d18760e709c9ef4fe897d90d7dd0888c10bd046**.
+This feature PR corrects stale summaries; pending PRs remain separate from main. No merge into
+main was performed. Git/code/executed checks take precedence over historical planning prose.
 
 ## Actual implementation
 
@@ -19,6 +19,9 @@ performed by this audit. Git/code/executed checks take precedence over historica
   there is no model selector on main.
 - MY-01 expanded provisional evaluator/golden cases and MY-03 frontend artifact viewer, merged
   through PR #6 (`b301c07`). Viewer build/browser QA was not rerun in this audit.
+- Concurrent main commit `3d18760` adds Mayank's separate demo/web Mission Control viewer.
+  Its source is preserved unchanged. No Python/config/test/CI files changed; neither viewer's
+  build, rendered UI or example-comparison validity was certified by this integration audit.
 - Synthetic fixtures, foundation tests, lint/type/repository checks, Windows/Linux CI and
   requirements.txt with existing development pins. No new dependency was added by this audit.
 
@@ -31,11 +34,11 @@ split-enforced CLI replay does not. No final competition milestone is certified.
 
 ## Verified checks and Git state
 
-Exact main `8c1be6f`: **266 passed, 1 skipped** for unavailable Windows symlink privilege, also
-reproduced from a Git archive. Ruff lint/format (25 files), strict mypy (16 source files), pip
+Initial main `8c1be6f` and refreshed exact main `3d18760`: **266 passed, 1 skipped** for Windows
+symlink privilege, each reproduced from a Git archive. Ruff lint/format (25 files), mypy (16 files), pip
 check, repository checker (139 links/24 tasks/original PDF hash) and whitespace checks passed.
 Archived-main README replay/evaluate: 16 synthetic points, provisional TP/FP/FN=1/0/0. Local
-execution Windows/Python 3.12.14. Main's exact-head Actions run **40494596951** has four successful
+execution Windows/Python 3.12.14. Current main's exact-head Actions run **40498576245** has four successful
 Ubuntu/Windows Python 3.11/3.13 jobs, read from check-runs. Empty legacy statuses certify nothing.
 All metric evidence is synthetic `provisional_event_trigger_f1_v0`, official_metric=false.
 
@@ -43,6 +46,9 @@ Origin remains [the shared repository](https://github.com/Manas-Jain-24/sentinel
 All branches were fetched; the old KS branch pull --ff-only was already current, and this new
 task branch starts at fetched main. Initial tree clean; no stash/reset/force push/branch deletion.
 Local main was not rewritten and no competition submission/release/protection change occurred.
+Fetched the concurrent `3d18760` and preserved it with feature-only merge `137cad3`; main itself
+was untouched. Latest-main archive gates/smoke passed after correcting a missing temporary-parent
+directory in the local verification harness (initial setup errors retained in evidence).
 
 ## Pending review, not integrated
 

@@ -15,7 +15,7 @@ All 24 task statuses/effort/dependencies are in the personal files. **INIT-01 is
 foundation scope; verified completion and exact checks are recorded in CURRENT_STATE/VALIDATION.
 No official-data experiment or submission milestone is complete.
 
-Audit: 2026-10-27 (Asia/Calcutta), exact main `8c1be6f`; see
+Audit: 2026-10-27 (Asia/Calcutta), refreshed exact main `3d18760`; see
 [verified state](../docs/CURRENT_STATE.md) and the
 [integration handoff](../docs/HANDOFFS/AY-03_ayush_20261027T113928Z_integration-review.md).
 Main suite266 passed / 1 Windows privilege skip; exact-head CI four successful jobs. Rows report
