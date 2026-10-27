@@ -128,3 +128,36 @@ Four exact-head CI jobs succeeded in run 40498576245. Initial archive pytest had
 reran successfully with fresh basetemp. Failed command is retained in compatibility evidence.
 No viewer build/browser QA or comparison-result validity is claimed. Final feature candidate
 is checked after this preservation/record update; PR identifies exact head and actual CI.
+
+
+### Verified publication and coordination
+
+Published [PR #8](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/8)
+from `fix/kaustubh/KS-06-integration-review` to main. Initial published candidate
+`22e86ab2b843bc50175ed48b74afa6e2fef8366d` passed all README gates on the exact committed tree:
+288 passed / 1 Windows privilege skip, Ruff 27 files, strict mypy 16 files, pip/repository/
+whitespace checks, synthetic 16-point replay/evaluate TP/FP/FN=1/0/0. Raw commands/results are
+in `docs/validation/AY-03_20261027T113928Z/candidate-22e86ab-checks.json` (repository-relative).
+All eight exact-head CI jobs succeeded: push run 40499158468 and PR run 40499214180.
+This final publication record follows that candidate; final PR body identifies the later checked
+head and actual latest CI instead of attributing earlier checks to a new commit.
+
+[Scoped #7 review](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/7#pullrequestreview-5666596852)
+was actually posted by kaustubh-dot at a52dd28, state COMMENTED, 2026-10-27T11:51:52Z.
+It reports the inherited parser failures/fix and bounded feature/context compatibility; it is
+not an APPROVE or Ayush/human approval. PR #8 actually requests AJCoder01 (Ayush), Manas-Jain-24
+(Manas) and Kratos7heSpartanRage (Mayank); no submitted reviews were present at publication.
+GitHub connector writes returned 403 Resource not accessible by integration; authenticated CLI
+successfully performed the authorized PR/review/reviewer actions. No credential was exposed.
+
+Exact sharing commands: `git push -u origin fix/kaustubh/KS-06-integration-review`,
+`gh pr create --repo Manas-Jain-24/sentinel-adaptive-anomaly-detection --base main --head fix/kaustubh/KS-06-integration-review --title 'KS-06 / AY-03: harden CSV replay and reconcile verified integration' --body-file outputs/integration-review-pr-body.md`,
+`gh api repos/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pulls/7/reviews --method POST --input outputs/pr7-review-payload.json`,
+and `gh pr edit 8 --repo Manas-Jain-24/sentinel-adaptive-anomaly-detection --add-reviewer 'AJCoder01,Manas-Jain-24,Kratos7heSpartanRage'`.
+All CLI publication actions exited 0. Body/payload files are local/ignored; actual content is
+shared on GitHub. The branch/handoffs are portable after the final non-force push.
+
+Next actions remain named-owner reviews, authorized integration, AY-02 proposal approval before
+state API work, Mayank's MY-02 target-mask/harness implementation, and organizer asset/permission/
+label/split/Q01/Q09/scorer/schema/runtime answers. KS-04/05 remain BLOCKED. No merge into main,
+release, official parity, real EDA, benchmark/candidate promotion or submission was performed.
