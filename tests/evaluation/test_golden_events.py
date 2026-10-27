@@ -127,7 +127,7 @@ def test_pre_window_trigger_conservative_policy() -> None:
 
     Explicit conservative trigger policy:
     - Episode began at t1 (before window [t2, t3]), causing a false positive.
-    - Since the episode continues through t2 and t3 without a new trigger,
+    - Since episode continues through t2 and t3 without a new trigger,
       window [t2, t3] is a miss (FN).
     """
     t0 = iso_time(0)

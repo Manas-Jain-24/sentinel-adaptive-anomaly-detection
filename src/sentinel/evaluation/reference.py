@@ -259,8 +259,7 @@ def format_evaluation_report(metrics: dict[str, Any]) -> str:
             [
                 "## Per-Series Breakdown",
                 "",
-                "| Series ID | Windows | TP | FP | FN | Precision | Recall | Event F1 | "
-                "Mean Delay | Obs |",
+                "| Series | Windows | TP | FP | FN | Precision | Recall | Event F1 | Delay | Obs |",
                 "|---|---|---|---|---|---|---|---|---|---|",
             ]
         )
