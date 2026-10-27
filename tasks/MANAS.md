@@ -314,3 +314,34 @@ all reported Ubuntu/Windows Python 3.11/3.13 checks passed for both exact heads.
 New [draft PR #5](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/5)
 publishes detector readiness. Its source/evidence was pushed through `eecdc91` before
 this publication-only record; use its latest head for continuation. Main is unchanged.
+
+### MN-02/03 integration increment — 2026-10-27 (Asia/Calcutta)
+
+User authorized implementing the proposed integration ("do then"). Ayush retains shared
+ownership/review; scope and old/new contract are recorded in the
+[proposal](../docs/HANDOFFS/MN-03_manas_20261027T103208Z_cli-integration-proposal.md).
+Branch `feat/manas/MN-03-cli-integration` combines published Manas PRs #3/#4/#5 and Ayush AY-01
+`a859457d1815824e84ac785a04cee3ce7d401222`, preserving their history. Main stays unchanged.
+
+Implemented selector/factory, CLI --detector OR separate --model-config, real residual/
+seasonal/quantile execution, correct algorithm/resolved-feature/calibration metadata and
+model/combined hashes. Legacy config/hash semantics/default MAD stay intact. Actual model
+libraries/guards/official-data adapter/harness are not silently introduced. Split manifests
+remain opaque checksum snapshots. New model schema is additive and pending Ayush/domain review.
+
+Implementation `beaa4182206275670c0cf02181847a07101fb4ee`; regression `3d22b4c9be996a1cdd87ab8e68fa2f7e8e54a7d0`.
+Final suite **582 passed, 1 Windows symlink skip** (59 new integration cases), Ruff
+lint/format (46 files), strict mypy (23 source files), repository/whitespace checks passed.
+Seven CLI smokes archived with clean source evidence; 16-point MAD equals prior saved
+baseline. Quantile ties on the 96-point fixture caused provisional 0/1/1; regression and
+README preserve this observed limitation. No candidate promotion or parameter hiding.
+Two intermediate Windows directory-publication denials were reproduced at different paths;
+bounded WinError 5/32 retry and five failure/collision tests fix the integration failure,
+while persistent errors propagate. Details and all prior outcomes are retained in the
+[handoff](../docs/HANDOFFS/MN-03_manas_20261027T104453Z_cli-integration.md) and
+[evidence](../docs/validation/MN-03_manas_20261027T104453Z_cli-integration/README.md).
+
+MN-02/03 remain IN_REVIEW, not DONE merely from this combined feature branch. MN-04/05/06
+real-data and A/B blockers remain. Ayush/Kaustubh/Mayank review affected boundaries; Mayank
+can start consuming these actual saved outputs in parallel. Ayush owns central reconciliation.
+Final PR publication records shared commits and CI; no automatic main merge authorized.
