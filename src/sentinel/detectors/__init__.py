@@ -1,1 +1,1 @@
-"""Manas owns streaming baselines and causal residual detector composition."""
+"""Causal rolling baselines and residual detector composition, owned by Manas."""

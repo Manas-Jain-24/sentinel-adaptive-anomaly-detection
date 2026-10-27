@@ -9,14 +9,14 @@ import pytest
 
 from sentinel.config import DetectorConfig
 from sentinel.contracts import ContractError, Observation, Prediction, timestamp_text
+from sentinel.data import features
+from sentinel.data import inventory as inventory_api
+from sentinel.data import splits as split_api
 from sentinel.data.io import read_observations
 from sentinel.detectors.residual import ResidualDetector
 from sentinel.evaluation.reference import event_metrics
 from sentinel.pipeline import prediction_record
 
-features = pytest.importorskip("sentinel.data.features", reason="PR-2 data modules are unmerged")
-inventory_api = pytest.importorskip("sentinel.data.inventory", reason="PR-2 inventory is unmerged")
-split_api = pytest.importorskip("sentinel.data.splits", reason="PR-2 splits are unmerged")
 START = datetime(2026, 1, 1, tzinfo=UTC)
 
 

@@ -1,0 +1,55 @@
+{
+  "cuts": [
+    {
+      "calibration_stop": 11,
+      "series_id": "synthetic-demo",
+      "train_stop": 6
+    }
+  ],
+  "dataset_id": "synthetic-fixture-v1",
+  "evaluation_scope": "synthetic_smoke",
+  "group_assignments": [],
+  "inventory_sha256": "171b4fef6195d83cd40f5b0712143d1b61114f1c63137432ac1344689ddff87c",
+  "lookback": 2,
+  "past_context": "carry",
+  "ranges": [
+    {
+      "context_start": 0,
+      "group_id": "synthetic-fixture",
+      "partition": "train",
+      "partition_start": 0,
+      "partition_stop": 6,
+      "series_id": "synthetic-demo",
+      "source_path": "tests/fixtures/synthetic_stream.csv",
+      "source_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+      "target_start": 2,
+      "target_stop": 4
+    },
+    {
+      "context_start": 4,
+      "group_id": "synthetic-fixture",
+      "partition": "calibration",
+      "partition_start": 6,
+      "partition_stop": 11,
+      "series_id": "synthetic-demo",
+      "source_path": "tests/fixtures/synthetic_stream.csv",
+      "source_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+      "target_start": 6,
+      "target_stop": 9
+    },
+    {
+      "context_start": 9,
+      "group_id": "synthetic-fixture",
+      "partition": "validation",
+      "partition_start": 11,
+      "partition_stop": 16,
+      "series_id": "synthetic-demo",
+      "source_path": "tests/fixtures/synthetic_stream.csv",
+      "source_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+      "target_start": 11,
+      "target_stop": 16
+    }
+  ],
+  "schema_version": "sentinel_split_v1",
+  "strategy": "chronological"
+}

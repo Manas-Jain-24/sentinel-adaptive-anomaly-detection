@@ -1,4 +1,4 @@
-"""Run when KS-02 is available; no teammate source is copied into this branch."""
+"""Exercise the merged KS-02 extractor through the residual consumer contract."""
 
 import json
 from datetime import UTC, datetime, timedelta
@@ -8,15 +8,12 @@ import pytest
 
 from sentinel.config import DetectorConfig
 from sentinel.contracts import ContractError, Observation, Prediction
+from sentinel.data import features
 from sentinel.data.io import read_observations
 from sentinel.detectors.residual import ResidualDetector
 from sentinel.detectors.rolling import RollingMADStarter
 from sentinel.pipeline import prediction_record, process_stream
 
-features = pytest.importorskip(
-    "sentinel.data.features",
-    reason="KS-02 is unmerged; run the pinned published-extractor compatibility check",
-)
 START = datetime(2026, 1, 1, tzinfo=UTC)
 FIXTURES = Path(__file__).parents[1] / "fixtures"
 
