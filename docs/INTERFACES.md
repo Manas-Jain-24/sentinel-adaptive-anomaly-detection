@@ -125,6 +125,58 @@ finite positive threshold/floor, and no unknown keys. These are starting values 
 not tuned hyperparameters. Advanced model/period/quantile/guard settings must use a reviewed
 separate config section or extension; do not overload threshold semantics silently.
 
+### Detector selection (additive integration proposal)
+
+The user authorized Manas to prepare CLI/pipeline integration across ownership boundaries;
+Ayush and affected-owner review remains pending. See the
+[scoped proposal](HANDOFFS/MN-03_manas_20261027T103208Z_cli-integration-proposal.md).
+This implementation is on the integration feature branch, not a claim of main integration.
+Detector/Prediction/Evidence and the legacy five-field DetectorConfig are unchanged.
+
+`sentinel run` accepts optional `--detector mad|zscore|residual` (fixed threshold) OR
+`--model-config PATH`, never both. Neither option means the same default MAD behavior.
+`run_file` adds keyword-only `model_config: ModelConfig | None = None`; all existing
+positional calls and `split_manifest_path` remain valid. Guards, model weight downloads,
+fitting, label inputs and TSFM selectors are not introduced.
+
+`detectors.selection.ModelConfig` is a separate frozen settings object. Its strict JSON
+keys are `detector` (default mad), `use_seasonal` (default false), `seasonal_period`
+(default null), and `calibration` (default null). Calibration is a JSON object containing
+the validated QuantileThresholdConfig fields, with documented defaults in
+[CALIBRATION](../src/sentinel/detectors/CALIBRATION.md). Empty calibration `{}` explicitly
+enables its defaults; null disables it. Duplicate/unknown keys, bools masquerading as
+numbers and nonfinite/invalid settings reject. Seasonal scoring requires residual,
+use_seasonal=true and an explicit integer observation lag P in [1,W]. No fitting occurs.
+
+The base config's W/min_history/scale_floor govern feature construction; its threshold
+governs a fixed detector. When calibrated, the separate fallback/empirical threshold
+replaces that fixed decision boundary, with all resolved calibration values recorded.
+Each factory call creates fresh base, feature and calibration state for one series.
+
+Algorithm IDs are `rolling_mad_starter`, `rolling_zscore`, `residual_max` and
+`residual_max_seasonal`; enabled calibration appends `_prior_quantile`. Existing default
+MAD predictions and algorithm ID are preserved. `run.json` adds `model`, containing the
+resolved selector/seasonal/calibration values, actual feature implementation/settings (null
+for direct baselines), inclusive raw reference/update policy and calibration sample policy.
+`replay_context.saturated_raw_lookback` records W for fixed or W+C for these bounded
+calibrated models; it certifies neither context permissions nor partition replay. It does
+not apply to frozen forecast blocks, guarded/fitted models or intermittent readiness.
+
+Provenance adds `model_config_sha256` (canonical hash of resolved `model`) and
+`run_config_sha256` (canonical hash of `{"config": base_config, "model": resolved_model}`).
+The existing config_sha256 still hashes only the unchanged base config. Consumers must
+use the combined hash plus code/data/split/metric identity to compare complete runs.
+Existing prediction schema, staging/error behavior and named provisional evaluator are
+preserved. Split snapshots remain checksum-only; no implied fitting or target selection.
+
+Integration verification reproduced intermittent Windows access-denied directory renames
+on two different runs, after artifact handles were closed. Publication now retries only
+PermissionError with Windows code 5/32, at most six attempts with 310 ms total backoff.
+Destination existence is rechecked before each attempt. Persistent permission errors
+and all other errors still fail and clean unpublished artifacts; existing outputs are
+preserved. Backoff is outside the documented prepublication/profiling regions. This is
+single-process publication, not an atomic multiwriter claim.
+
 ## Truth and evaluation (implemented, provisional)
 
 Window JSON: `{"schema_version":"1.0","windows":[{"series_id":"s","start":"...Z","end":"...Z"}]}`.

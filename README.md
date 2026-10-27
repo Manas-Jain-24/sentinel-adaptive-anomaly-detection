@@ -4,8 +4,9 @@ Causal, interpretable streaming anomaly detection for **Utkrishta 2026, Challeng
 GitHub repository: [Manas-Jain-24/sentinel-adaptive-anomaly-detection](https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection).
 The foundation is published on `main`. The Python package and project name remain Sentinel Pulse.
 
-**Status:** runnable starter, research and engineering blueprint. The competitive detector,
-official dataset adapter, official scorer/exporter, and dashboard remain planned work.
+**Status on this integration branch:** runnable MAD/z-score/residual detectors, optional
+past-score quantile calibration, and reproducible profiled CLI replay, prepared for review.
+Official dataset adaptation, official scoring/export and dashboard remain incomplete.
 The organizer dataset, scoring code, submission schema, hardware limits, and deadline were not
 provided. No official benchmark or hidden evaluation has been performed.
 
@@ -47,6 +48,35 @@ the artificial event using **`provisional_event_trigger_f1_v0`**. A successful s
 proves software wiring only. It is neither the official metric implementation nor a NAB result.
 Input timestamps must include an offset. Raw NAB CSV files need a documented adapter first.
 
+## Select a detector
+
+The original command/config still runs MAD. For another fixed-threshold detector, append
+`--detector zscore` or `--detector residual` to `sentinel run`. Optional model settings use
+a **separate** file; do not add model keys to `configs/starter.json`:
+
+```powershell
+.\.venv\Scripts\python.exe -m sentinel run --input tests/fixtures/synthetic_stream.csv --config configs/starter.json --model-config configs/residual-quantile.model.json --output-dir outputs/residual-quantile-001 --dataset-id synthetic-fixture-v1 --scope synthetic_smoke
+.\.venv\Scripts\python.exe -m sentinel evaluate --run-dir outputs/residual-quantile-001 --windows tests/fixtures/synthetic_windows.json
+```
+
+`--detector` and `--model-config` are mutually exclusive. The supplied quantile example
+requires 32 preceding **ready scores** before replacing its fallback threshold; the short
+16-point fixture cannot fill that history. Longer synthetic tests exercise the empirical
+path. Example settings prove software wiring and are not tuned competition parameters.
+
+`configs/residual-seasonal.model.json` demonstrates an explicit observation lag of four.
+It is suitable only for a fixture with that declared lag, not inferred seasonality in real
+data. Use only periods chosen from permitted past/training analysis. Missing cadence is
+never imputed. Guards remain test-only, and unloaded Chronos/TimesFM models are not CLI choices.
+
+Saved runs now identify the actual algorithm, resolved feature/calibration settings,
+model hash and combined run-config hash alongside Ayush's provenance/profiling. The old
+base-config hash keeps its original meaning. See [integration contract](docs/INTERFACES.md)
+and the [integration proposal](docs/HANDOFFS/MN-03_manas_20261027T103208Z_cli-integration-proposal.md).
+The optional split manifest remains an opaque checksum snapshot: it does not filter
+partitions, validate membership/lookback, or exclude context from evaluation. Mayank's
+harness must apply approved target/context policies before real split comparisons.
+
 Run manifests also record Git revision/dirty state, resolved-config and environment hashes,
 installed dependency versions, hardware, per-series workload, and timing populations. p50/p95
 are bounded histogram upper estimates (less than 1/128 relative overestimate). Process timing
@@ -69,8 +99,8 @@ evaluator. Output publication
 uses a temporary directory so input errors do not publish a partial run. Unit/integration tests,
 synthetic fixtures, a repository checker, and a Windows/Linux CI definition are included.
 
-Level B adds residual features, causal seasonal prediction, calibrated thresholds, and guarded
-adaptation **only after comparisons**. See [delivery levels](docs/PRD.md) and
+Residual/seasonal scores and past-score quantiles are selectable on this branch. Promotion
+to the competition candidate and any guarded adaptation require comparisons. See [delivery levels](docs/PRD.md) and
 [experiment plan](docs/EXPERIMENT_PLAN.md). Warmup currently emits NORMAL with `ready=false`
 and `score=null`; that is a documented internal convention awaiting organizer confirmation.
 

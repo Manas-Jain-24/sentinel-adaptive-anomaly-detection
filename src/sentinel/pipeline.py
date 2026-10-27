@@ -9,7 +9,7 @@ from collections.abc import Callable, Iterable, Iterator
 from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
-from time import perf_counter_ns
+from time import perf_counter_ns, sleep
 from typing import Any
 
 from sentinel import __version__
@@ -24,7 +24,7 @@ from sentinel.contracts import (
     timestamp_text,
 )
 from sentinel.data.io import read_observations
-from sentinel.detectors.rolling import RollingMADStarter
+from sentinel.detectors.selection import ModelConfig, create_detector
 from sentinel.profiling import ReplayProfile
 from sentinel.provenance import canonical_sha256, environment_snapshot, source_state
 
@@ -59,6 +59,28 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _publish_run(temporary: Path, output_dir: Path) -> None:
+    """Bound Windows sharing/access-denied retries without hiding persistent errors.
+
+    Files have been closed before this call. A short-lived filesystem reader can
+    still prevent a directory rename on Windows. No retry for other error types,
+    no overwrite of an existing destination, and at most 310 ms total backoff.
+    This remains single-process publication, not a multiwriter transaction.
+    """
+    delays = (0.0, 0.01, 0.02, 0.04, 0.08, 0.16)
+    for attempt, delay in enumerate(delays):
+        if delay:
+            sleep(delay)
+        if output_dir.exists():
+            raise ContractError(f"Output directory already exists: {output_dir}")
+        try:
+            temporary.rename(output_dir)
+            return
+        except PermissionError as exc:
+            if getattr(exc, "winerror", None) not in (5, 32) or attempt == len(delays) - 1:
+                raise
+
+
 def run_file(
     input_path: Path,
     output_dir: Path,
@@ -67,6 +89,7 @@ def run_file(
     dataset_id: str,
     *,
     split_manifest_path: Path | None = None,
+    model_config: ModelConfig | None = None,
 ) -> dict[str, Any]:
     started_ns = perf_counter_ns()
     started_at = timestamp_text(datetime.now(UTC))
@@ -74,6 +97,8 @@ def run_file(
         raise ContractError("Starter supports synthetic_smoke or development_validation only")
     if not dataset_id.strip():
         raise ContractError("dataset_id is required")
+    selection = model_config if model_config is not None else ModelConfig()
+    model_metadata = selection.metadata(config)
     if output_dir.exists():
         raise ContractError(
             f"Output directory already exists: {output_dir}; use a new run directory"
@@ -96,7 +121,7 @@ def run_file(
         with (temporary / "predictions.jsonl").open("w", encoding="utf-8", newline="\n") as stream:
             for prediction, elapsed in process_stream(
                 read_observations(input_path),
-                lambda: RollingMADStarter(config),
+                lambda: create_detector(config, selection),
                 config.max_series,
             ):
                 stream.write(
@@ -113,12 +138,13 @@ def run_file(
         metadata: dict[str, Any] = {
             "schema_version": SCHEMA_VERSION,
             "package_version": __version__,
-            "algorithm": "rolling_mad_starter",
+            "algorithm": selection.algorithm,
             "evaluation_scope": scope,
             "dataset_id": dataset_id,
             "input_sha256": input_sha256,
             "predictions_sha256": sha256_file(temporary / "predictions.jsonl"),
             "config": config.to_dict(),
+            "model": model_metadata,
             "python": platform.python_version(),
             "platform": platform.platform(),
             "observations": count,
@@ -133,6 +159,10 @@ def run_file(
                 "version": "1.0",
                 "source": source,
                 "config_sha256": canonical_sha256(config.to_dict()),
+                "model_config_sha256": canonical_sha256(model_metadata),
+                "run_config_sha256": canonical_sha256(
+                    {"config": config.to_dict(), "model": model_metadata}
+                ),
                 "environment": environment,
                 "environment_sha256": canonical_sha256(environment),
                 "dependencies_sha256": canonical_sha256(environment["dependencies"]),
@@ -168,7 +198,7 @@ def run_file(
         (temporary / "run.json").write_text(
             json.dumps(metadata, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n"
         )
-        temporary.rename(output_dir)
+        _publish_run(temporary, output_dir)
         return metadata
     except BaseException:
         shutil.rmtree(temporary)
