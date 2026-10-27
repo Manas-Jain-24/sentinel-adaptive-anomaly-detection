@@ -1,0 +1,12 @@
+{
+  "detector": "residual",
+  "use_seasonal": false,
+  "seasonal_period": null,
+  "calibration": {
+    "window_size": 256,
+    "min_history": 32,
+    "quantile": 0.99,
+    "fallback_threshold": 4.0,
+    "threshold_floor": 0.000001
+  }
+}

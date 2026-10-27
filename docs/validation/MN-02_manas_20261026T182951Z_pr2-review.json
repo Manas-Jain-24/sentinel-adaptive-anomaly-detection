@@ -1,0 +1,179 @@
+{
+  "scope": "synthetic_software_and_scoped_feature_review",
+  "official_benchmark": false,
+  "review_workstream": "Manas",
+  "reviewed_pr": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/pull/2",
+  "reviewed_head": "954bd1bc38b866617de3a011b6b22d6921238601",
+  "initial_comments": {
+    "issue": 0,
+    "inline": 0,
+    "reviews": 0
+  },
+  "remote_ci": [
+    {
+      "name": "checks (ubuntu-latest, 3.11)",
+      "head_sha": "954bd1bc38b866617de3a011b6b22d6921238601",
+      "conclusion": "success",
+      "url": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40361429482/job/121707613622"
+    },
+    {
+      "name": "checks (ubuntu-latest, 3.13)",
+      "head_sha": "954bd1bc38b866617de3a011b6b22d6921238601",
+      "conclusion": "success",
+      "url": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40361429482/job/121707613502"
+    },
+    {
+      "name": "checks (windows-latest, 3.11)",
+      "head_sha": "954bd1bc38b866617de3a011b6b22d6921238601",
+      "conclusion": "success",
+      "url": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40361429482/job/121707613499"
+    },
+    {
+      "name": "checks (windows-latest, 3.13)",
+      "head_sha": "954bd1bc38b866617de3a011b6b22d6921238601",
+      "conclusion": "success",
+      "url": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/actions/runs/40361429482/job/121707613086"
+    }
+  ],
+  "legacy_status_contexts": 0,
+  "ci_annotations": {
+    "checks (ubuntu-latest, 3.11)": [
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/blob/954bd1bc38b866617de3a011b6b22d6921238601/.github",
+        "start_line": 2,
+        "start_column": null,
+        "end_line": 2,
+        "end_column": null,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+        "raw_details": ""
+      },
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/blob/954bd1bc38b866617de3a011b6b22d6921238601/.github",
+        "start_line": 1,
+        "start_column": null,
+        "end_line": 1,
+        "end_column": null,
+        "annotation_level": "notice",
+        "title": "",
+        "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+        "raw_details": ""
+      }
+    ],
+    "checks (ubuntu-latest, 3.13)": [
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/blob/954bd1bc38b866617de3a011b6b22d6921238601/.github",
+        "start_line": 2,
+        "start_column": null,
+        "end_line": 2,
+        "end_column": null,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+        "raw_details": ""
+      },
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/blob/954bd1bc38b866617de3a011b6b22d6921238601/.github",
+        "start_line": 1,
+        "start_column": null,
+        "end_line": 1,
+        "end_column": null,
+        "annotation_level": "notice",
+        "title": "",
+        "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+        "raw_details": ""
+      }
+    ],
+    "checks (windows-latest, 3.11)": [
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/blob/954bd1bc38b866617de3a011b6b22d6921238601/.github",
+        "start_line": 2,
+        "start_column": null,
+        "end_line": 2,
+        "end_column": null,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+        "raw_details": ""
+      }
+    ],
+    "checks (windows-latest, 3.13)": [
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/Manas-Jain-24/sentinel-adaptive-anomaly-detection/blob/954bd1bc38b866617de3a011b6b22d6921238601/.github",
+        "start_line": 2,
+        "start_column": null,
+        "end_line": 2,
+        "end_column": null,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+        "raw_details": ""
+      }
+    ]
+  },
+  "pr_snapshot_local": {
+    "platform": "Windows 11",
+    "python": "3.13.5",
+    "passed": 191,
+    "skipped": 1,
+    "skip_reason": "Windows symlink privilege",
+    "ruff_check": "passed",
+    "ruff_format_files": 21,
+    "mypy_source_files": 15,
+    "repository_checker": "passed"
+  },
+  "consumer_check": {
+    "scope": "synthetic_consumer_compatibility",
+    "official_benchmark": false,
+    "published_data_commit": "954bd1bc38b866617de3a011b6b22d6921238601",
+    "source_sha256": {
+      "src/sentinel/data/features.py": "e8de0025fbed3bae54928da2a642e3304d667814bbaf8494818fb07a932f426b",
+      "src/sentinel/data/inventory.py": "3748d882ccee01e519cca2eefd398af13b623c6ca90da3c77826e10647bdccda",
+      "src/sentinel/data/splits.py": "b8307b1a1b622c5d66397bba1fb6f51dbb8d21492560ab9f08c8b9b62d0ec3cf"
+    },
+    "pytest_arguments": [
+      "-ra",
+      "tests",
+      "-q"
+    ],
+    "pytest_counts": {
+      "passed": 121,
+      "failed": 0,
+      "skipped": 0,
+      "error": 0,
+      "xfailed": 0,
+      "xpassed": 0
+    },
+    "exit_code": 0
+  },
+  "independent_branch": {
+    "passed": 93,
+    "skipped_modules": 2,
+    "ruff_check": "passed",
+    "ruff_format_files": 19,
+    "mypy_source_files": 13,
+    "src_plus_runner_mypy_files": 14
+  },
+  "consumer_base_commit": "b973cebf39b0fb0c4c3680085ed292985d88ffc7",
+  "consumer_file_sha256": {
+    "tests/detectors/test_residual_partitions.py": "9a270e83b436229213024cb1c5d1c268d9567f5f3a4803ca20a3b76bee4a4e5c",
+    "tests/detectors/check_published_data.py": "fd6da8e58eb812552f0b1d64e4ac0f6eac4bc9f2d277e8db63d41f6d882fc524"
+  },
+  "findings": {
+    "blocking_feature_findings_reproduced": 0,
+    "integration_requirement": "Validate full effective lookback and per-series target/context masks; readiness alone is insufficient.",
+    "ci_maintenance_owner": "Ayush"
+  },
+  "remaining_review_owners": {
+    "Ayush": "manifests/config/order/CLI metadata",
+    "Mayank": "split/leakage/fitting/state and target masks"
+  },
+  "official_assets_available": false
+}

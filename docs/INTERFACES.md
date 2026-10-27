@@ -16,7 +16,7 @@ is currently one point-sized streaming window; future trailing windows end at th
 Raw NAB `timestamp,value` input needs KS-04 to supply the series ID and approved timezone. Do not
 rename/assume a raw timestamp convention silently. Series cardinality is bounded by max_series.
 
-## Feature boundary (typed now; extractor not implemented)
+## Feature boundary (implemented by KS-02)
 
 `FeatureExtractor.process(Observation) -> FeatureFrame` and `reset() -> None` operate per series.
 The frame fields are `series_id`, `timestamp`, `expected_level`, `expected_delta`, `scale`, `delta`,
@@ -24,7 +24,8 @@ The frame fields are `series_id`, `timestamp`, `expected_level`, `expected_delta
 observations; delta may use current value minus the preceding value. `scale` is positive when
 ready; expected_level/expected_delta/scale may be null in warmup; seasonal_expected is null until
 a validated period has sufficient past context. All present numerical values must be finite.
-KS-02 implements this contract; MN-02 can use a deterministic fake FeatureExtractor meanwhile.
+KS-02's merged RollingFeatureExtractor implements this contract; MN-02 uses it through
+the integration factory, with deterministic doubles retained for boundary tests.
 RollingMADStarter does not use FeatureFrame and remains runnable if feature development stalls.
 
 ## Detector boundary and lifecycle (implemented)
@@ -63,9 +64,59 @@ operator assertions, not automatic verification. Every run uses a new directory.
 are staged in a sibling temporary directory and published on success; this is single-process
 publication, not a multiwriter transaction service.
 
-AY-01 planned additive metadata: split/feature/schema versions, source revision, dirty flag,
-dependency/environment digest, seed where relevant, timestamps, full timing distributions,
-and workload/hardware. Current manifests must not be described as containing these fields yet.
+AY-01 adds the following optional objects under schema 1.0; old runs without them remain valid.
+The implementation is prepared for affected-owner review on the AY-01 branch; see the
+[manifest proposal](HANDOFFS/AY-01_ayush_20261026T145042Z_manifest-proposal.md). Peer review and
+integration are pending. No prediction/detector/config/evaluation semantics change.
+
+`provenance` (version `1.0`):
+
+- `source`: status (`git` or `unavailable`), full HEAD `revision` and boolean `dirty`, plus note.
+  The tracked package checkout is used regardless of caller CWD. Dirty includes tracked edits
+  and nonignored untracked files. HEAD identifies the committed base, never uncommitted code.
+  Without tracked source/Git, revision and dirty are null with an explicit explanation.
+- `config_sha256`: digest of resolved `config`. `environment` records Python version/implementation,
+  OS/platform, architecture, processor (null if unknown), logical CPU count, and sorted unique
+  installed distribution name/version pairs. `environment_sha256` hashes the full snapshot;
+  `dependencies_sha256` hashes its dependency list. These three hashes use sorted-key, compact,
+  ASCII-escaped UTF-8 JSON without a trailing newline and with NaN/Inf disallowed. They identify
+  recorded metadata; they do not certify locked dependencies or reproduce uncommitted source.
+- `split_manifest_sha256` and `split_manifest_artifact`: null unless an optional manifest is
+  supplied. `--split-manifest PATH` copies bytes to `split-manifest.snapshot` in the run directory,
+  then hashes that copy. `split_validation` is `checksum_only` or `not_supplied`. This preserves
+  provenance without inventing KS-03 semantics or verifying split membership. Bytes are opaque
+  and never passed to inference. Existing input/prediction hashes also hash exact file bytes.
+- UTC `started_at_utc` and `prepared_at_utc`: entry to run_file and completion of metadata
+  preparation, before the final manifest write/publication. No random seed is needed by the
+  deterministic starter; no feature extractor or split schema version is invented.
+
+`profiling` uses `perf_counter_ns`, nanoseconds, and explicit region descriptions:
+
+- `distributions`: `all_process`, `ready_process`, `warmup_process`, `cold_process` (first process
+  call per series) and `warm_process` (subsequent calls, including remaining learning warmup).
+  Process time excludes detector construction, routing, parsing, serialization and profiler work.
+  Cold does not measure interpreter startup, imports or constructor cost.
+- Each population has exact `count`, `total_ns`, `min_ns`, `max_ns`, and a bounded integer
+  `histogram` of `upper_bound_ns`/`count` pairs. `p50_upper_bound_ns`/`p95_upper_bound_ns` are
+  nearest-rank quantile upper bounds, with relative overestimate <1/128; durations <256 ns are
+  exact. Empty populations have zero count/total, null min/max/quantiles and empty histograms.
+  The bound can exceed max_ns slightly. These are explicitly approximate quantiles, not exact
+  observations. Storage depends on duration magnitude, not number of points.
+- `end_to_end_replay_ns`: predictions file open through close, including CSV open/read, construction,
+  routing, parsing, process, serialization, writing and profiling. `prepublication_elapsed_ns`: run_file
+  entry through prepared metadata, also including input hashing, environment/Git collection,
+  optional split snapshot, output setup and prediction hashing. Final run.json serialization/
+  write/rename, CLI startup and evaluation are excluded to keep staged publication immutable.
+  Wall time includes profiler overhead; no peak-memory or official-runtime measurement is implied.
+
+`workload` records actual observation/readiness/warmup counts, series_count, configured window_size,
+min_history/max_series, no-resampling cadence policy, and a per-series map of counts and UTC
+first/last timestamps. Hardware is in provenance.environment. Profiling requires O(S + log T)
+storage for S series and largest duration T, with a fixed number of histogram sub-buckets.
+
+Input bytes are hashed before and after replay; a detected change aborts publication. This guard
+does not lock the input file; use immutable input assets. Prediction equality excludes elapsed_ns;
+run timestamps, runtime distributions, Git state and environment may also vary between runs.
 
 ## Config (implemented)
 
@@ -74,6 +125,58 @@ scale_floor=0.1, max_series=100. Require integer bounds 2<=min_history<=window_s
 finite positive threshold/floor, and no unknown keys. These are starting values for wiring,
 not tuned hyperparameters. Advanced model/period/quantile/guard settings must use a reviewed
 separate config section or extension; do not overload threshold semantics silently.
+
+### Detector selection (additive integration proposal)
+
+The user authorized Manas to prepare CLI/pipeline integration across ownership boundaries;
+Ayush and affected-owner review remains pending. See the
+[scoped proposal](HANDOFFS/MN-03_manas_20261027T103208Z_cli-integration-proposal.md).
+This implementation is on the integration feature branch, not a claim of main integration.
+Detector/Prediction/Evidence and the legacy five-field DetectorConfig are unchanged.
+
+`sentinel run` accepts optional `--detector mad|zscore|residual` (fixed threshold) OR
+`--model-config PATH`, never both. Neither option means the same default MAD behavior.
+`run_file` adds keyword-only `model_config: ModelConfig | None = None`; all existing
+positional calls and `split_manifest_path` remain valid. Guards, model weight downloads,
+fitting, label inputs and TSFM selectors are not introduced.
+
+`detectors.selection.ModelConfig` is a separate frozen settings object. Its strict JSON
+keys are `detector` (default mad), `use_seasonal` (default false), `seasonal_period`
+(default null), and `calibration` (default null). Calibration is a JSON object containing
+the validated QuantileThresholdConfig fields, with documented defaults in
+[CALIBRATION](../src/sentinel/detectors/CALIBRATION.md). Empty calibration `{}` explicitly
+enables its defaults; null disables it. Duplicate/unknown keys, bools masquerading as
+numbers and nonfinite/invalid settings reject. Seasonal scoring requires residual,
+use_seasonal=true and an explicit integer observation lag P in [1,W]. No fitting occurs.
+
+The base config's W/min_history/scale_floor govern feature construction; its threshold
+governs a fixed detector. When calibrated, the separate fallback/empirical threshold
+replaces that fixed decision boundary, with all resolved calibration values recorded.
+Each factory call creates fresh base, feature and calibration state for one series.
+
+Algorithm IDs are `rolling_mad_starter`, `rolling_zscore`, `residual_max` and
+`residual_max_seasonal`; enabled calibration appends `_prior_quantile`. Existing default
+MAD predictions and algorithm ID are preserved. `run.json` adds `model`, containing the
+resolved selector/seasonal/calibration values, actual feature implementation/settings (null
+for direct baselines), inclusive raw reference/update policy and calibration sample policy.
+`replay_context.saturated_raw_lookback` records W for fixed or W+C for these bounded
+calibrated models; it certifies neither context permissions nor partition replay. It does
+not apply to frozen forecast blocks, guarded/fitted models or intermittent readiness.
+
+Provenance adds `model_config_sha256` (canonical hash of resolved `model`) and
+`run_config_sha256` (canonical hash of `{"config": base_config, "model": resolved_model}`).
+The existing config_sha256 still hashes only the unchanged base config. Consumers must
+use the combined hash plus code/data/split/metric identity to compare complete runs.
+Existing prediction schema, staging/error behavior and named provisional evaluator are
+preserved. Split snapshots remain checksum-only; no implied fitting or target selection.
+
+Integration verification reproduced intermittent Windows access-denied directory renames
+on two different runs, after artifact handles were closed. Publication now retries only
+PermissionError with Windows code 5/32, at most six attempts with 310 ms total backoff.
+Destination existence is rechecked before each attempt. Persistent permission errors
+and all other errors still fail and clean unpublished artifacts; existing outputs are
+preserved. Backoff is outside the documented prepublication/profiling regions. This is
+single-process publication, not an atomic multiwriter claim.
 
 ## Truth and evaluation (implemented, provisional)
 
@@ -87,6 +190,13 @@ precision/recall/event_f1, per-hit delay_seconds, mean_delay_seconds (null if no
 and warmup counts, and, through evaluate_run, scope, dataset ID, input/windows hashes.
 [EVALUATION](EVALUATION.md) defines exact episode matching and edge cases. Unsupported metric or
 scope must error. Official benchmark/hidden scopes are not supported by this starter evaluator.
+
+Merged MY-01 adds diagnostic per_series counts/precision/recall/F1/coverage/delays,
+macro_precision/macro_recall/macro_event_f1 across observed series, missed_events,
+median/min/max/p95 delay_seconds summaries, series_count and explicit policy metadata.
+The provisional identifier and trigger semantics remain unchanged. Macro averages use
+the documented zero-denominator convention and are separate from pooled event F1;
+delay p95 uses linear interpolation, separate from runtime histogram upper bounds.
 
 ## Errors, persistence, and future adapters
 

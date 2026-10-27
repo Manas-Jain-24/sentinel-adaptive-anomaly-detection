@@ -1,0 +1,6448 @@
+{
+  "scope": "synthetic_cli_integration",
+  "official_benchmark": false,
+  "candidate_promoted": false,
+  "results": [
+    {
+      "name": "legacy-mad",
+      "commands": [
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "run",
+          "--input",
+          "tests\\fixtures\\synthetic_stream.csv",
+          "--config",
+          "configs/starter.json",
+          "--output-dir",
+          "outputs\\cli-integration-smoke-001\\legacy-mad",
+          "--dataset-id",
+          "synthetic-cli-integration-v1",
+          "--scope",
+          "synthetic_smoke"
+        ],
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "evaluate",
+          "--run-dir",
+          "outputs\\cli-integration-smoke-001\\legacy-mad",
+          "--windows",
+          "tests\\fixtures\\synthetic_windows.json"
+        ]
+      ],
+      "manifest": {
+        "schema_version": "1.0",
+        "package_version": "0.1.0",
+        "algorithm": "rolling_mad_starter",
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+        "predictions_sha256": "edca7dbb7fff4fb3fecac3fb7fec46382a421f63a7808edee94b1718238d7c0c",
+        "config": {
+          "window_size": 32,
+          "min_history": 8,
+          "threshold": 4.0,
+          "scale_floor": 0.1,
+          "max_series": 100
+        },
+        "model": {
+          "detector": "mad",
+          "use_seasonal": false,
+          "seasonal_period": null,
+          "calibration": null,
+          "features": null,
+          "reference_update_policy": "include_all_observations",
+          "calibration_update_policy": "not_enabled",
+          "replay_context": {
+            "saturated_raw_lookback": 32,
+            "note": "Bounded selected models only; not split validation or context permission"
+          }
+        },
+        "python": "3.13.5",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "observations": 16,
+        "ready_observations": 8,
+        "anomalous_points": 1,
+        "detector_total_ns": 119800,
+        "runtime_note": "process() only, includes warmup; excludes parsing/writing; not a benchmark",
+        "official_submission_ready": false,
+        "provenance": {
+          "version": "1.0",
+          "source": {
+            "status": "git",
+            "revision": "beaa4182206275670c0cf02181847a07101fb4ee",
+            "dirty": false,
+            "note": "HEAD identifies committed base; dirty includes tracked and nonignored untracked files"
+          },
+          "config_sha256": "5f514238ce7dff179ac18d828109254087dce20e784390deaf4dbe89de6e8594",
+          "model_config_sha256": "bccd464c07c7edb547e3f95c55b6f7d0574d07ccab64a27ee439770bfaffd3a9",
+          "run_config_sha256": "d66f21b94c39dc5222a3a63c2f3f64d2dc4ff3db62e9a6804d9b9a9bd7422547",
+          "environment": {
+            "python": "3.13.5",
+            "implementation": "CPython",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "machine": "AMD64",
+            "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+            "logical_cpu_count": 16,
+            "dependencies": [
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "iniconfig",
+                "version": "2.3.1"
+              },
+              {
+                "name": "mypy",
+                "version": "1.15.0"
+              },
+              {
+                "name": "mypy_extensions",
+                "version": "1.1.0"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "25.1.1"
+              },
+              {
+                "name": "pluggy",
+                "version": "1.7.0"
+              },
+              {
+                "name": "pytest",
+                "version": "8.3.5"
+              },
+              {
+                "name": "ruff",
+                "version": "0.11.13"
+              },
+              {
+                "name": "sentinel-pulse",
+                "version": "0.1.0"
+              },
+              {
+                "name": "typing_extensions",
+                "version": "4.16.0"
+              }
+            ]
+          },
+          "environment_sha256": "9acb142a80930a4fcbaf1bb22572d648a8789535f0d644f0d3785e99fcc78059",
+          "dependencies_sha256": "56e775164ecb9f3133d4937ef4f24e23c21dd2d1055898a2cfd2936d8165c8bf",
+          "split_manifest_sha256": null,
+          "split_manifest_artifact": null,
+          "split_validation": "not_supplied",
+          "started_at_utc": "2026-10-27T10:40:53.652514Z",
+          "prepared_at_utc": "2026-10-27T10:40:54.166195Z"
+        },
+        "profiling": {
+          "clock": "perf_counter_ns",
+          "unit": "ns",
+          "quantile_method": "nearest_rank_histogram_upper_bound",
+          "quantile_relative_overestimate_limit": 0.0078125,
+          "process_region": "process() only; excludes factory, routing, parsing, writing, profiler",
+          "cold_region": "first process() per series; excludes construction and interpreter startup",
+          "warm_region": "subsequent process() calls, including any remaining learning warmup",
+          "distributions": {
+            "all_process": {
+              "count": 16,
+              "total_ns": 119800,
+              "min_ns": 3200,
+              "max_ns": 19200,
+              "p50_upper_bound_ns": 6303,
+              "p95_upper_bound_ns": 19327,
+              "histogram": [
+                {
+                  "upper_bound_ns": 3215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 4127,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7807,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10047,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19327,
+                  "count": 1
+                }
+              ]
+            },
+            "ready_process": {
+              "count": 8,
+              "total_ns": 58200,
+              "min_ns": 5600,
+              "max_ns": 10000,
+              "p50_upper_bound_ns": 7423,
+              "p95_upper_bound_ns": 10047,
+              "histogram": [
+                {
+                  "upper_bound_ns": 5631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7807,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10047,
+                  "count": 1
+                }
+              ]
+            },
+            "warmup_process": {
+              "count": 8,
+              "total_ns": 61600,
+              "min_ns": 3200,
+              "max_ns": 19200,
+              "p50_upper_bound_ns": 4127,
+              "p95_upper_bound_ns": 19327,
+              "histogram": [
+                {
+                  "upper_bound_ns": 3215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 4127,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19327,
+                  "count": 1
+                }
+              ]
+            },
+            "cold_process": {
+              "count": 1,
+              "total_ns": 13300,
+              "min_ns": 13300,
+              "max_ns": 13300,
+              "p50_upper_bound_ns": 13311,
+              "p95_upper_bound_ns": 13311,
+              "histogram": [
+                {
+                  "upper_bound_ns": 13311,
+                  "count": 1
+                }
+              ]
+            },
+            "warm_process": {
+              "count": 15,
+              "total_ns": 106500,
+              "min_ns": 3200,
+              "max_ns": 19200,
+              "p50_upper_bound_ns": 6303,
+              "p95_upper_bound_ns": 19327,
+              "histogram": [
+                {
+                  "upper_bound_ns": 3215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 4127,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7807,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10047,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19327,
+                  "count": 1
+                }
+              ]
+            }
+          },
+          "end_to_end_replay_ns": 2242000,
+          "replay_region": "predictions file open through close; includes CSV open/read, parsing, detector construction, routing, process, serialization, writing and profiling",
+          "prepublication_region": "run_file entry through metadata preparation, including provenance and hashes; excludes final run.json write/rename, CLI startup and evaluation",
+          "prepublication_elapsed_ns": 513688200
+        },
+        "workload": {
+          "series_count": 1,
+          "cadence_policy": "input timestamps as supplied; no resampling or replay sleeps",
+          "series": {
+            "synthetic-demo": {
+              "observations": 16,
+              "ready_observations": 8,
+              "warmup_observations": 8,
+              "first_timestamp": "2026-01-01T00:00:00Z",
+              "last_timestamp": "2026-01-01T00:15:00Z"
+            }
+          },
+          "observations": 16,
+          "ready_observations": 8,
+          "warmup_observations": 8,
+          "window_size": 32,
+          "min_history": 8,
+          "max_series": 100
+        }
+      },
+      "metrics": {
+        "metric_id": "provisional_event_trigger_f1_v0",
+        "official_metric": false,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "event_f1": 1.0,
+        "delay_seconds": [
+          0.0
+        ],
+        "mean_delay_seconds": 0.0,
+        "warmup_points_included_in_coverage": 8,
+        "observations": 16,
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+        "windows_sha256": "57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb"
+      },
+      "calibration_method_counts": {},
+      "prediction_file_sha256": "edca7dbb7fff4fb3fecac3fb7fec46382a421f63a7808edee94b1718238d7c0c"
+    },
+    {
+      "name": "readme-quantile",
+      "commands": [
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "run",
+          "--input",
+          "tests\\fixtures\\synthetic_stream.csv",
+          "--config",
+          "configs/starter.json",
+          "--output-dir",
+          "outputs\\cli-integration-smoke-001\\readme-quantile",
+          "--dataset-id",
+          "synthetic-cli-integration-v1",
+          "--scope",
+          "synthetic_smoke",
+          "--model-config",
+          "configs/residual-quantile.model.json"
+        ],
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "evaluate",
+          "--run-dir",
+          "outputs\\cli-integration-smoke-001\\readme-quantile",
+          "--windows",
+          "tests\\fixtures\\synthetic_windows.json"
+        ]
+      ],
+      "manifest": {
+        "schema_version": "1.0",
+        "package_version": "0.1.0",
+        "algorithm": "residual_max_prior_quantile",
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+        "predictions_sha256": "5c299cdb0e608f1792d6faac93d3d743cf6d2299cfd63e4fcb746efa90d27838",
+        "config": {
+          "window_size": 32,
+          "min_history": 8,
+          "threshold": 4.0,
+          "scale_floor": 0.1,
+          "max_series": 100
+        },
+        "model": {
+          "detector": "residual",
+          "use_seasonal": false,
+          "seasonal_period": null,
+          "calibration": {
+            "window_size": 256,
+            "min_history": 32,
+            "quantile": 0.99,
+            "fallback_threshold": 4.0,
+            "threshold_floor": 1e-06
+          },
+          "features": {
+            "implementation": "sentinel.data.features.RollingFeatureExtractor",
+            "window_size": 32,
+            "min_history": 8,
+            "scale_floor": 0.1,
+            "seasonal_period": null
+          },
+          "reference_update_policy": "include_all_observations",
+          "calibration_update_policy": "include_all_ready_scores",
+          "replay_context": {
+            "saturated_raw_lookback": 288,
+            "note": "Bounded selected models only; not split validation or context permission"
+          }
+        },
+        "python": "3.13.5",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "observations": 16,
+        "ready_observations": 8,
+        "anomalous_points": 2,
+        "detector_total_ns": 566300,
+        "runtime_note": "process() only, includes warmup; excludes parsing/writing; not a benchmark",
+        "official_submission_ready": false,
+        "provenance": {
+          "version": "1.0",
+          "source": {
+            "status": "git",
+            "revision": "beaa4182206275670c0cf02181847a07101fb4ee",
+            "dirty": false,
+            "note": "HEAD identifies committed base; dirty includes tracked and nonignored untracked files"
+          },
+          "config_sha256": "5f514238ce7dff179ac18d828109254087dce20e784390deaf4dbe89de6e8594",
+          "model_config_sha256": "6db182755429f94244ee0c8db782947cdb6fbfce854deaef110334e07f2cf120",
+          "run_config_sha256": "1975634e3bba866373b7a424f32807dbdaa00bfe0b4cfbba3fa5bc684027440a",
+          "environment": {
+            "python": "3.13.5",
+            "implementation": "CPython",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "machine": "AMD64",
+            "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+            "logical_cpu_count": 16,
+            "dependencies": [
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "iniconfig",
+                "version": "2.3.1"
+              },
+              {
+                "name": "mypy",
+                "version": "1.15.0"
+              },
+              {
+                "name": "mypy_extensions",
+                "version": "1.1.0"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "25.1.1"
+              },
+              {
+                "name": "pluggy",
+                "version": "1.7.0"
+              },
+              {
+                "name": "pytest",
+                "version": "8.3.5"
+              },
+              {
+                "name": "ruff",
+                "version": "0.11.13"
+              },
+              {
+                "name": "sentinel-pulse",
+                "version": "0.1.0"
+              },
+              {
+                "name": "typing_extensions",
+                "version": "4.16.0"
+              }
+            ]
+          },
+          "environment_sha256": "9acb142a80930a4fcbaf1bb22572d648a8789535f0d644f0d3785e99fcc78059",
+          "dependencies_sha256": "56e775164ecb9f3133d4937ef4f24e23c21dd2d1055898a2cfd2936d8165c8bf",
+          "split_manifest_sha256": null,
+          "split_manifest_artifact": null,
+          "split_validation": "not_supplied",
+          "started_at_utc": "2026-10-27T10:40:55.005289Z",
+          "prepared_at_utc": "2026-10-27T10:40:55.548217Z"
+        },
+        "profiling": {
+          "clock": "perf_counter_ns",
+          "unit": "ns",
+          "quantile_method": "nearest_rank_histogram_upper_bound",
+          "quantile_relative_overestimate_limit": 0.0078125,
+          "process_region": "process() only; excludes factory, routing, parsing, writing, profiler",
+          "cold_region": "first process() per series; excludes construction and interpreter startup",
+          "warm_region": "subsequent process() calls, including any remaining learning warmup",
+          "distributions": {
+            "all_process": {
+              "count": 16,
+              "total_ns": 566300,
+              "min_ns": 16500,
+              "max_ns": 106500,
+              "p50_upper_bound_ns": 29567,
+              "p95_upper_bound_ns": 107007,
+              "histogram": [
+                {
+                  "upper_bound_ns": 16511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17023,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17919,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29567,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31871,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53759,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 107007,
+                  "count": 1
+                }
+              ]
+            },
+            "ready_process": {
+              "count": 8,
+              "total_ns": 303800,
+              "min_ns": 28300,
+              "max_ns": 59600,
+              "p50_upper_bound_ns": 31231,
+              "p95_upper_bound_ns": 59647,
+              "histogram": [
+                {
+                  "upper_bound_ns": 28415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29567,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31871,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53759,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                }
+              ]
+            },
+            "warmup_process": {
+              "count": 8,
+              "total_ns": 262500,
+              "min_ns": 16500,
+              "max_ns": 106500,
+              "p50_upper_bound_ns": 18815,
+              "p95_upper_bound_ns": 107007,
+              "histogram": [
+                {
+                  "upper_bound_ns": 16511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17023,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17919,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 107007,
+                  "count": 1
+                }
+              ]
+            },
+            "cold_process": {
+              "count": 1,
+              "total_ns": 106500,
+              "min_ns": 106500,
+              "max_ns": 106500,
+              "p50_upper_bound_ns": 107007,
+              "p95_upper_bound_ns": 107007,
+              "histogram": [
+                {
+                  "upper_bound_ns": 107007,
+                  "count": 1
+                }
+              ]
+            },
+            "warm_process": {
+              "count": 15,
+              "total_ns": 459800,
+              "min_ns": 16500,
+              "max_ns": 59600,
+              "p50_upper_bound_ns": 29567,
+              "p95_upper_bound_ns": 59647,
+              "histogram": [
+                {
+                  "upper_bound_ns": 16511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17023,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17919,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29567,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31871,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53759,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                }
+              ]
+            }
+          },
+          "end_to_end_replay_ns": 4167600,
+          "replay_region": "predictions file open through close; includes CSV open/read, parsing, detector construction, routing, process, serialization, writing and profiling",
+          "prepublication_region": "run_file entry through metadata preparation, including provenance and hashes; excludes final run.json write/rename, CLI startup and evaluation",
+          "prepublication_elapsed_ns": 542937200
+        },
+        "workload": {
+          "series_count": 1,
+          "cadence_policy": "input timestamps as supplied; no resampling or replay sleeps",
+          "series": {
+            "synthetic-demo": {
+              "observations": 16,
+              "ready_observations": 8,
+              "warmup_observations": 8,
+              "first_timestamp": "2026-01-01T00:00:00Z",
+              "last_timestamp": "2026-01-01T00:15:00Z"
+            }
+          },
+          "observations": 16,
+          "ready_observations": 8,
+          "warmup_observations": 8,
+          "window_size": 32,
+          "min_history": 8,
+          "max_series": 100
+        }
+      },
+      "metrics": {
+        "metric_id": "provisional_event_trigger_f1_v0",
+        "official_metric": false,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "event_f1": 1.0,
+        "delay_seconds": [
+          0.0
+        ],
+        "mean_delay_seconds": 0.0,
+        "warmup_points_included_in_coverage": 8,
+        "observations": 16,
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+        "windows_sha256": "57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb"
+      },
+      "calibration_method_counts": {
+        "fallback": 16
+      },
+      "prediction_file_sha256": "5c299cdb0e608f1792d6faac93d3d743cf6d2299cfd63e4fcb746efa90d27838"
+    },
+    {
+      "name": "mad",
+      "commands": [
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "run",
+          "--input",
+          "outputs\\cli-integration-smoke-001\\stream.csv",
+          "--config",
+          "configs/starter.json",
+          "--output-dir",
+          "outputs\\cli-integration-smoke-001\\mad",
+          "--dataset-id",
+          "synthetic-cli-integration-v1",
+          "--scope",
+          "synthetic_smoke",
+          "--detector",
+          "mad"
+        ],
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "evaluate",
+          "--run-dir",
+          "outputs\\cli-integration-smoke-001\\mad",
+          "--windows",
+          "outputs\\cli-integration-smoke-001\\windows.json"
+        ]
+      ],
+      "manifest": {
+        "schema_version": "1.0",
+        "package_version": "0.1.0",
+        "algorithm": "rolling_mad_starter",
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "predictions_sha256": "d45e337a1c8cb262111bfa370a20b424640b1c466863c7020e44083cc7283ccc",
+        "config": {
+          "window_size": 32,
+          "min_history": 8,
+          "threshold": 4.0,
+          "scale_floor": 0.1,
+          "max_series": 100
+        },
+        "model": {
+          "detector": "mad",
+          "use_seasonal": false,
+          "seasonal_period": null,
+          "calibration": null,
+          "features": null,
+          "reference_update_policy": "include_all_observations",
+          "calibration_update_policy": "not_enabled",
+          "replay_context": {
+            "saturated_raw_lookback": 32,
+            "note": "Bounded selected models only; not split validation or context permission"
+          }
+        },
+        "python": "3.13.5",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "observations": 96,
+        "ready_observations": 88,
+        "anomalous_points": 1,
+        "detector_total_ns": 1011100,
+        "runtime_note": "process() only, includes warmup; excludes parsing/writing; not a benchmark",
+        "official_submission_ready": false,
+        "provenance": {
+          "version": "1.0",
+          "source": {
+            "status": "git",
+            "revision": "beaa4182206275670c0cf02181847a07101fb4ee",
+            "dirty": false,
+            "note": "HEAD identifies committed base; dirty includes tracked and nonignored untracked files"
+          },
+          "config_sha256": "5f514238ce7dff179ac18d828109254087dce20e784390deaf4dbe89de6e8594",
+          "model_config_sha256": "bccd464c07c7edb547e3f95c55b6f7d0574d07ccab64a27ee439770bfaffd3a9",
+          "run_config_sha256": "d66f21b94c39dc5222a3a63c2f3f64d2dc4ff3db62e9a6804d9b9a9bd7422547",
+          "environment": {
+            "python": "3.13.5",
+            "implementation": "CPython",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "machine": "AMD64",
+            "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+            "logical_cpu_count": 16,
+            "dependencies": [
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "iniconfig",
+                "version": "2.3.1"
+              },
+              {
+                "name": "mypy",
+                "version": "1.15.0"
+              },
+              {
+                "name": "mypy_extensions",
+                "version": "1.1.0"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "25.1.1"
+              },
+              {
+                "name": "pluggy",
+                "version": "1.7.0"
+              },
+              {
+                "name": "pytest",
+                "version": "8.3.5"
+              },
+              {
+                "name": "ruff",
+                "version": "0.11.13"
+              },
+              {
+                "name": "sentinel-pulse",
+                "version": "0.1.0"
+              },
+              {
+                "name": "typing_extensions",
+                "version": "4.16.0"
+              }
+            ]
+          },
+          "environment_sha256": "9acb142a80930a4fcbaf1bb22572d648a8789535f0d644f0d3785e99fcc78059",
+          "dependencies_sha256": "56e775164ecb9f3133d4937ef4f24e23c21dd2d1055898a2cfd2936d8165c8bf",
+          "split_manifest_sha256": null,
+          "split_manifest_artifact": null,
+          "split_validation": "not_supplied",
+          "started_at_utc": "2026-10-27T10:40:56.323070Z",
+          "prepared_at_utc": "2026-10-27T10:40:56.830770Z"
+        },
+        "profiling": {
+          "clock": "perf_counter_ns",
+          "unit": "ns",
+          "quantile_method": "nearest_rank_histogram_upper_bound",
+          "quantile_relative_overestimate_limit": 0.0078125,
+          "process_region": "process() only; excludes factory, routing, parsing, writing, profiler",
+          "cold_region": "first process() per series; excludes construction and interpreter startup",
+          "warm_region": "subsequent process() calls, including any remaining learning warmup",
+          "distributions": {
+            "all_process": {
+              "count": 96,
+              "total_ns": 1011100,
+              "min_ns": 3200,
+              "max_ns": 59500,
+              "p50_upper_bound_ns": 8703,
+              "p95_upper_bound_ns": 17407,
+              "histogram": [
+                {
+                  "upper_bound_ns": 3215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3311,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 4223,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6111,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6431,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6527,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6623,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6911,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7103,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7327,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7423,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 7519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7711,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7807,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7903,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 8031,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 8255,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8319,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 8447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9023,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9535,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9919,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10111,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 10239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10431,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 10751,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 10815,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 10943,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 11135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11263,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11327,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11455,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 11519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11711,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 11839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11903,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12031,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12159,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12223,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13119,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 13823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 16319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 16767,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17407,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 25983,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 50431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                }
+              ]
+            },
+            "ready_process": {
+              "count": 88,
+              "total_ns": 920700,
+              "min_ns": 5500,
+              "max_ns": 59500,
+              "p50_upper_bound_ns": 9343,
+              "p95_upper_bound_ns": 16767,
+              "histogram": [
+                {
+                  "upper_bound_ns": 5503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6111,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6527,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6623,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6911,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7103,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7327,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7423,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 7519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7711,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7807,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7903,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 8031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8255,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8319,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 8447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9023,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9535,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9919,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10111,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 10239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10431,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 10751,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 10815,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 10943,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 11135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11263,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11327,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11455,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 11519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11903,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12031,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12159,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12223,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13119,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 13823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 16319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 16767,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17407,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 25983,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                }
+              ]
+            },
+            "warmup_process": {
+              "count": 8,
+              "total_ns": 90400,
+              "min_ns": 3200,
+              "max_ns": 50300,
+              "p50_upper_bound_ns": 4223,
+              "p95_upper_bound_ns": 50431,
+              "histogram": [
+                {
+                  "upper_bound_ns": 3215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3311,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 4223,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 50431,
+                  "count": 1
+                }
+              ]
+            },
+            "cold_process": {
+              "count": 1,
+              "total_ns": 50300,
+              "min_ns": 50300,
+              "max_ns": 50300,
+              "p50_upper_bound_ns": 50431,
+              "p95_upper_bound_ns": 50431,
+              "histogram": [
+                {
+                  "upper_bound_ns": 50431,
+                  "count": 1
+                }
+              ]
+            },
+            "warm_process": {
+              "count": 95,
+              "total_ns": 960800,
+              "min_ns": 3200,
+              "max_ns": 59500,
+              "p50_upper_bound_ns": 8703,
+              "p95_upper_bound_ns": 16767,
+              "histogram": [
+                {
+                  "upper_bound_ns": 3215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 3311,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 4223,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 5727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6111,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6431,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6527,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6623,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 6719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 6911,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7103,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7327,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7423,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 7519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 7711,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7807,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 7903,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 8031,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 8255,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8319,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 8447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9023,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9535,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9919,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10111,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 10239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 10431,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 10751,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 10815,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 10943,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 11135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11263,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11327,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11455,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 11519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11711,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 11839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 11903,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12031,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12159,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12223,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13119,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 13823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 16319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 16767,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17407,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 25983,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                }
+              ]
+            }
+          },
+          "end_to_end_replay_ns": 8035800,
+          "replay_region": "predictions file open through close; includes CSV open/read, parsing, detector construction, routing, process, serialization, writing and profiling",
+          "prepublication_region": "run_file entry through metadata preparation, including provenance and hashes; excludes final run.json write/rename, CLI startup and evaluation",
+          "prepublication_elapsed_ns": 507710100
+        },
+        "workload": {
+          "series_count": 1,
+          "cadence_policy": "input timestamps as supplied; no resampling or replay sleeps",
+          "series": {
+            "synthetic-integration": {
+              "observations": 96,
+              "ready_observations": 88,
+              "warmup_observations": 8,
+              "first_timestamp": "2026-01-01T00:00:00Z",
+              "last_timestamp": "2026-01-01T00:01:35Z"
+            }
+          },
+          "observations": 96,
+          "ready_observations": 88,
+          "warmup_observations": 8,
+          "window_size": 32,
+          "min_history": 8,
+          "max_series": 100
+        }
+      },
+      "metrics": {
+        "metric_id": "provisional_event_trigger_f1_v0",
+        "official_metric": false,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "event_f1": 1.0,
+        "delay_seconds": [
+          0.0
+        ],
+        "mean_delay_seconds": 0.0,
+        "warmup_points_included_in_coverage": 8,
+        "observations": 96,
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "windows_sha256": "55dca279d6239c6fd48a762453a6b9eaf8852a3f7da2c8662264fbf25fbce39f"
+      },
+      "calibration_method_counts": {},
+      "prediction_file_sha256": "d45e337a1c8cb262111bfa370a20b424640b1c466863c7020e44083cc7283ccc"
+    },
+    {
+      "name": "zscore",
+      "commands": [
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "run",
+          "--input",
+          "outputs\\cli-integration-smoke-001\\stream.csv",
+          "--config",
+          "configs/starter.json",
+          "--output-dir",
+          "outputs\\cli-integration-smoke-001\\zscore",
+          "--dataset-id",
+          "synthetic-cli-integration-v1",
+          "--scope",
+          "synthetic_smoke",
+          "--detector",
+          "zscore"
+        ],
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "evaluate",
+          "--run-dir",
+          "outputs\\cli-integration-smoke-001\\zscore",
+          "--windows",
+          "outputs\\cli-integration-smoke-001\\windows.json"
+        ]
+      ],
+      "manifest": {
+        "schema_version": "1.0",
+        "package_version": "0.1.0",
+        "algorithm": "rolling_zscore",
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "predictions_sha256": "a5b6bffa7195d0b82f5e8eaea1e5b7dc141d1b51d47ab8c1edf7a25c0c740d26",
+        "config": {
+          "window_size": 32,
+          "min_history": 8,
+          "threshold": 4.0,
+          "scale_floor": 0.1,
+          "max_series": 100
+        },
+        "model": {
+          "detector": "zscore",
+          "use_seasonal": false,
+          "seasonal_period": null,
+          "calibration": null,
+          "features": null,
+          "reference_update_policy": "include_all_observations",
+          "calibration_update_policy": "not_enabled",
+          "replay_context": {
+            "saturated_raw_lookback": 32,
+            "note": "Bounded selected models only; not split validation or context permission"
+          }
+        },
+        "python": "3.13.5",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "observations": 96,
+        "ready_observations": 88,
+        "anomalous_points": 1,
+        "detector_total_ns": 7152400,
+        "runtime_note": "process() only, includes warmup; excludes parsing/writing; not a benchmark",
+        "official_submission_ready": false,
+        "provenance": {
+          "version": "1.0",
+          "source": {
+            "status": "git",
+            "revision": "beaa4182206275670c0cf02181847a07101fb4ee",
+            "dirty": false,
+            "note": "HEAD identifies committed base; dirty includes tracked and nonignored untracked files"
+          },
+          "config_sha256": "5f514238ce7dff179ac18d828109254087dce20e784390deaf4dbe89de6e8594",
+          "model_config_sha256": "1b8b3f271cd219f7ee0c506ea786b9d8e6e512bf4f27706242dd51c94c5dd0fa",
+          "run_config_sha256": "c3fc473bccb8893ca6a002c7d0dbc4ae3bab6e07c678ee11363ab5ad360aa13d",
+          "environment": {
+            "python": "3.13.5",
+            "implementation": "CPython",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "machine": "AMD64",
+            "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+            "logical_cpu_count": 16,
+            "dependencies": [
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "iniconfig",
+                "version": "2.3.1"
+              },
+              {
+                "name": "mypy",
+                "version": "1.15.0"
+              },
+              {
+                "name": "mypy_extensions",
+                "version": "1.1.0"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "25.1.1"
+              },
+              {
+                "name": "pluggy",
+                "version": "1.7.0"
+              },
+              {
+                "name": "pytest",
+                "version": "8.3.5"
+              },
+              {
+                "name": "ruff",
+                "version": "0.11.13"
+              },
+              {
+                "name": "sentinel-pulse",
+                "version": "0.1.0"
+              },
+              {
+                "name": "typing_extensions",
+                "version": "4.16.0"
+              }
+            ]
+          },
+          "environment_sha256": "9acb142a80930a4fcbaf1bb22572d648a8789535f0d644f0d3785e99fcc78059",
+          "dependencies_sha256": "56e775164ecb9f3133d4937ef4f24e23c21dd2d1055898a2cfd2936d8165c8bf",
+          "split_manifest_sha256": null,
+          "split_manifest_artifact": null,
+          "split_validation": "not_supplied",
+          "started_at_utc": "2026-10-27T10:40:57.650807Z",
+          "prepared_at_utc": "2026-10-27T10:40:58.200793Z"
+        },
+        "profiling": {
+          "clock": "perf_counter_ns",
+          "unit": "ns",
+          "quantile_method": "nearest_rank_histogram_upper_bound",
+          "quantile_relative_overestimate_limit": 0.0078125,
+          "process_region": "process() only; excludes factory, routing, parsing, writing, profiler",
+          "cold_region": "first process() per series; excludes construction and interpreter startup",
+          "warm_region": "subsequent process() calls, including any remaining learning warmup",
+          "distributions": {
+            "all_process": {
+              "count": 96,
+              "total_ns": 7152400,
+              "min_ns": 14900,
+              "max_ns": 281200,
+              "p50_upper_bound_ns": 69631,
+              "p95_upper_bound_ns": 124415,
+              "histogram": [
+                {
+                  "upper_bound_ns": 14911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17279,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29311,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40959,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44799,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46335,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48127,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 48383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48639,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48895,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 49151,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51199,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53247,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54527,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 54783,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 55039,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57087,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 57343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57599,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 60159,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62463,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 64511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 65023,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 67071,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 67583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 68095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 68607,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 69119,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 69631,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 70143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72191,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 73215,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 73727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 75263,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 75775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 76287,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 77311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 78847,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 80383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 81407,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 82943,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 83455,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 83967,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 84479,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 85503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 86015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 87551,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 88575,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 90623,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 92671,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 93183,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 95231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 95743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 100351,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 101375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 106495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 108031,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 108543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 109567,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 110591,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 113151,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 113663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 115711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 124415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 134143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 137215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 174079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 282623,
+                  "count": 1
+                }
+              ]
+            },
+            "ready_process": {
+              "count": 88,
+              "total_ns": 6930000,
+              "min_ns": 40900,
+              "max_ns": 281200,
+              "p50_upper_bound_ns": 73215,
+              "p95_upper_bound_ns": 124415,
+              "histogram": [
+                {
+                  "upper_bound_ns": 40959,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44799,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46335,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48127,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 48383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48639,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48895,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 49151,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51199,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53247,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54527,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 54783,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 55039,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57087,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 57343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57599,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 60159,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62463,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 64511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 65023,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 67071,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 67583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 68095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 68607,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 69119,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 69631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 70143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72191,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 73215,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 73727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 75263,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 75775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 76287,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 77311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 78847,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 80383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 81407,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 82943,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 83455,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 83967,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 84479,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 85503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 86015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 87551,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 88575,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 90623,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 92671,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 93183,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 95231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 95743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 100351,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 101375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 106495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 108031,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 108543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 109567,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 110591,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 113151,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 113663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 115711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 124415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 134143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 137215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 174079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 282623,
+                  "count": 1
+                }
+              ]
+            },
+            "warmup_process": {
+              "count": 8,
+              "total_ns": 222400,
+              "min_ns": 14900,
+              "max_ns": 69400,
+              "p50_upper_bound_ns": 20607,
+              "p95_upper_bound_ns": 69631,
+              "histogram": [
+                {
+                  "upper_bound_ns": 14911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17279,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29311,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 69631,
+                  "count": 1
+                }
+              ]
+            },
+            "cold_process": {
+              "count": 1,
+              "total_ns": 17200,
+              "min_ns": 17200,
+              "max_ns": 17200,
+              "p50_upper_bound_ns": 17279,
+              "p95_upper_bound_ns": 17279,
+              "histogram": [
+                {
+                  "upper_bound_ns": 17279,
+                  "count": 1
+                }
+              ]
+            },
+            "warm_process": {
+              "count": 95,
+              "total_ns": 7135200,
+              "min_ns": 14900,
+              "max_ns": 281200,
+              "p50_upper_bound_ns": 69631,
+              "p95_upper_bound_ns": 124415,
+              "histogram": [
+                {
+                  "upper_bound_ns": 14911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29311,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40959,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44799,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46335,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48127,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 48383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48639,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48895,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 49151,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51199,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53247,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 53503,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54527,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 54783,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 55039,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57087,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 57343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57599,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 60159,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62463,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 64511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 65023,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 67071,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 67583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 68095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 68607,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 69119,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 69631,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 70143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72191,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 73215,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 73727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 75263,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 75775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 76287,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 77311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 78847,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 80383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 81407,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 82943,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 83455,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 83967,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 84479,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 85503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 86015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 87551,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 88575,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 90623,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 92671,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 93183,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 95231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 95743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 100351,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 101375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 106495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 108031,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 108543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 109567,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 110591,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 113151,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 113663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 115711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 124415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 134143,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 137215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 174079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 282623,
+                  "count": 1
+                }
+              ]
+            }
+          },
+          "end_to_end_replay_ns": 15363400,
+          "replay_region": "predictions file open through close; includes CSV open/read, parsing, detector construction, routing, process, serialization, writing and profiling",
+          "prepublication_region": "run_file entry through metadata preparation, including provenance and hashes; excludes final run.json write/rename, CLI startup and evaluation",
+          "prepublication_elapsed_ns": 549993600
+        },
+        "workload": {
+          "series_count": 1,
+          "cadence_policy": "input timestamps as supplied; no resampling or replay sleeps",
+          "series": {
+            "synthetic-integration": {
+              "observations": 96,
+              "ready_observations": 88,
+              "warmup_observations": 8,
+              "first_timestamp": "2026-01-01T00:00:00Z",
+              "last_timestamp": "2026-01-01T00:01:35Z"
+            }
+          },
+          "observations": 96,
+          "ready_observations": 88,
+          "warmup_observations": 8,
+          "window_size": 32,
+          "min_history": 8,
+          "max_series": 100
+        }
+      },
+      "metrics": {
+        "metric_id": "provisional_event_trigger_f1_v0",
+        "official_metric": false,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "event_f1": 1.0,
+        "delay_seconds": [
+          0.0
+        ],
+        "mean_delay_seconds": 0.0,
+        "warmup_points_included_in_coverage": 8,
+        "observations": 96,
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "windows_sha256": "55dca279d6239c6fd48a762453a6b9eaf8852a3f7da2c8662264fbf25fbce39f"
+      },
+      "calibration_method_counts": {},
+      "prediction_file_sha256": "a5b6bffa7195d0b82f5e8eaea1e5b7dc141d1b51d47ab8c1edf7a25c0c740d26"
+    },
+    {
+      "name": "residual",
+      "commands": [
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "run",
+          "--input",
+          "outputs\\cli-integration-smoke-001\\stream.csv",
+          "--config",
+          "configs/starter.json",
+          "--output-dir",
+          "outputs\\cli-integration-smoke-001\\residual",
+          "--dataset-id",
+          "synthetic-cli-integration-v1",
+          "--scope",
+          "synthetic_smoke",
+          "--detector",
+          "residual"
+        ],
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "evaluate",
+          "--run-dir",
+          "outputs\\cli-integration-smoke-001\\residual",
+          "--windows",
+          "outputs\\cli-integration-smoke-001\\windows.json"
+        ]
+      ],
+      "manifest": {
+        "schema_version": "1.0",
+        "package_version": "0.1.0",
+        "algorithm": "residual_max",
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "predictions_sha256": "6b6e4671ac332e8ab6d255051ca1a6018b25c6ac4709fb6b5ac56e8ea8756c81",
+        "config": {
+          "window_size": 32,
+          "min_history": 8,
+          "threshold": 4.0,
+          "scale_floor": 0.1,
+          "max_series": 100
+        },
+        "model": {
+          "detector": "residual",
+          "use_seasonal": false,
+          "seasonal_period": null,
+          "calibration": null,
+          "features": {
+            "implementation": "sentinel.data.features.RollingFeatureExtractor",
+            "window_size": 32,
+            "min_history": 8,
+            "scale_floor": 0.1,
+            "seasonal_period": null
+          },
+          "reference_update_policy": "include_all_observations",
+          "calibration_update_policy": "not_enabled",
+          "replay_context": {
+            "saturated_raw_lookback": 32,
+            "note": "Bounded selected models only; not split validation or context permission"
+          }
+        },
+        "python": "3.13.5",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "observations": 96,
+        "ready_observations": 88,
+        "anomalous_points": 2,
+        "detector_total_ns": 2321900,
+        "runtime_note": "process() only, includes warmup; excludes parsing/writing; not a benchmark",
+        "official_submission_ready": false,
+        "provenance": {
+          "version": "1.0",
+          "source": {
+            "status": "git",
+            "revision": "beaa4182206275670c0cf02181847a07101fb4ee",
+            "dirty": false,
+            "note": "HEAD identifies committed base; dirty includes tracked and nonignored untracked files"
+          },
+          "config_sha256": "5f514238ce7dff179ac18d828109254087dce20e784390deaf4dbe89de6e8594",
+          "model_config_sha256": "1ef12ebd3765d20d169c92195ba218ae745a8802e4b9e27c71e22f6f72613783",
+          "run_config_sha256": "1fa7f4bae19b78b58459b37c04b3e2ff3b7ff2743d4148b2e3f771282f99cf46",
+          "environment": {
+            "python": "3.13.5",
+            "implementation": "CPython",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "machine": "AMD64",
+            "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+            "logical_cpu_count": 16,
+            "dependencies": [
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "iniconfig",
+                "version": "2.3.1"
+              },
+              {
+                "name": "mypy",
+                "version": "1.15.0"
+              },
+              {
+                "name": "mypy_extensions",
+                "version": "1.1.0"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "25.1.1"
+              },
+              {
+                "name": "pluggy",
+                "version": "1.7.0"
+              },
+              {
+                "name": "pytest",
+                "version": "8.3.5"
+              },
+              {
+                "name": "ruff",
+                "version": "0.11.13"
+              },
+              {
+                "name": "sentinel-pulse",
+                "version": "0.1.0"
+              },
+              {
+                "name": "typing_extensions",
+                "version": "4.16.0"
+              }
+            ]
+          },
+          "environment_sha256": "9acb142a80930a4fcbaf1bb22572d648a8789535f0d644f0d3785e99fcc78059",
+          "dependencies_sha256": "56e775164ecb9f3133d4937ef4f24e23c21dd2d1055898a2cfd2936d8165c8bf",
+          "split_manifest_sha256": null,
+          "split_manifest_artifact": null,
+          "split_validation": "not_supplied",
+          "started_at_utc": "2026-10-27T10:40:59.026403Z",
+          "prepared_at_utc": "2026-10-27T10:40:59.566514Z"
+        },
+        "profiling": {
+          "clock": "perf_counter_ns",
+          "unit": "ns",
+          "quantile_method": "nearest_rank_histogram_upper_bound",
+          "quantile_relative_overestimate_limit": 0.0078125,
+          "process_region": "process() only; excludes factory, routing, parsing, writing, profiler",
+          "cold_region": "first process() per series; excludes construction and interpreter startup",
+          "warm_region": "subsequent process() calls, including any remaining learning warmup",
+          "distributions": {
+            "all_process": {
+              "count": 96,
+              "total_ns": 2321900,
+              "min_ns": 7900,
+              "max_ns": 72300,
+              "p50_upper_bound_ns": 21375,
+              "p95_upper_bound_ns": 40191,
+              "histogram": [
+                {
+                  "upper_bound_ns": 7903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8959,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9407,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12735,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 14911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15807,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17279,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17919,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18175,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18559,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18815,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 18943,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 19327,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 19583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 19839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20223,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 20479,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20735,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21759,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22527,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23167,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23551,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23679,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24447,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 25215,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 25343,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25727,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25855,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26111,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28799,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28927,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30463,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 32767,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33535,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 35839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38655,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44287,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 68607,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72703,
+                  "count": 1
+                }
+              ]
+            },
+            "ready_process": {
+              "count": 88,
+              "total_ns": 2170500,
+              "min_ns": 14900,
+              "max_ns": 72300,
+              "p50_upper_bound_ns": 21759,
+              "p95_upper_bound_ns": 38655,
+              "histogram": [
+                {
+                  "upper_bound_ns": 14911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15807,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17279,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17919,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18175,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18559,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18815,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 18943,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 19327,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 19583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 19839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20223,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 20479,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20735,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21759,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22527,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23167,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23551,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23679,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24447,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 25215,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 25343,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25727,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25855,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26111,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28799,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28927,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30463,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 32767,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33535,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 35839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38655,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44287,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72703,
+                  "count": 1
+                }
+              ]
+            },
+            "warmup_process": {
+              "count": 8,
+              "total_ns": 151400,
+              "min_ns": 7900,
+              "max_ns": 68400,
+              "p50_upper_bound_ns": 12031,
+              "p95_upper_bound_ns": 68607,
+              "histogram": [
+                {
+                  "upper_bound_ns": 7903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8959,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9407,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12735,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 68607,
+                  "count": 1
+                }
+              ]
+            },
+            "cold_process": {
+              "count": 1,
+              "total_ns": 68400,
+              "min_ns": 68400,
+              "max_ns": 68400,
+              "p50_upper_bound_ns": 68607,
+              "p95_upper_bound_ns": 68607,
+              "histogram": [
+                {
+                  "upper_bound_ns": 68607,
+                  "count": 1
+                }
+              ]
+            },
+            "warm_process": {
+              "count": 95,
+              "total_ns": 2253500,
+              "min_ns": 7900,
+              "max_ns": 72300,
+              "p50_upper_bound_ns": 21375,
+              "p95_upper_bound_ns": 38655,
+              "histogram": [
+                {
+                  "upper_bound_ns": 7903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8959,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9407,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 12735,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 14911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 15807,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17279,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 17919,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18175,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18559,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 18815,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 18943,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 19327,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 19583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 19839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20223,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 20479,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20735,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21503,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21759,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22527,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23167,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23551,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23679,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24447,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 25215,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 25343,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25727,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25855,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26111,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28415,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28799,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28927,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30463,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30719,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 32767,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33535,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 35839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38655,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44287,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47359,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72703,
+                  "count": 1
+                }
+              ]
+            }
+          },
+          "end_to_end_replay_ns": 8484900,
+          "replay_region": "predictions file open through close; includes CSV open/read, parsing, detector construction, routing, process, serialization, writing and profiling",
+          "prepublication_region": "run_file entry through metadata preparation, including provenance and hashes; excludes final run.json write/rename, CLI startup and evaluation",
+          "prepublication_elapsed_ns": 540127400
+        },
+        "workload": {
+          "series_count": 1,
+          "cadence_policy": "input timestamps as supplied; no resampling or replay sleeps",
+          "series": {
+            "synthetic-integration": {
+              "observations": 96,
+              "ready_observations": 88,
+              "warmup_observations": 8,
+              "first_timestamp": "2026-01-01T00:00:00Z",
+              "last_timestamp": "2026-01-01T00:01:35Z"
+            }
+          },
+          "observations": 96,
+          "ready_observations": 88,
+          "warmup_observations": 8,
+          "window_size": 32,
+          "min_history": 8,
+          "max_series": 100
+        }
+      },
+      "metrics": {
+        "metric_id": "provisional_event_trigger_f1_v0",
+        "official_metric": false,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "event_f1": 1.0,
+        "delay_seconds": [
+          0.0
+        ],
+        "mean_delay_seconds": 0.0,
+        "warmup_points_included_in_coverage": 8,
+        "observations": 96,
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "windows_sha256": "55dca279d6239c6fd48a762453a6b9eaf8852a3f7da2c8662264fbf25fbce39f"
+      },
+      "calibration_method_counts": {},
+      "prediction_file_sha256": "6b6e4671ac332e8ab6d255051ca1a6018b25c6ac4709fb6b5ac56e8ea8756c81"
+    },
+    {
+      "name": "residual-quantile",
+      "commands": [
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "run",
+          "--input",
+          "outputs\\cli-integration-smoke-001\\stream.csv",
+          "--config",
+          "configs/starter.json",
+          "--output-dir",
+          "outputs\\cli-integration-smoke-001\\residual-quantile",
+          "--dataset-id",
+          "synthetic-cli-integration-v1",
+          "--scope",
+          "synthetic_smoke",
+          "--model-config",
+          "configs/residual-quantile.model.json"
+        ],
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "evaluate",
+          "--run-dir",
+          "outputs\\cli-integration-smoke-001\\residual-quantile",
+          "--windows",
+          "outputs\\cli-integration-smoke-001\\windows.json"
+        ]
+      ],
+      "manifest": {
+        "schema_version": "1.0",
+        "package_version": "0.1.0",
+        "algorithm": "residual_max_prior_quantile",
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "predictions_sha256": "25d02811595f1fa1e86f4748c55a49a580716c5b5bea4662208c2cbbdbbec906",
+        "config": {
+          "window_size": 32,
+          "min_history": 8,
+          "threshold": 4.0,
+          "scale_floor": 0.1,
+          "max_series": 100
+        },
+        "model": {
+          "detector": "residual",
+          "use_seasonal": false,
+          "seasonal_period": null,
+          "calibration": {
+            "window_size": 256,
+            "min_history": 32,
+            "quantile": 0.99,
+            "fallback_threshold": 4.0,
+            "threshold_floor": 1e-06
+          },
+          "features": {
+            "implementation": "sentinel.data.features.RollingFeatureExtractor",
+            "window_size": 32,
+            "min_history": 8,
+            "scale_floor": 0.1,
+            "seasonal_period": null
+          },
+          "reference_update_policy": "include_all_observations",
+          "calibration_update_policy": "include_all_ready_scores",
+          "replay_context": {
+            "saturated_raw_lookback": 288,
+            "note": "Bounded selected models only; not split validation or context permission"
+          }
+        },
+        "python": "3.13.5",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "observations": 96,
+        "ready_observations": 88,
+        "anomalous_points": 25,
+        "detector_total_ns": 4555400,
+        "runtime_note": "process() only, includes warmup; excludes parsing/writing; not a benchmark",
+        "official_submission_ready": false,
+        "provenance": {
+          "version": "1.0",
+          "source": {
+            "status": "git",
+            "revision": "beaa4182206275670c0cf02181847a07101fb4ee",
+            "dirty": false,
+            "note": "HEAD identifies committed base; dirty includes tracked and nonignored untracked files"
+          },
+          "config_sha256": "5f514238ce7dff179ac18d828109254087dce20e784390deaf4dbe89de6e8594",
+          "model_config_sha256": "6db182755429f94244ee0c8db782947cdb6fbfce854deaef110334e07f2cf120",
+          "run_config_sha256": "1975634e3bba866373b7a424f32807dbdaa00bfe0b4cfbba3fa5bc684027440a",
+          "environment": {
+            "python": "3.13.5",
+            "implementation": "CPython",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "machine": "AMD64",
+            "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+            "logical_cpu_count": 16,
+            "dependencies": [
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "iniconfig",
+                "version": "2.3.1"
+              },
+              {
+                "name": "mypy",
+                "version": "1.15.0"
+              },
+              {
+                "name": "mypy_extensions",
+                "version": "1.1.0"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "25.1.1"
+              },
+              {
+                "name": "pluggy",
+                "version": "1.7.0"
+              },
+              {
+                "name": "pytest",
+                "version": "8.3.5"
+              },
+              {
+                "name": "ruff",
+                "version": "0.11.13"
+              },
+              {
+                "name": "sentinel-pulse",
+                "version": "0.1.0"
+              },
+              {
+                "name": "typing_extensions",
+                "version": "4.16.0"
+              }
+            ]
+          },
+          "environment_sha256": "9acb142a80930a4fcbaf1bb22572d648a8789535f0d644f0d3785e99fcc78059",
+          "dependencies_sha256": "56e775164ecb9f3133d4937ef4f24e23c21dd2d1055898a2cfd2936d8165c8bf",
+          "split_manifest_sha256": null,
+          "split_manifest_artifact": null,
+          "split_validation": "not_supplied",
+          "started_at_utc": "2026-10-27T10:41:00.323608Z",
+          "prepared_at_utc": "2026-10-27T10:41:00.868695Z"
+        },
+        "profiling": {
+          "clock": "perf_counter_ns",
+          "unit": "ns",
+          "quantile_method": "nearest_rank_histogram_upper_bound",
+          "quantile_relative_overestimate_limit": 0.0078125,
+          "process_region": "process() only; excludes factory, routing, parsing, writing, profiler",
+          "cold_region": "first process() per series; excludes construction and interpreter startup",
+          "warm_region": "subsequent process() calls, including any remaining learning warmup",
+          "distributions": {
+            "all_process": {
+              "count": 96,
+              "total_ns": 4555400,
+              "min_ns": 26400,
+              "max_ns": 94100,
+              "p50_upper_bound_ns": 45055,
+              "p95_upper_bound_ns": 76287,
+              "histogram": [
+                {
+                  "upper_bound_ns": 26495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 32127,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 32511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33279,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33535,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 33791,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34047,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 34815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 35071,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 35327,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 35583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36095,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36607,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 37375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37887,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 40703,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 41727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42751,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 43519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 43775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45055,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 45311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46591,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46847,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48895,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 49407,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 49663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 50431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 50687,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51967,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 52479,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 52735,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 52991,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54271,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54527,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54783,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 56063,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 56319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57087,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59391,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 61439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 63487,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 63743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 69631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 73215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 74751,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 75775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 76287,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 79871,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 80383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 94207,
+                  "count": 1
+                }
+              ]
+            },
+            "ready_process": {
+              "count": 88,
+              "total_ns": 4266400,
+              "min_ns": 32000,
+              "max_ns": 94100,
+              "p50_upper_bound_ns": 45823,
+              "p95_upper_bound_ns": 76287,
+              "histogram": [
+                {
+                  "upper_bound_ns": 32127,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 32511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33535,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 33791,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34047,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 34815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 35071,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 35327,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 35583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36095,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36607,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 37375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37887,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 40703,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 41727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42751,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 43519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 43775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45055,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 45311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46591,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46847,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48895,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 49407,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 49663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 50431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 50687,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51967,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 52479,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 52735,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 52991,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54271,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54527,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54783,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 56063,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 56319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57087,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59391,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 61439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 63487,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 63743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 69631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 73215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 74751,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 75775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 76287,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 79871,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 80383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 94207,
+                  "count": 1
+                }
+              ]
+            },
+            "warmup_process": {
+              "count": 8,
+              "total_ns": 289000,
+              "min_ns": 26400,
+              "max_ns": 74700,
+              "p50_upper_bound_ns": 29823,
+              "p95_upper_bound_ns": 74751,
+              "histogram": [
+                {
+                  "upper_bound_ns": 26495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33279,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34047,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 35327,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 74751,
+                  "count": 1
+                }
+              ]
+            },
+            "cold_process": {
+              "count": 1,
+              "total_ns": 74700,
+              "min_ns": 74700,
+              "max_ns": 74700,
+              "p50_upper_bound_ns": 74751,
+              "p95_upper_bound_ns": 74751,
+              "histogram": [
+                {
+                  "upper_bound_ns": 74751,
+                  "count": 1
+                }
+              ]
+            },
+            "warm_process": {
+              "count": 95,
+              "total_ns": 4480700,
+              "min_ns": 26400,
+              "max_ns": 94100,
+              "p50_upper_bound_ns": 45055,
+              "p95_upper_bound_ns": 76287,
+              "histogram": [
+                {
+                  "upper_bound_ns": 26495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28543,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 32127,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 32511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33279,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33535,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 33791,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34047,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 34815,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 35071,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 35327,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 35583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36095,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 36607,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 37375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37887,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 40703,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 41727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42239,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42495,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 42751,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 43519,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 43775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 44031,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45055,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 45311,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46079,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46591,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 46847,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48895,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 49407,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 49663,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 50431,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 50687,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51967,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 52479,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 52735,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 52991,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54015,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54271,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54527,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 54783,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 56063,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 56319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57087,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 57343,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 59391,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 59647,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 61439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 62207,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 63487,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 63743,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 69631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 72703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 73215,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 74751,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 75775,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 76287,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 79871,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 80383,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 94207,
+                  "count": 1
+                }
+              ]
+            }
+          },
+          "end_to_end_replay_ns": 12653000,
+          "replay_region": "predictions file open through close; includes CSV open/read, parsing, detector construction, routing, process, serialization, writing and profiling",
+          "prepublication_region": "run_file entry through metadata preparation, including provenance and hashes; excludes final run.json write/rename, CLI startup and evaluation",
+          "prepublication_elapsed_ns": 545096200
+        },
+        "workload": {
+          "series_count": 1,
+          "cadence_policy": "input timestamps as supplied; no resampling or replay sleeps",
+          "series": {
+            "synthetic-integration": {
+              "observations": 96,
+              "ready_observations": 88,
+              "warmup_observations": 8,
+              "first_timestamp": "2026-01-01T00:00:00Z",
+              "last_timestamp": "2026-01-01T00:01:35Z"
+            }
+          },
+          "observations": 96,
+          "ready_observations": 88,
+          "warmup_observations": 8,
+          "window_size": 32,
+          "min_history": 8,
+          "max_series": 100
+        }
+      },
+      "metrics": {
+        "metric_id": "provisional_event_trigger_f1_v0",
+        "official_metric": false,
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "event_f1": 0.0,
+        "delay_seconds": [],
+        "mean_delay_seconds": null,
+        "warmup_points_included_in_coverage": 8,
+        "observations": 96,
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "windows_sha256": "55dca279d6239c6fd48a762453a6b9eaf8852a3f7da2c8662264fbf25fbce39f"
+      },
+      "calibration_method_counts": {
+        "fallback": 40,
+        "nearest_rank": 56
+      },
+      "prediction_file_sha256": "25d02811595f1fa1e86f4748c55a49a580716c5b5bea4662208c2cbbdbbec906"
+    },
+    {
+      "name": "residual-seasonal",
+      "commands": [
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "run",
+          "--input",
+          "outputs\\cli-integration-smoke-001\\stream.csv",
+          "--config",
+          "configs/starter.json",
+          "--output-dir",
+          "outputs\\cli-integration-smoke-001\\residual-seasonal",
+          "--dataset-id",
+          "synthetic-cli-integration-v1",
+          "--scope",
+          "synthetic_smoke",
+          "--model-config",
+          "configs/residual-seasonal.model.json"
+        ],
+        [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "sentinel",
+          "evaluate",
+          "--run-dir",
+          "outputs\\cli-integration-smoke-001\\residual-seasonal",
+          "--windows",
+          "outputs\\cli-integration-smoke-001\\windows.json"
+        ]
+      ],
+      "manifest": {
+        "schema_version": "1.0",
+        "package_version": "0.1.0",
+        "algorithm": "residual_max_seasonal",
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "predictions_sha256": "9beea36811d3bcdb964fc9eca3ea2a0da173ddd0713dd624b4260c0412c3bc76",
+        "config": {
+          "window_size": 32,
+          "min_history": 8,
+          "threshold": 4.0,
+          "scale_floor": 0.1,
+          "max_series": 100
+        },
+        "model": {
+          "detector": "residual",
+          "use_seasonal": true,
+          "seasonal_period": 4,
+          "calibration": null,
+          "features": {
+            "implementation": "sentinel.data.features.RollingFeatureExtractor",
+            "window_size": 32,
+            "min_history": 8,
+            "scale_floor": 0.1,
+            "seasonal_period": 4
+          },
+          "reference_update_policy": "include_all_observations",
+          "calibration_update_policy": "not_enabled",
+          "replay_context": {
+            "saturated_raw_lookback": 32,
+            "note": "Bounded selected models only; not split validation or context permission"
+          }
+        },
+        "python": "3.13.5",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "observations": 96,
+        "ready_observations": 88,
+        "anomalous_points": 3,
+        "detector_total_ns": 2430900,
+        "runtime_note": "process() only, includes warmup; excludes parsing/writing; not a benchmark",
+        "official_submission_ready": false,
+        "provenance": {
+          "version": "1.0",
+          "source": {
+            "status": "git",
+            "revision": "beaa4182206275670c0cf02181847a07101fb4ee",
+            "dirty": false,
+            "note": "HEAD identifies committed base; dirty includes tracked and nonignored untracked files"
+          },
+          "config_sha256": "5f514238ce7dff179ac18d828109254087dce20e784390deaf4dbe89de6e8594",
+          "model_config_sha256": "08f2c535f4cabef7b0db82756fc93166c9fc466e232a410bd731527d9bf1ed88",
+          "run_config_sha256": "570ad754c3cea4898485c287defac5f3fb191da63713b9f4f7dadee603d20506",
+          "environment": {
+            "python": "3.13.5",
+            "implementation": "CPython",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "machine": "AMD64",
+            "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+            "logical_cpu_count": 16,
+            "dependencies": [
+              {
+                "name": "colorama",
+                "version": "0.4.6"
+              },
+              {
+                "name": "iniconfig",
+                "version": "2.3.1"
+              },
+              {
+                "name": "mypy",
+                "version": "1.15.0"
+              },
+              {
+                "name": "mypy_extensions",
+                "version": "1.1.0"
+              },
+              {
+                "name": "packaging",
+                "version": "26.3"
+              },
+              {
+                "name": "pip",
+                "version": "25.1.1"
+              },
+              {
+                "name": "pluggy",
+                "version": "1.7.0"
+              },
+              {
+                "name": "pytest",
+                "version": "8.3.5"
+              },
+              {
+                "name": "ruff",
+                "version": "0.11.13"
+              },
+              {
+                "name": "sentinel-pulse",
+                "version": "0.1.0"
+              },
+              {
+                "name": "typing_extensions",
+                "version": "4.16.0"
+              }
+            ]
+          },
+          "environment_sha256": "9acb142a80930a4fcbaf1bb22572d648a8789535f0d644f0d3785e99fcc78059",
+          "dependencies_sha256": "56e775164ecb9f3133d4937ef4f24e23c21dd2d1055898a2cfd2936d8165c8bf",
+          "split_manifest_sha256": null,
+          "split_manifest_artifact": null,
+          "split_validation": "not_supplied",
+          "started_at_utc": "2026-10-27T10:41:01.631241Z",
+          "prepared_at_utc": "2026-10-27T10:41:02.151288Z"
+        },
+        "profiling": {
+          "clock": "perf_counter_ns",
+          "unit": "ns",
+          "quantile_method": "nearest_rank_histogram_upper_bound",
+          "quantile_relative_overestimate_limit": 0.0078125,
+          "process_region": "process() only; excludes factory, routing, parsing, writing, profiler",
+          "cold_region": "first process() per series; excludes construction and interpreter startup",
+          "warm_region": "subsequent process() calls, including any remaining learning warmup",
+          "distributions": {
+            "all_process": {
+              "count": 96,
+              "total_ns": 2430900,
+              "min_ns": 7700,
+              "max_ns": 51600,
+              "p50_upper_bound_ns": 22527,
+              "p95_upper_bound_ns": 45055,
+              "histogram": [
+                {
+                  "upper_bound_ns": 7711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9663,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12223,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13951,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18559,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18687,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18943,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19455,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19967,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20223,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 20351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20479,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20991,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21119,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21247,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21503,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 21631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 22399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22527,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 22655,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22911,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 23039,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23295,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24063,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 24319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24959,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26623,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26751,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27263,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 27391,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 27903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28671,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28927,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30975,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31999,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33791,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 35583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 45055,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48639,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51711,
+                  "count": 1
+                }
+              ]
+            },
+            "ready_process": {
+              "count": 88,
+              "total_ns": 2299700,
+              "min_ns": 18300,
+              "max_ns": 51600,
+              "p50_upper_bound_ns": 22655,
+              "p95_upper_bound_ns": 40191,
+              "histogram": [
+                {
+                  "upper_bound_ns": 18303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18559,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18687,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18943,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19455,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19967,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20223,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 20351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20479,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20991,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21119,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21247,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21503,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 21631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 22399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22527,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 22655,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23039,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23295,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24063,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 24319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24959,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26623,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26751,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27263,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 27391,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 27903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28671,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28927,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30975,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31999,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33791,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 35583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 45055,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48639,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51711,
+                  "count": 1
+                }
+              ]
+            },
+            "warmup_process": {
+              "count": 8,
+              "total_ns": 131200,
+              "min_ns": 7700,
+              "max_ns": 46900,
+              "p50_upper_bound_ns": 9663,
+              "p95_upper_bound_ns": 47103,
+              "histogram": [
+                {
+                  "upper_bound_ns": 7711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9663,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12223,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13951,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22911,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 47103,
+                  "count": 1
+                }
+              ]
+            },
+            "cold_process": {
+              "count": 1,
+              "total_ns": 46900,
+              "min_ns": 46900,
+              "max_ns": 46900,
+              "p50_upper_bound_ns": 47103,
+              "p95_upper_bound_ns": 47103,
+              "histogram": [
+                {
+                  "upper_bound_ns": 47103,
+                  "count": 1
+                }
+              ]
+            },
+            "warm_process": {
+              "count": 95,
+              "total_ns": 2384000,
+              "min_ns": 7700,
+              "max_ns": 51600,
+              "p50_upper_bound_ns": 22527,
+              "p95_upper_bound_ns": 40191,
+              "histogram": [
+                {
+                  "upper_bound_ns": 7711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 8511,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 9663,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 12223,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 13951,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18303,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18559,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18687,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 18943,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19455,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 19711,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19839,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 19967,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20095,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20223,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 20351,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 20479,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 20607,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 20991,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21119,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 21247,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21375,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 21503,
+                  "count": 3
+                },
+                {
+                  "upper_bound_ns": 21631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22015,
+                  "count": 5
+                },
+                {
+                  "upper_bound_ns": 22399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22527,
+                  "count": 4
+                },
+                {
+                  "upper_bound_ns": 22655,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 22911,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 23039,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 23295,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24063,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 24319,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24447,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24703,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 24959,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 25727,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26367,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26623,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 26751,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27135,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 27263,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 27391,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 27903,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28671,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 28927,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 29439,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 30975,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 31103,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31231,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31615,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 31999,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 33791,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 34303,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 35583,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 37631,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 38399,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39423,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 39935,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 40191,
+                  "count": 2
+                },
+                {
+                  "upper_bound_ns": 45055,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 45823,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 48639,
+                  "count": 1
+                },
+                {
+                  "upper_bound_ns": 51711,
+                  "count": 1
+                }
+              ]
+            }
+          },
+          "end_to_end_replay_ns": 9702700,
+          "replay_region": "predictions file open through close; includes CSV open/read, parsing, detector construction, routing, process, serialization, writing and profiling",
+          "prepublication_region": "run_file entry through metadata preparation, including provenance and hashes; excludes final run.json write/rename, CLI startup and evaluation",
+          "prepublication_elapsed_ns": 520056300
+        },
+        "workload": {
+          "series_count": 1,
+          "cadence_policy": "input timestamps as supplied; no resampling or replay sleeps",
+          "series": {
+            "synthetic-integration": {
+              "observations": 96,
+              "ready_observations": 88,
+              "warmup_observations": 8,
+              "first_timestamp": "2026-01-01T00:00:00Z",
+              "last_timestamp": "2026-01-01T00:01:35Z"
+            }
+          },
+          "observations": 96,
+          "ready_observations": 88,
+          "warmup_observations": 8,
+          "window_size": 32,
+          "min_history": 8,
+          "max_series": 100
+        }
+      },
+      "metrics": {
+        "metric_id": "provisional_event_trigger_f1_v0",
+        "official_metric": false,
+        "tp": 1,
+        "fp": 1,
+        "fn": 0,
+        "precision": 0.5,
+        "recall": 1.0,
+        "event_f1": 0.6666666666666666,
+        "delay_seconds": [
+          0.0
+        ],
+        "mean_delay_seconds": 0.0,
+        "warmup_points_included_in_coverage": 8,
+        "observations": 96,
+        "evaluation_scope": "synthetic_smoke",
+        "dataset_id": "synthetic-cli-integration-v1",
+        "input_sha256": "6d51103ec1836e50ff16ab49ff4a28675fea597da9079e2e3e40ed428500e950",
+        "windows_sha256": "55dca279d6239c6fd48a762453a6b9eaf8852a3f7da2c8662264fbf25fbce39f"
+      },
+      "calibration_method_counts": {},
+      "prediction_file_sha256": "9beea36811d3bcdb964fc9eca3ea2a0da173ddd0713dd624b4260c0412c3bc76"
+    }
+  ],
+  "authored_utc": "2026-10-27T10:44:53.787874+00:00",
+  "verification_commit": "3d22b4c9be996a1cdd87ab8e68fa2f7e8e54a7d0",
+  "source_sha256": {
+    "src/sentinel/__init__.py": "3778e530ca6a1786aaa181957b159cbd1835cbbda772905c5d58c43d4511da05",
+    "src/sentinel/__main__.py": "ce794dc56cb1a826284221eb388332170adf753c1a8d5971b115abd9636cc581",
+    "src/sentinel/cli.py": "b839c83e9059cc1e1cd9e1f748c139dea25ed99b7ff32f33d050c3167ac97a70",
+    "src/sentinel/config.py": "6207be7c66cc6a8b8975b2c19f4f6afa0c3c487369394939afb8f9be16eb7267",
+    "src/sentinel/contracts.py": "29a16144defc18a74d55a0835b2be73ed74ef1eebbc9a5f7443f6b0254ebc2a3",
+    "src/sentinel/data/__init__.py": "0cc8f88eafe42d4ed856d3b09b33610f7460473db3ca345755023cd80d4d4648",
+    "src/sentinel/data/features.py": "e8de0025fbed3bae54928da2a642e3304d667814bbaf8494818fb07a932f426b",
+    "src/sentinel/data/inventory.py": "3748d882ccee01e519cca2eefd398af13b623c6ca90da3c77826e10647bdccda",
+    "src/sentinel/data/io.py": "5e0ba20d67cfdd90643aab988643fa9bfa29bb7e49045906b44a24e225ac6733",
+    "src/sentinel/data/splits.py": "b8307b1a1b622c5d66397bba1fb6f51dbb8d21492560ab9f08c8b9b62d0ec3cf",
+    "src/sentinel/detectors/__init__.py": "0ae5c48d631efea4a07ac8417872a2cdaf534c1ec6d5167d2b2c5ceade2cb434",
+    "src/sentinel/detectors/calibrated.py": "d54079431e185fc842002e048e790f629acebb3a044a86548a7c696e16ef64fe",
+    "src/sentinel/detectors/forecast.py": "cc775efa37b0e20345af6ae05a1ff48c42b07f5c3b0bf2896cf2766640ecd025",
+    "src/sentinel/detectors/residual.py": "10c423aa048b1764f6d91add9bc669f01e16b913e42037e41260cc09dc6d2ef2",
+    "src/sentinel/detectors/rolling.py": "a3426ae26f11d45628daf83412e5b729f11a90b4bc90166c4ca2e4647329e5b9",
+    "src/sentinel/detectors/selection.py": "8e6ed039b1d3ce80fa884f544f9925e4004ca3fda3170b5e73a8965d87000e85",
+    "src/sentinel/detectors/thresholds.py": "a90f0b70ee1ad5fde93782a3076f7c5c3960b0ca2b3228cbe48cf60fcef69769",
+    "src/sentinel/detectors/zscore.py": "983f67e1ac1831d010a11a38133c3a12c9760aaa4d19e11d54ea4c5458109c85",
+    "src/sentinel/evaluation/__init__.py": "aed748bd045942da2d6ed726055ec3108d9ea44daf8bf05781f8fd84321f839a",
+    "src/sentinel/evaluation/reference.py": "26c22a4d1a0ab3aeaf33143857e020cfa61affff4a4614cece615dcddebe2cc2",
+    "src/sentinel/pipeline.py": "25835dfd5e41b4d87aea12e3b05672f13eb34c2ed1df561e418429754540564c",
+    "src/sentinel/profiling.py": "5d792548683cda1183228efe509fc4b79faa3f48af1e4a0a3c70d94780d85374",
+    "src/sentinel/provenance.py": "e7e96c296407edb49212354321a5d83721e5d50f77808b12724044efc98c4815"
+  },
+  "implementation_commit": "beaa4182206275670c0cf02181847a07101fb4ee",
+  "note": "CLI smokes ran on clean beaa418; later 3d22b4c adds only a regression and README explanation. Runtime source hashes are identical.",
+  "checks": {
+    "full_pytest": {
+      "passed": 582,
+      "skipped": 1,
+      "reason": "Windows symlink privilege unavailable"
+    },
+    "focused_new_tests": 59,
+    "ruff_check": "passed",
+    "ruff_formatted_files": 46,
+    "strict_mypy_source_files": 23,
+    "repository_checker": "passed before final personal/handoff/artifact documentation",
+    "diff_check": "passed"
+  },
+  "prior_failures": [
+    {
+      "command": "pytest --basetemp outputs/pytest-cli-integration-full-001",
+      "result": "571 passed, 1 failed, 1 skipped",
+      "failure": "Windows WinError 5 while renaming staged directory in existing interleaved metadata case"
+    },
+    {
+      "command": "three isolated reruns of affected case with fresh repository-local basetemp",
+      "result": "all three passed"
+    },
+    {
+      "command": "pytest --basetemp outputs/pytest-cli-integration-full-002",
+      "result": "575 passed, 1 failed, 1 skipped",
+      "failure": "Windows WinError 5 at a different staged directory rename in model identity case"
+    },
+    {
+      "fix": "Bounded Windows-specific publication retries with five failure/collision regressions; full suites after fix passed 581 then 582 (new tie regression). Root cause of intermittent OS denial not established."
+    }
+  ]
+}

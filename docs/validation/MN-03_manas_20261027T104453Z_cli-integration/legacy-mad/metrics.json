@@ -1,0 +1,20 @@
+{
+  "metric_id": "provisional_event_trigger_f1_v0",
+  "official_metric": false,
+  "tp": 1,
+  "fp": 0,
+  "fn": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "event_f1": 1.0,
+  "delay_seconds": [
+    0.0
+  ],
+  "mean_delay_seconds": 0.0,
+  "warmup_points_included_in_coverage": 8,
+  "observations": 16,
+  "evaluation_scope": "synthetic_smoke",
+  "dataset_id": "synthetic-cli-integration-v1",
+  "input_sha256": "19f5d1794d37aa238c6420bb192f0316c03cb645e0dc3170e266f41155cb54de",
+  "windows_sha256": "57ee49d9a25d1e53c88480dc9615c6cdbde91dcffa39762c6dec573757904adb"
+}

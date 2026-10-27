@@ -1,0 +1,6 @@
+{
+  "detector": "residual",
+  "use_seasonal": true,
+  "seasonal_period": 4,
+  "calibration": null
+}
