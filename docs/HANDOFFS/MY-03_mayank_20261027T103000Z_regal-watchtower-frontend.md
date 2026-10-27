@@ -1,0 +1,65 @@
+# Handoff: MY-03 "Regal Watchtower" Demo & Visualization Frontend
+
+- Task ID: MY-03
+- Developer: Mayank
+- Original owner: Mayank
+- Status: DONE
+- Branch: feat/mayank/MY-01-event-cases
+- Implementation commit reference: 60d9076
+- Shared location: local-only (in frontend/web/ on branch feat/mayank/MY-01-event-cases)
+- Objective: Build the demo and result-visualization frontend for "Sentinel Pulse" implementing the "Regal Watchtower" theme, 60fps parallax constellation wallpaper, causal streaming replay, interactive evidence drawer, event evaluation timeline strip, Level B roadmap, run manifest inspector, and client-side run upload.
+- Relevant files:
+  - `frontend/web/package.json`
+  - `frontend/web/vite.config.js`
+  - `frontend/web/index.html`
+  - `frontend/web/src/styles/tokens.css`
+  - `frontend/web/src/styles/global.css`
+  - `frontend/web/src/hooks/useTheme.js`
+  - `frontend/web/src/hooks/useReplay.js`
+  - `frontend/web/src/lib/parsers.js`
+  - `frontend/web/src/lib/evaluator.js`
+  - `frontend/web/src/components/BackgroundCanvas.jsx`
+  - `frontend/web/src/components/HeroPulse.jsx`
+  - `frontend/web/src/components/Navbar.jsx`
+  - `frontend/web/src/components/StreamingChart.jsx`
+  - `frontend/web/src/components/EvidenceDrawer.jsx`
+  - `frontend/web/src/components/ReplayTab.jsx`
+  - `frontend/web/src/components/OverviewTab.jsx`
+  - `frontend/web/src/components/EvaluationTab.jsx`
+  - `frontend/web/src/components/ExperimentsTab.jsx`
+  - `frontend/web/src/components/ManifestTab.jsx`
+  - `frontend/web/src/components/TeamTab.jsx`
+  - `frontend/web/src/components/UploadModal.jsx`
+  - `frontend/web/src/components/Footer.jsx`
+  - `frontend/web/src/components/Toast.jsx`
+  - `frontend/web/src/App.jsx`
+  - `frontend/web/src/main.jsx`
+  - `frontend/web/README.md`
+  - `tasks/MAYANK.md`
+- Implementation completed:
+  - Built React 19 + Vite 5 single-page application in `frontend/web/` without touching `src/sentinel/` or any Python files.
+  - Implemented Midnight (#070B14) dark theme and Parchment (#F6F1E4) light theme with antique gold (#C9A24B) accent and muted crimson (#B3363E) strictly for anomalies.
+  - Implemented 60fps requestAnimationFrame constellation wallpaper with 3-layer mouse parallax and reduced-motion fallback.
+  - Implemented animated ECG hero pulse line with radar sweep glow that flares crimson on anomaly trigger.
+  - Implemented causal streaming chart with pre-update rolling median ± 4.0 MAD envelope, hatched warmup region, live heads-up display, and play/pause/step/scrubber/speed controls.
+  - Implemented slide-out numeric evidence drawer displaying baseline, scale, residual, threshold, latency, and plain-language reasoning.
+  - Implemented event evaluation dual-lane timeline strip aligning ground truth with triggers, and automated `provisional_event_trigger_f1_v0` metrics.
+  - Implemented Level B experiment harness preview table and gate criteria.
+  - Implemented run manifest inspector with one-click cryptographic SHA-256 copying and toast alerts.
+  - Implemented team attribution cards with module ownership and Challenge 2 context.
+  - Implemented persistent scope badge (`synthetic_smoke`) and required honesty disclosure.
+  - Zero backend dependencies; bundled synthetic run + client-side file picker/dropzone.
+- Remaining implementation:
+  - None for MY-03.
+- Important decisions and approval references where required:
+  - Custom Canvas charts: Drew streaming charts and wallpapers directly with Canvas for 60fps performance and zero chart-library dependencies.
+  - Single-owner isolation: No Python code was touched.
+- Actual tests/checks executed:
+  - `npm run build` in `frontend/web/`: Exit code 0 (4.45s, zero lint or rollup errors).
+  - Python test suite: 51/51 pytest tests passed.
+  - `python scripts/check_repository.py`: Exit code 0 (32 docs, 89 relative links, 24 unique tasks).
+- Results: 100% build pass, 100% test pass.
+- Bugs and blockers: None.
+- Exact next actions:
+  - Commit frontend implementation.
+  - Ready for integration review.

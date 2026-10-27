@@ -16,3 +16,4 @@ data/official/*
 *.pem
 *.key
 .DS_Store
+node_modules/

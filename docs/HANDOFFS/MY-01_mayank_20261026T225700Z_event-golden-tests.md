@@ -1,0 +1,61 @@
+﻿# Handoff: MY-01 Expanded Event Golden Tests & Policy Reporting
+
+- Task ID: MY-01
+- Developer: Mayank
+- Original owner: Mayank
+- Status: DONE
+- Branch: feat/mayank/MY-01-event-cases
+- Implementation commit reference: 9335b87
+- Shared location: local-only (on branch feat/mayank/MY-01-event-cases; ready for local commit and review)
+- Objective: Expand event golden tests covering boundaries, repeated episodes, warmup, no-event series, gaps, interleaving, micro/macro aggregation, and state evaluation policy in reports.
+- Relevant files:
+  - `src/sentinel/evaluation/reference.py`
+  - `tests/evaluation/__init__.py`
+  - `tests/evaluation/test_golden_events.py`
+  - `tasks/MAYANK.md`
+- Implementation completed:
+  - Updated `event_metrics()` in `src/sentinel/evaluation/reference.py`:
+    - Preserved 100% backward compatibility for all existing fields (`metric_id`, `official_metric`, `tp`, `fp`, `fn`, `precision`, `recall`, `event_f1`, `delay_seconds`, `mean_delay_seconds`, `warmup_points_included_in_coverage`, `observations`).
+    - Added delay distribution statistics: `median_delay_seconds`, `min_delay_seconds`, `max_delay_seconds`, `p95_delay_seconds` (using standard linear interpolation without external dependencies).
+    - Added `missed_events` count directly alongside latency distributions.
+    - Added per-series breakdown dict `per_series` mapping series_id to series-level TP, FP, FN, precision, recall, event_f1, observations, warmup_points, and delay statistics.
+    - Added macro-averaged metrics: `macro_precision`, `macro_recall`, and `macro_event_f1` computed across all distinct series present in predictions.
+    - Added explicit `policy` metadata dict documenting conservative onset-trigger matching, pre-window alert policy, repeat trigger handling, zero-denominator convention (0.0), and warmup inclusion.
+    - Implemented `format_evaluation_report(metrics)` returning an informative, formatted markdown summary report.
+  - Created `tests/evaluation/test_golden_events.py` containing 27 comprehensive golden unit tests:
+    - Boundary triggers: exact `window.start`, exact `window.end`, single-point windows (`start == end`).
+    - Pre-window alerts extending into window (conservative FP + FN policy).
+    - Post-window alerts (FP + FN policy).
+    - Repeated pulses inside one window (first pulse TP, subsequent pulses FP).
+    - Single continuous episode spanning window (1 TP, 0 FP).
+    - Multiple disjoint windows and partial hits with interspersed false alarms.
+    - Warmup interactions: events during warmup missed (FN) with warmup count recorded; straddled windows correctly triggered upon readiness.
+    - Clean/zero-event series and zero-denominator convention (precision=0.0, recall=0.0, F1=0.0).
+    - Micro vs. Macro divergence verification.
+    - Multi-series chronological interleaving and complete state isolation.
+    - Irregular cadence and temporal gaps.
+    - Delay distribution percentiles verified against known mathematical values.
+    - Strict schema and contract validation error rejections.
+    - Report formatting validation.
+- Remaining implementation:
+  - None for MY-01. Subsystem is verified and ready for integration.
+- Important decisions and approval references where required:
+  - Backward compatibility: All original fields in `event_metrics` returned dictionary remain unchanged in type and value.
+  - Zero-denominator policy: When a series has 0 events and 0 alerts, precision, recall, and event_f1 evaluate to 0.0 by convention to prevent division-by-zero crashes while clearly documenting the policy.
+  - Standard library quantile: Implemented `_calculate_quantile` using standard library without introducing new external dependencies.
+- Actual tests/checks executed:
+  - `$env:PYTHONPATH="...src"; python -m pytest tests -v`: Exit code 0, 51 passed in 1.56s (24 foundation tests + 27 new golden tests).
+  - `python scripts/check_repository.py`: Exit code 0 (32 mandatory documents, 89 relative links, 24 unique team tasks, PDF hash verified).
+- Results: 51 passed, 0 failed. Repository check 100% OK.
+- Bugs and blockers:
+  - No bugs identified in reference evaluation or contracts.
+  - Official scorer (MY-04) remains externally blocked until organizer assets arrive.
+- Interface dependencies and versions:
+  - Python >=3.11, standard library only (`statistics`, `collections`, `pathlib`, `typing`, `math`, `json`, `datetime`).
+  - Strict compliance with `sentinel.contracts` schema 1.0.
+- Exact next actions:
+  - Commit changes to `feat/mayank/MY-01-event-cases`.
+  - Proceed to **MY-02**: Build config/split-driven experiment harness and immutable result index under `experiments/`.
+- Integration/review obligations:
+  - Ayush reviews tool/pipeline integration.
+  - Manas reviews metric definitions and ablation compatibility.

@@ -1,0 +1,218 @@
+@import "./tokens.css";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100vh;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--transition-med), color var(--transition-med);
+}
+
+/* Headings */
+h1, h2, h3, h4, .serif-heading {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+/* Monospace numerals */
+.mono-num, code, pre {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Crest & Double Rule motif */
+.double-divider {
+  height: 4px;
+  border-top: 1px solid var(--gold-border);
+  border-bottom: 1px solid var(--gold-border);
+  margin: 1.5rem 0;
+  opacity: 0.7;
+}
+
+.gold-hairline {
+  border: 1px solid var(--gold-border);
+}
+
+.gold-glow-box {
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+/* Card Styling */
+.regal-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--gold-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-subtle);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.regal-card:hover {
+  border-color: var(--gold-border-strong);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Gold Shimmer Button */
+.btn-regal {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, rgba(201, 162, 75, 0.15) 0%, rgba(201, 162, 75, 0.05) 100%);
+  border: 1px solid var(--gold-border-strong);
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-regal::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(201, 162, 75, 0.25) 50%,
+    transparent 70%
+  );
+  transform: rotate(35deg) translateY(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.btn-regal:hover::after {
+  transform: rotate(35deg) translateY(100%);
+}
+
+.btn-regal:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  box-shadow: 0 0 16px var(--gold-glow);
+  transform: translateY(-1px);
+}
+
+.btn-regal-primary {
+  background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+  color: #070B14;
+  border-color: var(--gold-light);
+}
+
+.btn-regal-primary:hover {
+  color: #000;
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+/* Focus Rings */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
+}
+
+/* Status Badge Pills */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  border: 1px solid var(--gold-border);
+}
+
+.pill-scope {
+  background: rgba(201, 162, 75, 0.1);
+  color: var(--gold-primary);
+  border-color: var(--gold-border);
+}
+
+.pill-anomaly {
+  background: var(--crimson-bg);
+  color: var(--crimson-light);
+  border-color: var(--crimson-border);
+}
+
+.pill-normal {
+  background: var(--teal-bg);
+  color: var(--teal-normal);
+  border-color: var(--teal-border);
+}
+
+.pill-warmup {
+  background: var(--amber-bg);
+  color: var(--amber-warn);
+  border-color: var(--gold-border);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 162, 75, 0.25);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 162, 75, 0.45);
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--crimson-glow);
+    border-color: var(--crimson-border);
+  }
+  50% {
+    box-shadow: 0 0 25px var(--crimson-glow);
+    border-color: var(--crimson-light);
+  }
+}
+
+.pulse-crimson {
+  animation: pulseGlow 1.8s infinite ease-in-out;
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

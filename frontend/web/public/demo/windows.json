@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "provenance": "synthetic_smoke_only",
+  "windows": [
+    {
+      "series_id": "synthetic-demo",
+      "start": "2026-01-01T00:10:00Z",
+      "end": "2026-01-01T00:11:00Z"
+    }
+  ]
+}
